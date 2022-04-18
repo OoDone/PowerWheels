@@ -11,3 +11,6 @@ class DriveMotor:
       speed = speedPercent*5+motorNeutralSpeed
     driveSpeed = speed
     pi.set_servo_pulsewidth(ESC, speed)
+
+#Getters for encoder ticks, motor speed
+#Encoder logic
