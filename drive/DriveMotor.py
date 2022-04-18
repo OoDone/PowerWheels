@@ -1,4 +1,6 @@
-import Constants
+import sys
+sys.path.append('/home/Desktop/PowerWheels/')
+from ..Constants import Constants 
 speed = 0.0
 constants = Constants()
 
