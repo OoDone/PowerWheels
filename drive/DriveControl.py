@@ -7,7 +7,8 @@ class DriveControl:
   logger = Logger("robotLog")
   driveMotor = DriveMotor(ESC)
   
-  #def __init__():
+  def __init__():
+    logger.info("Robot | Code: DriveControl.py Init.")
   
   def driveRobot(x):
     speed = x.decode('UTF-8').split(':')[2].replace("'",'')
