@@ -5,8 +5,8 @@ import time
 import os 
 from sensor import ultrasonicRead
 from Logger import Logger
-import pigpio 
-
+import pigpio
+#from Constants import Constants
 autonMode = 1
 motorNeutralSpeed = 1500
 motorMinSpeed = 1000
@@ -15,11 +15,8 @@ enabled = False
 autonEnabled = False
 disconnected = False
 ultrasonicSensorEnabled = False
-buzzer = False
 servoPin = 18
 ESC = 4
-temp1=1
-buzzerPin=17
 servoNeutralPosition = 1700 #1488 for 556-2420 & 1700 for 1500-1900
 directionTicksPer = 2 #(Ticks of rotation)/100 #100 is for input value
 os.system ("sudo pigpiod")
@@ -27,8 +24,6 @@ time.sleep(1)
 logger = Logger("robotLog")
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(buzzerPin, GPIO.OUT)
-GPIO.output(buzzerPin, GPIO.LOW)
 bd_addr = "DC:A6:32:6B:38:BD"  #"B8:27:EB:D6:57:CE" 
 #B8:27:EB:6B:AB:4B
 uuid = "42b58f76-b26d-11ea-b733-cb205305bc99"
@@ -37,72 +32,14 @@ port = 1
 pi = pigpio.pi();
 pi.set_servo_pulsewidth(ESC, 0)
 
-server_socket = bluetooth.BluetoothSocket( bluetooth.RFCOMM )
-server_socket.bind((bd_addr, bluetooth.PORT_ANY))
-server_socket.listen(port)
-logger.info("Bluetooth Bind: Listening on port " + str(port))
-def enabledAlert(length, amount):
-    buzz=amount
-    while (buzz > 0):
-        if buzz > 0:
-            logger.info("Buzzer Alert")
-            GPIO.setmode(GPIO.BCM)
-            GPIO.output(buzzerPin,GPIO.HIGH)
-            sleep(length)
-            GPIO.output(buzzerPin,GPIO.LOW)
-            sleep(length)
-            buzz = buzz-1
-        else:
-            break
-            
-    
-def arm(): #This is the arming procedure of an ESC 
-    logger.info("ESC: ARMING ESC")
-    pi.set_servo_pulsewidth(ESC, 0)
-    time.sleep(1)
-    pi.set_servo_pulsewidth(ESC, 2000)
-    time.sleep(1)
-    pi.set_servo_pulsewidth(ESC, 1500)
-    logger.info("ESC: ESC ARMED")
-
-#enabledAlert(0.1, 3)
-bluetooth.advertise_service(server_socket, "SampleServer", service_classes=[bluetooth.SERIAL_PORT_CLASS],profiles=[bluetooth.SERIAL_PORT_PROFILE])
-logger.info("Bluetooth: Advertising Service!")
-
-
-client_socket, address = server_socket.accept()
-logger.info("Bluetooth: Accepting client!")
-#server_socket.send('\x1a')
-logger.info("Bluetooth: Device connected!")
-#enabledAlert(0.2, 2) #2 bluetooth connected 
-
-
     
 def enableRobot():
-    #arm() #TRYING WITHOUT ARMING SEQUENCE
     #enabledAlert(0.5, 3) #3 long enable robot
     enabled = True
     logger.info("Robot: Robot Enabled")
     client_socket.send("Robot: Enabled Robot")
     
-def getDrive():
-    return [pi, ESC, servoPin]
-    
-def getLogger():
-    return logger
 
-
-def getConstants():
-    return [motorNeutralSpeed,directionTicksPer,motorMinSpeed,motorMaxSpeed,autonMode]
-
-def isRobotEnabled():
-    return enabled
-
-def getSocket():
-    return [client_socket, disconnected]
-
-def setAutonMode(mode):
-    autonMode = mode
     
 def return_data():
     try:
@@ -110,7 +47,7 @@ def return_data():
             data = client_socket.recv(1024)
             if not data:
                 break
-            print(data) #PRINT LINEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+            #print(data) #PRINT LINEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
             return data
     except OSError:
         pass
@@ -119,16 +56,6 @@ logger.info("\n")
 logger.info("Robot Program Started...")
 logger.info("\n")
 
-from threading import Thread
-def sendCollisionWarning():
-    while ultrasonicSensorEnabled == True:
-        distance = ultrasonicRead()
-        if distance < 10:
-            logger.info("Collision warning")
-            client_socket.send("cw")
-        
-thread=Thread(target=sendCollisionWarning)
-thread.start()
 
 while(1):
     x=return_data()
@@ -139,18 +66,6 @@ while(1):
         client_socket, address = server_socket.accept()
         if disconnected == True:
             logger.info("Bluetooth: Reconnected!")
-
-    elif x==bytes('r', 'UTF-8'):
-        if enabled == True:
-            logger.info("run")
-            if(temp1==1):
-                pi.set_servo_pulsewidth(ESC, 2000)
-                logger.info("forward")
-                x='z'
-            else:
-                pi.set_servo_pulsewidth(ESC, 1000)
-                logger.info("backward")
-                x='z'
 
     elif bytes(':','UTF-8') in x:
         #MAIN DRIVE CODE.
@@ -194,10 +109,10 @@ while(1):
         break
     elif x==bytes('ho','UTF-8'):
         if buzzer == False:
-            GPIO.output(buzzerPin,GPIO.HIGH)
+            #GPIO.output(buzzerPin,GPIO.HIGH)
             buzzer = True
         elif buzzer == True:
-            GPIO.output(buzzerPin,GPIO.LOW)
+            #GPIO.output(buzzerPin,GPIO.LOW)
             buzzer = False
     elif x==bytes('au','UTF-8'):
         #Auton Mode
