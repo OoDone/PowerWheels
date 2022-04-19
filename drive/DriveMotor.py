@@ -1,11 +1,17 @@
 import sys
 sys.path.append('/home/Desktop/PowerWheels/')
-from ..Constants import Constants
+#from ..Constants import Constants
 from Logger import Logger
+import pigpio
+import os
+os.system("sudo pigpiod")
+time.sleep(1)
 speed = 0.0
-constants = Constants()
+#constants = Constants()
+motorNeutralSpeed = 1500
 motor = False
-logger = Logger("DriveMotor") #Make it specific for each motor?
+logger = Logger("robotLog") #Make it specific for each motor?
+GPIO.setmode(GPIO.BCM)
 
 class DriveMotor:
   
