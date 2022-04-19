@@ -39,15 +39,3 @@ class BluetoothServer:
             return data
     except OSError:
         pass
-   
-      
-  while True:
-    x=return_data()
-    if x == None:
-      logger.info("Bluetooth: disconnected!")
-      pi.set_servo_pulsewidth(ESC, 0)
-      connected = False
-      client_socket, address = server_socket.accept()
-      if connected == False:
-        logger.info("Bluetooth: Reconnected!")
-  
