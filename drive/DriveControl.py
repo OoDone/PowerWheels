@@ -31,3 +31,8 @@ class DriveControl:
     else:
       directionPosition = servoNeutralPosition - direction * directionTicksPer   # 1489 - direction * directionTicksPer #* 9.36        #1489 mid servo position
     #pi.set_servo_pulsewidth(servoPin, directionPosition)
+    
+    
+  def stopRobot():
+    driveMotor.stopMotor()
+    
