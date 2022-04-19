@@ -23,7 +23,7 @@ class DriveMotor:
   def stopMotor():
     pi.set_servo_pulsewidth(motor, 0.0)
     
-  def getDriveSpeed():
+  def getDriveSpeedPercent():
     return speed
 
 #Getters for encoder ticks, motor speed
