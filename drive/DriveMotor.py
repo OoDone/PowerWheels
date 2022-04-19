@@ -8,12 +8,14 @@ import RPi.GPIO as GPIO
 from time import sleep
 os.system("sudo pigpiod")
 time.sleep(1)
+pi = pigpio.pi();
+GPIO.setmode(GPIO.BCM)
+pi.set_servo_pulsewidth(ESC, 0)
 speed = 0.0
 #constants = Constants()
 motorNeutralSpeed = 1500
 motor = False
 logger = Logger("robotLog") #Make it specific for each motor?
-GPIO.setmode(GPIO.BCM)
 
 class DriveMotor:
   
