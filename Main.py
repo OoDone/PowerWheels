@@ -6,6 +6,7 @@ import os
 from sensor import ultrasonicRead
 from Logger import Logger
 import pigpio
+import BluetoothServer
 #from Constants import Constants
 autonMode = 1
 motorNeutralSpeed = 1500
@@ -41,16 +42,6 @@ def enableRobot():
     
 
     
-def return_data():
-    try:
-        while True:
-            data = client_socket.recv(1024)
-            if not data:
-                break
-            #print(data) #PRINT LINEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-            return data
-    except OSError:
-        pass
     
 logger.info("\n")
 logger.info("Robot Program Started...")
@@ -58,7 +49,7 @@ logger.info("\n")
 
 
 while(1):
-    x=return_data()
+    x=BluetoothServer.return_data()
     if x == None:
         logger.info("Bluetooth: disconnected!")
         pi.set_servo_pulsewidth(ESC, 0)
