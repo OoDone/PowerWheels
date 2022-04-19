@@ -4,6 +4,8 @@ sys.path.append('/home/Desktop/PowerWheels/')
 from Logger import Logger
 import pigpio
 import os
+import RPi.GPIO as GPIO
+from time import sleep
 os.system("sudo pigpiod")
 time.sleep(1)
 speed = 0.0
