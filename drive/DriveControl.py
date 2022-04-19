@@ -3,6 +3,8 @@ import DriveMotor
 ESC = 4
 
 class DriveControl:
+ 
+driveMotor = DriveMotor()
   
   #def __init__():
   
@@ -17,7 +19,7 @@ class DriveControl:
       direction = 0.0
       logger.warn("Exception: speed or direction not a number")
     if speed > 0:#0
-      pi.set_servo_pulsewidth(ESC, speed*5+motorNeutralSpeed)
+      driveMotor.drive(ESC, speed*5+motorNeutralSpeed)
     elif speed < 0: #0
       pi.set_servo_pulsewidth(ESC, motorNeutralSpeed + speed * 5)
     else:
