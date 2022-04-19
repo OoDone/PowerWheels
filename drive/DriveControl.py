@@ -19,11 +19,11 @@ driveMotor = DriveMotor()
       direction = 0.0
       logger.warn("Exception: speed or direction not a number")
     if speed > 0:#0
-      driveMotor.drive(ESC, speed*5+motorNeutralSpeed)
+      driveMotor.driveMotor(ESC, speed*5+motorNeutralSpeed)
     elif speed < 0: #0
-      pi.set_servo_pulsewidth(ESC, motorNeutralSpeed + speed * 5)
+      driveMotor.driveMotor(ESC, motorNeutralSpeed + speed * 5)
     else:
-      pi.set_servo_pulsewidth(ESC, 0)
+      driveMotor.driveMotor(ESC, 0)
     if direction < 0:
       directionPosition = -direction * directionTicksPer + servoNeutralPosition #* 9.36 + 1489 # TEMP  
     else:
