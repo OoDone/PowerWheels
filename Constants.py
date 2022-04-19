@@ -1,3 +1,5 @@
+#CONVERT TO USE A YML FILE WITH PARSE CODE
+
 #robot constants
 enabled = False
 disconnected = False
