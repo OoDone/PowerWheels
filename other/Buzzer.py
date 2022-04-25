@@ -1,8 +1,16 @@
-buzzerPin = 17
+import RPi.GPIO as GPIO
+from time import sleep
+from Constants import Constants
+
 
 class Buzzer:
-  GPIO.setup(buzzerPin, GPIO.OUT)
-  GPIO.output(buzzerPin, GPIO.LOW)
+  def __init__(self, Logger):
+    global logger
+    global constants
+    logger = Logger
+    constants = Constants(Logger)
+    GPIO.setup(constants.buzzerPin, GPIO.OUT)
+    GPIO.output(constants.buzzerPin, GPIO.LOW)
   
   def buzz(length, amount):
     buzz=amount
@@ -11,10 +19,12 @@ class Buzzer:
         if buzz > 0:
           logger.info("Buzzer Alert")
           GPIO.setmode(GPIO.BCM)
-          GPIO.output(buzzerPin,GPIO.HIGH)
+          GPIO.output(constants.buzzerPin,GPIO.HIGH)
           sleep(length)
-          GPIO.output(buzzerPin,GPIO.LOW)
+          GPIO.output(constants.buzzerPin,GPIO.LOW)
           sleep(length)
           buzz = buzz-1
         else:
           break
+    except:
+      logger.warn("Robot: Exception in Buzz() function")

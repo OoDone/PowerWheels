@@ -2,7 +2,10 @@ from sensor import ultrasonicRead
 
 class CollisionSensor:
   
-  def __init__(socket):
+  def __init__(self, socket, Logger):
+    global logger
+    global blsocket
+    logger = Logger
     blsocket = socket
     logger.info("Robot | Code: CollisionSensor.py Init")
   
@@ -14,5 +17,5 @@ class CollisionSensor:
         logger.info("Robot: Robot {} centimeters away from object!", distance)
         blsocket.send("cw")
       
-  thread=Thread(target=sendCollisionWarning)
+  thread=Thread(target=collisionWarning)
   thread.start()

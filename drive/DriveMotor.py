@@ -1,33 +1,34 @@
-import sys
-sys.path.append('/home/Desktop/PowerWheels/')
-#from ..Constants import Constants
-from Logger import Logger
 import pigpio
 import os
 import RPi.GPIO as GPIO
 from time import sleep
-os.system("sudo pigpiod")
-time.sleep(1)
-pi = pigpio.pi();
-GPIO.setmode(GPIO.BCM)
-pi.set_servo_pulsewidth(ESC, 0)
+from Constants import Constants
 speed = 0.0
-#constants = Constants()
-motorNeutralSpeed = 1500
 motor = False
-logger = Logger("robotLog") #Make it specific for each motor?
 
 class DriveMotor:
   
-  def __init__(motorPin):
+  def __init__(self, motorPin, Logger):
+    global motor
+    global logger
+    global constants
+    global pi
     motor = motorPin
+    logger = Logger
+    constants = Constants(logger)
     
-  def driveMotor(speedPercent):
+    GPIO.setmode(GPIO.BCM)
+    os.system("sudo pigpiod")
+    sleep(1)
+    pi = pigpio.pi()
+    pi.set_servo_pulsewidth(motor, 0)
+    
+  def setMotorSpeed(speedPercent):
     speed = 0.0
     if speedPercent > 0:
-      speed = motorNeutralSpeed+speedPercent*5
+      speed = constants.motorNeutralSpeed+speedPercent*5
     else:
-      speed = speedPercent*5+motorNeutralSpeed
+      speed = speedPercent*5+constants.motorNeutralSpeed
     pi.set_servo_pulsewidth(motor, speed)
     
   def stopMotor():

@@ -1,5 +1,6 @@
-from Logger import Logger
-logger = Logger("robotLog")
+import bluetooth
+from Constants import Constants
+#logger = Logger("robotLog")
 
 class BluetoothServer:
   connected = False
@@ -8,10 +9,18 @@ class BluetoothServer:
   uuid = "42b58f76-b26d-11ea-b733-cb205305bc99"
   port = 1
   
-  def __init__():
+
+  def __init__(self, Logger):
+    global logger
+    global constants
+    logger = Logger
+    constants = Constants(logger)
     logger.info("Robot | Code: BluetoothServer.py Init.")
+
+
     
-    
+  global server_socket
+  global client_socket
   server_socket = bluetooth.BluetoothSocket( bluetooth.RFCOMM )
   server_socket.bind((bd_addr, bluetooth.PORT_ANY))
   server_socket.listen(port)
@@ -39,3 +48,7 @@ class BluetoothServer:
             return data
     except OSError:
         pass
+  
+  def getServerSocket():
+    if server_socket != None:
+      return server_socket

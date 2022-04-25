@@ -1,13 +1,16 @@
-import DriveMotor
-from ..Logger import Logger
-
-ESC = 4
+from DriveMotor import DriveMotor
+from Constants import Constants
 
 class DriveControl:
-  logger = Logger("robotLog")
-  driveMotor = DriveMotor(ESC)
   
-  def __init__():
+  def __init__(self, Logger):
+    global logger
+    global constants
+    global driveMotor
+    logger = Logger
+    constants = Constants(logger)
+    driveMotor = DriveMotor(constants.ESC, logger)
+
     logger.info("Robot | Code: DriveControl.py Init.")
   
   def driveRobot(x):
@@ -21,15 +24,15 @@ class DriveControl:
       direction = 0.0
       logger.warn("Exception: speed or direction not a number")
     if speed > 0:#0
-      driveMotor.driveMotor(speed*5+motorNeutralSpeed)
+      driveMotor.setMotorSpeed(speed*5+constants.motorNeutralSpeed)
     elif speed < 0: #0
-      driveMotor.driveMotor(motorNeutralSpeed + speed * 5)
+      driveMotor.setMotorSpeed(constants.motorNeutralSpeed + speed * 5)
     else:
-      driveMotor.driveMotor(0)
+      driveMotor.setMotorSpeed(0)
     if direction < 0:
-      directionPosition = -direction * directionTicksPer + servoNeutralPosition #* 9.36 + 1489 # TEMP  
+      directionPosition = -direction * constants.directionTicksPer + constants.servoNeutralPosition #* 9.36 + 1489 # TEMP  
     else:
-      directionPosition = servoNeutralPosition - direction * directionTicksPer   # 1489 - direction * directionTicksPer #* 9.36        #1489 mid servo position
+      directionPosition = constants.servoNeutralPosition - direction * constants.directionTicksPer   # 1489 - direction * directionTicksPer #* 9.36        #1489 mid servo position
     #pi.set_servo_pulsewidth(servoPin, directionPosition)
     
     
