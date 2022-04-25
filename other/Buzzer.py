@@ -11,6 +11,7 @@ class Buzzer:
     constants = Constants(Logger)
     GPIO.setup(constants.buzzerPin, GPIO.OUT)
     GPIO.output(constants.buzzerPin, GPIO.LOW)
+    logger.info("Robot | Code: Buzzer.py Init.")
   
   def buzz(length, amount):
     buzz=amount

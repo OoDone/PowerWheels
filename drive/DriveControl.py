@@ -9,8 +9,7 @@ class DriveControl:
     global driveMotor
     logger = Logger
     constants = Constants(logger)
-    driveMotor = DriveMotor(constants.ESC, logger)
-
+    driveMotor = DriveMotor(constants.DriveConstants().ESC, logger)
     logger.info("Robot | Code: DriveControl.py Init.")
   
   def driveRobot(x):
@@ -24,15 +23,15 @@ class DriveControl:
       direction = 0.0
       logger.warn("Exception: speed or direction not a number")
     if speed > 0:#0
-      driveMotor.setMotorSpeed(speed*5+constants.motorNeutralSpeed)
+      driveMotor.setMotorSpeed(speed*5+constants.DriveConstants().motorNeutralSpeed)
     elif speed < 0: #0
-      driveMotor.setMotorSpeed(constants.motorNeutralSpeed + speed * 5)
+      driveMotor.setMotorSpeed(constants.DriveConstants().motorNeutralSpeed + speed * 5)
     else:
       driveMotor.setMotorSpeed(0)
     if direction < 0:
-      directionPosition = -direction * constants.directionTicksPer + constants.servoNeutralPosition #* 9.36 + 1489 # TEMP  
+      directionPosition = -direction * constants.DriveConstants().directionTicksPer + constants.DriveConstants().servoNeutralPosition #* 9.36 + 1489 # TEMP  
     else:
-      directionPosition = constants.servoNeutralPosition - direction * constants.directionTicksPer   # 1489 - direction * directionTicksPer #* 9.36        #1489 mid servo position
+      directionPosition = constants.DriveConstants().servoNeutralPosition - direction * constants.DriveConstants().directionTicksPer   # 1489 - direction * directionTicksPer #* 9.36        #1489 mid servo position
     #pi.set_servo_pulsewidth(servoPin, directionPosition)
     
     

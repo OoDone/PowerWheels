@@ -16,19 +16,19 @@ class DriveMotor:
     motor = motorPin
     logger = Logger
     constants = Constants(logger)
-    
     GPIO.setmode(GPIO.BCM)
     os.system("sudo pigpiod")
     sleep(1)
     pi = pigpio.pi()
     pi.set_servo_pulsewidth(motor, 0)
+    logger.info("Robot | Code: DriveMotor.py Init.")
     
   def setMotorSpeed(speedPercent):
     speed = 0.0
     if speedPercent > 0:
-      speed = constants.motorNeutralSpeed+speedPercent*5
+      speed = constants.DriveConstants().motorNeutralSpeed+speedPercent*5
     else:
-      speed = speedPercent*5+constants.motorNeutralSpeed
+      speed = speedPercent*5+constants.DriveConstants().motorNeutralSpeed
     pi.set_servo_pulsewidth(motor, speed)
     
   def stopMotor():
