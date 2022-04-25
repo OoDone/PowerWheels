@@ -25,7 +25,6 @@ class BluetoothServer:
   server_socket.bind((bd_addr, bluetooth.PORT_ANY))
   server_socket.listen(port)
   logger.info("Bluetooth Bind: Listening on port " + str(port))
-  
   #enabledAlert(0.1, 3)
   bluetooth.advertise_service(server_socket, "SampleServer", service_classes=[bluetooth.SERIAL_PORT_CLASS],profiles=[bluetooth.SERIAL_PORT_PROFILE])
   logger.info("Bluetooth: Advertising Service!")
