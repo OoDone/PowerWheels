@@ -1,40 +1,52 @@
 import time
 from time import sleep
-
-import RPi.GPIO as GPIO
-
-from BluetoothServer import BluetoothServer
-from drive import DriveControl
+from drive.DriveControl import DriveControl
 from Logger import Logger
 from Constants import Constants
+try:
+    import RPi.GPIO as GPIO
+except (RuntimeError, ModuleNotFoundError):
+    import fake_rpigpio.utils
+    fake_rpigpio.utils.install()
+    import RPi.GPIO as GPIO
+
+from BluetoothServer import BluetoothServer
 
 #from Constants import Constants
 logger = Logger("robotLog")
 blServer = BluetoothServer(logger)
 driveControl = DriveControl(logger)
-constants = Constants(logger)
+constants = Constants()
 autonMode = 1
-enabled = False
 autonEnabled = False
+enabled = False
 disconnected = False
-#ultrasonicSensorEnabled = False
-#servoPin = 18
-#servoNeutralPosition = 1700 #1488 for 556-2420 & 1700 for 1500-1900
-#directionTicksPer = 2 #(Ticks of rotation)/100 #100 is for input value
 time.sleep(1)
+logger.info("Robot | Main.py Init")
 def enableRobot():
     #enabledAlert(0.5, 3) #3 long enable robot
+    global enabled
     enabled = True
-    logger.info("Robot: Robot Enabled")
-    client_socket.send("Robot: Enabled Robot")
+    logger.info("Robot | Enabled Robot.")
+    #if constants.isTestingMode == False and blServer.getStatus() == True:
+        #client_socket.send("Robot: Enabled Robot")
+
+def disableRobot():
+    logger.info("Robot | Disabled Robot.")
     
 while(1):
-    x=blServer.return_data()
+    if constants.isTestingMode == True:
+        if enabled == False:
+            enableRobot()
+            x=None
+        driveControl.driveRobot(bytes(input(), 'utf-8'))
+    else:
+        x=blServer.return_data()
     if x == None:
         logger.info("Bluetooth: disconnected!")
         driveControl.stopRobot()
         disconnected = True
-        client_socket, address = blServer.getServerSocket().accept()
+        client_socket = blServer.getServerSocket()
         if disconnected == True:
             logger.info("Bluetooth: Reconnected!")
     elif bytes(':','UTF-8') in x:

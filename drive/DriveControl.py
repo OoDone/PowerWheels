@@ -1,4 +1,4 @@
-from DriveMotor import DriveMotor
+from drive.DriveMotor import DriveMotor
 from Constants import Constants
 
 class DriveControl:
@@ -8,13 +8,14 @@ class DriveControl:
     global constants
     global driveMotor
     logger = Logger
-    constants = Constants(logger)
+    constants = Constants()
     driveMotor = DriveMotor(constants.DriveConstants().ESC, logger)
     logger.info("Robot | Code: DriveControl.py Init.")
   
-  def driveRobot(x):
+  def driveRobot(self, x):
     speed = x.decode('UTF-8').split(':')[2].replace("'",'')
     direction = x.decode('UTF-8').split(':')[4].replace("'",'')
+    #TESTMODE FAKE BYTE:   0:1:10:3:0
     try:
       speed = float(speed)
       direction = float(direction)
@@ -35,6 +36,6 @@ class DriveControl:
     #pi.set_servo_pulsewidth(servoPin, directionPosition)
     
     
-  def stopRobot():
+  def stopRobot(self):
     driveMotor.stopMotor()
     

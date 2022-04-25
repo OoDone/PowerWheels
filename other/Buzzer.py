@@ -1,6 +1,11 @@
-import RPi.GPIO as GPIO
 from time import sleep
 from Constants import Constants
+try:
+    import RPi.GPIO as GPIO
+except (RuntimeError, ModuleNotFoundError):
+    import fake_rpigpio.utils
+    fake_rpigpio.utils.install()
+    import RPi.GPIO as GPIO
 
 
 class Buzzer:
@@ -8,7 +13,7 @@ class Buzzer:
     global logger
     global constants
     logger = Logger
-    constants = Constants(Logger)
+    constants = Constants()
     GPIO.setup(constants.buzzerPin, GPIO.OUT)
     GPIO.output(constants.buzzerPin, GPIO.LOW)
     logger.info("Robot | Code: Buzzer.py Init.")
