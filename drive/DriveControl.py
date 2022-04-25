@@ -4,13 +4,13 @@ from Constants import Constants
 class DriveControl:
   
   def __init__(self, Logger):
+    logger.info("Robot | Code: DriveControl.py Init.")
     global logger
     global constants
     global driveMotor
     logger = Logger
     constants = Constants()
     driveMotor = DriveMotor(constants.DriveConstants().ESC, logger)
-    logger.info("Robot | Code: DriveControl.py Init.")
   
   def driveRobot(self, x):
     speed = x.decode('UTF-8').split(':')[2].replace("'",'')

@@ -4,11 +4,11 @@ from Constants import Constants
 connected = False
 class BluetoothServer:
   def __init__(self, Logger):
+    logger.info("Robot | Code: BluetoothServer.py Initialized.")
     global logger
     global constants
     logger = Logger
     constants = Constants()
-    logger.info("Robot | Code: BluetoothServer.py Initialized.")
     if constants.isTestingMode == False:
       self.StartServer()
 

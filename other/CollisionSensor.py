@@ -3,11 +3,11 @@ from sensor import ultrasonicRead
 class CollisionSensor:
   
   def __init__(self, socket, Logger):
+    logger.info("Robot | Code: CollisionSensor.py Init")
     global logger
     global blsocket
     logger = Logger
     blsocket = socket
-    logger.info("Robot | Code: CollisionSensor.py Init")
   
   from threading import Thread
   def collisionWarning():

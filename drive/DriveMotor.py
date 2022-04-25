@@ -14,6 +14,7 @@ motor = False
 
 class DriveMotor:
   def __init__(self, motorPin, Logger):
+    logger.info("Robot | Code: DriveMotor.py Init.")
     global motor
     global logger
     global constants
@@ -27,7 +28,6 @@ class DriveMotor:
       sleep(1)
       pi = pigpio.pi()
       pi.set_servo_pulsewidth(motor, 0)
-    logger.info("Robot | Code: DriveMotor.py Init.")
     
   def setMotorSpeed(self,speedPercent):
     speed = 0.0

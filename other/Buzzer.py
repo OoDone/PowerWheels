@@ -10,13 +10,13 @@ except (RuntimeError, ModuleNotFoundError):
 
 class Buzzer:
   def __init__(self, Logger):
+    logger.info("Robot | Code: Buzzer.py Init.")
     global logger
     global constants
     logger = Logger
     constants = Constants()
     GPIO.setup(constants.buzzerPin, GPIO.OUT)
     GPIO.output(constants.buzzerPin, GPIO.LOW)
-    logger.info("Robot | Code: Buzzer.py Init.")
   
   def buzz(length, amount):
     buzz=amount
