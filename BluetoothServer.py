@@ -32,7 +32,7 @@ class BluetoothServer:
     connected = True
   #enabledAlert(0.2, 2) #2 bluetooth connected 
     
-  def return_data():
+  def return_data(self):
     try:
         while True:
             data = client_socket.recv(1024)

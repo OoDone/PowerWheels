@@ -32,6 +32,9 @@ def enableRobot():
         #client_socket.send("Robot: Enabled Robot")
 
 def disableRobot():
+    global enabled
+    enabled = False
+    driveControl.stopRobot()
     logger.info("Robot | Disabled Robot.")
     
 while(1):
@@ -54,8 +57,7 @@ while(1):
             driveControl.driveRobot(x)
     elif x==bytes('s', 'UTF-8'):
         logger.info("Stopping robot...")
-        driveControl.stopRobot()
-        enabled = False
+        disableRobot()
         x='z'
     elif x==bytes('en', 'UTF-8'):
         logger.info("Robot Enabled")
