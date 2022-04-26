@@ -29,15 +29,24 @@ class Motor:
       pi = pigpio.pi()
       pi.set_servo_pulsewidth(motor, 0)
     
-  def setMotorSpeed(self,speedPercent):
-    speed = 0.0
-    if speedPercent > 0:
-      speed = constants.DriveConstants().motorNeutralSpeed+speedPercent*5
-    else:
-      speed = speedPercent*5+constants.DriveConstants().motorNeutralSpeed
-    if constants.isTestingMode == False:
-      pi.set_servo_pulsewidth(motor, speed)
-    else: logger.info("TestMode: Set Motor Speed to " + str(speedPercent))
+  def setMotorSpeed(self,Speed):
+    if Speed < constants.DriveConstants().motorMaxSpeed + 1 and Speed > constants.DriveConstants().motorMinSpeed - 1:
+      if constants.isTestingMode == False:
+        pi.set_servo_pulsewidth(motor, speed)
+      else: logger.info("TestMode: Set Motor Speed to " + str(Speed))
+    else: logger.info("setMotorSpeed: Speed not within allowed speed range.")
+
+  def setMotorSpeedPercent(self,speedPercent):
+    if speedPercent > -101 and speedPercent < 101:
+      speed = 0.0
+      if speedPercent > 0:
+        speed = constants.DriveConstants().motorNeutralSpeed+speedPercent*5
+      else:
+        speed = speedPercent*5+constants.DriveConstants().motorNeutralSpeed
+      if constants.isTestingMode == False:
+        pi.set_servo_pulsewidth(motor, speed)
+      else: logger.info("TestMode: Set Motor Speed to " + str(speedPercent) + " Percent.")
+    else: logger.info("setMotorSpeedPercent: SpeedPercent not within allowed speed range.")
     
   def stopMotor(self):
     if constants.isTestingMode == False:
