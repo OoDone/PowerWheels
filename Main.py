@@ -19,12 +19,12 @@ blServer = BluetoothServer(logger)
 driveControl = DriveControl(logger)
 constants = Constants()
 buzzer = Buzzer(logger)
+auton = AutonMain(logger)
 autonMode = 1
 autonEnabled = False
 enabled = False
 disconnected = False
 logger.info("Robot | Code: Main.py Init")
-auton = AutonMain(logger)
 time.sleep(1)
 def enableRobot():
     buzzer.buzz(0.5, 3) #3 long enable robot
@@ -84,7 +84,7 @@ while(1):
         #Auton Mode
         logger.info("Auton")
         auton.setAutonMode(0)
-        auton.enableAuton(true)
+        auton.enableAuton(True)
         #MainAuton.enableAuton(True, 1)
         #autonEnabled = MainAuton.getAutonEnabled()
     else:
