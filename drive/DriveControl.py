@@ -35,6 +35,10 @@ class DriveControl:
       directionPosition = constants.DriveConstants().servoNeutralPosition - direction * constants.DriveConstants().directionTicksPer   # 1489 - direction * directionTicksPer #* 9.36        #1489 mid servo position
     #pi.set_servo_pulsewidth(servoPin, directionPosition)
     
+    def drive(self, distance, speedPercent):
+      #AWAIT UNTIL DISTANCETICKS(ADDED UP MOTOR TICKS) EQUALS DISTANCE
+      logger.info("Driving " + distance + " at speed " + speedPercent)
+    
     
   def stopRobot(self):
     driveMotor.stopMotor()
