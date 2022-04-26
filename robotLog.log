@@ -4,3 +4,9 @@
 2022/04/25 20:53:00.612 Motor INFO | Robot | Code: DriveMotor.py Init.
 2022/04/25 20:53:00.612 Buzzer INFO | Robot | Code: Buzzer.py Init.
 2022/04/25 20:53:00.613 Main INFO | Robot | Code: Main.py Init
+2022/04/25 20:53:01.617 Main INFO | Robot | Enabled Robot.
+2022/04/25 20:53:01.617 Main INFO | Robot | Robot in Test Mode!
+2022/04/25 20:53:10.639 Motor INFO | TestMode: Set Motor Speed to 1550.0
+2022/04/25 20:53:10.639 Main INFO | Bluetooth: disconnected!
+2022/04/25 20:53:10.640 Motor INFO | TestMode: Stopping motor...
+2022/04/25 20:53:10.640 Main INFO | Bluetooth: Reconnected!
