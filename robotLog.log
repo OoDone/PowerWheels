@@ -1,42 +1,6 @@
-2022/04/25 17:40:10.252 Logger INFO | Logger object created successfully..
-2022/04/25 17:40:10.252 BluetoothServer INFO | Robot | Code: BluetoothServer.py Initialized.
-2022/04/25 17:40:10.253 DriveMotor INFO | Robot | Code: DriveMotor.py Init.
-2022/04/25 17:40:10.253 DriveControl INFO | Robot | Code: DriveControl.py Init.
-2022/04/25 17:40:11.256 Main INFO | Robot | Main.py Init
-2022/04/25 17:40:11.256 Main INFO | Robot: Robot Enabled
-2022/04/25 17:40:12.388 Main INFO | Bluetooth: disconnected!
-2022/04/25 17:40:12.388 DriveMotor INFO | TEMP
-2022/04/25 17:40:12.388 Main INFO | Bluetooth: Reconnected!
-2022/04/25 17:40:14.035 Main INFO | Bluetooth: disconnected!
-2022/04/25 17:40:14.036 DriveMotor INFO | TEMP
-2022/04/25 17:40:14.036 Main INFO | Bluetooth: Reconnected!
-2022/04/25 17:40:14.500 Main INFO | Bluetooth: disconnected!
-2022/04/25 17:40:14.500 DriveMotor INFO | TEMP
-2022/04/25 17:40:14.501 Main INFO | Bluetooth: Reconnected!
-2022/04/25 17:40:15.171 Main INFO | Bluetooth: disconnected!
-2022/04/25 17:40:15.172 DriveMotor INFO | TEMP
-2022/04/25 17:40:15.172 Main INFO | Bluetooth: Reconnected!
-2022/04/25 17:40:15.540 Main INFO | Bluetooth: disconnected!
-2022/04/25 17:40:15.540 DriveMotor INFO | TEMP
-2022/04/25 17:40:15.540 Main INFO | Bluetooth: Reconnected!
-2022/04/25 17:40:15.843 Main INFO | Bluetooth: disconnected!
-2022/04/25 17:40:15.844 DriveMotor INFO | TEMP
-2022/04/25 17:40:15.844 Main INFO | Bluetooth: Reconnected!
-2022/04/25 17:40:16.147 Main INFO | Bluetooth: disconnected!
-2022/04/25 17:40:16.147 DriveMotor INFO | TEMP
-2022/04/25 17:40:16.148 Main INFO | Bluetooth: Reconnected!
-2022/04/25 17:40:16.435 Main INFO | Bluetooth: disconnected!
-2022/04/25 17:40:16.436 DriveMotor INFO | TEMP
-2022/04/25 17:40:16.436 Main INFO | Bluetooth: Reconnected!
-2022/04/25 17:40:16.707 Main INFO | Bluetooth: disconnected!
-2022/04/25 17:40:16.707 DriveMotor INFO | TEMP
-2022/04/25 17:40:16.708 Main INFO | Bluetooth: Reconnected!
-2022/04/25 17:40:16.948 Main INFO | Bluetooth: disconnected!
-2022/04/25 17:40:16.948 DriveMotor INFO | TEMP
-2022/04/25 17:40:16.948 Main INFO | Bluetooth: Reconnected!
-2022/04/25 17:40:17.235 Main INFO | Bluetooth: disconnected!
-2022/04/25 17:40:17.236 DriveMotor INFO | TEMP
-2022/04/25 17:40:17.236 Main INFO | Bluetooth: Reconnected!
-2022/04/25 17:40:18.884 Main INFO | Bluetooth: disconnected!
-2022/04/25 17:40:18.884 DriveMotor INFO | TEMP
-2022/04/25 17:40:18.884 Main INFO | Bluetooth: Reconnected!
+2022/04/25 20:53:00.610 Logger INFO | Logger object created successfully..
+2022/04/25 20:53:00.611 BluetoothServer INFO | Robot | Code: BluetoothServer.py Initialized.
+2022/04/25 20:53:00.611 DriveControl INFO | Robot | Code: DriveControl.py Init.
+2022/04/25 20:53:00.612 Motor INFO | Robot | Code: DriveMotor.py Init.
+2022/04/25 20:53:00.612 Buzzer INFO | Robot | Code: Buzzer.py Init.
+2022/04/25 20:53:00.613 Main INFO | Robot | Code: Main.py Init

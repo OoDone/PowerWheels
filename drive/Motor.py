@@ -20,7 +20,7 @@ class Motor:
     global pi
     motor = motorPin
     logger = Logger
-    logger.info("Robot | Code: DriveMotor.py Init.")
+    logger.info("Robot | Code: Motor.py Init.")
     constants = Constants()
     GPIO.setmode(GPIO.BCM)
     if constants.isTestingMode == False:

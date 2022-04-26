@@ -17,14 +17,15 @@ logger = Logger("robotLog")
 blServer = BluetoothServer(logger)
 driveControl = DriveControl(logger)
 constants = Constants()
+buzzer = Buzzer(logger)
 autonMode = 1
 autonEnabled = False
 enabled = False
 disconnected = False
-logger.info("Robot | Main.py Init")
+logger.info("Robot | Code: Main.py Init")
 time.sleep(1)
 def enableRobot():
-    Buzzer.buzz(0.5, 3) #3 long enable robot
+    buzzer.buzz(0.5, 3) #3 long enable robot
     global enabled
     enabled = True
     logger.info("Robot | Enabled Robot.")
@@ -52,7 +53,8 @@ while(1):
         logger.info("Bluetooth: disconnected!")
         driveControl.stopRobot()
         disconnected = True
-        client_socket = blServer.getServerSocket()
+        if constants.isTestingMode == False:
+            client_socket = blServer.getServerSocket()
         if disconnected == True:
             logger.info("Bluetooth: Reconnected!")
     elif bytes(':','UTF-8') in x:

@@ -18,7 +18,7 @@ class Buzzer:
     GPIO.setup(constants.buzzerPin, GPIO.OUT)
     GPIO.output(constants.buzzerPin, GPIO.LOW)
   
-  def buzz(length, amount):
+  def buzz(self, length, amount):
     if constants.buzzer == True:
       buzz=amount
       try:

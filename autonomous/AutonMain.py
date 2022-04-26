@@ -8,7 +8,7 @@ class AutonMain:
         global logger
         global constants
         logger = Logger
-        logger.info("Robot | AutonMain.py Init")
+        logger.info("Robot | Code: AutonMain.py Init")
         constants = Constants()
 
     def setAutonMode(self, mode):
