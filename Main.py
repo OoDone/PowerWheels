@@ -1,8 +1,8 @@
 import time
-from time import sleep
 from drive.DriveControl import DriveControl
 from Logger import Logger
 from Constants import Constants
+from other.Buzzer import Buzzer
 try:
     import RPi.GPIO as GPIO
 except (RuntimeError, ModuleNotFoundError):
@@ -21,13 +21,15 @@ autonMode = 1
 autonEnabled = False
 enabled = False
 disconnected = False
-time.sleep(1)
 logger.info("Robot | Main.py Init")
+time.sleep(1)
 def enableRobot():
-    #enabledAlert(0.5, 3) #3 long enable robot
+    Buzzer.buzz(0.5, 3) #3 long enable robot
     global enabled
     enabled = True
     logger.info("Robot | Enabled Robot.")
+    if constants.isTestingMode == True:
+        logger.info("Robot | Robot in Test Mode!")
     #if constants.isTestingMode == False and blServer.getStatus() == True:
         #client_socket.send("Robot: Enabled Robot")
 
@@ -36,6 +38,7 @@ def disableRobot():
     enabled = False
     driveControl.stopRobot()
     logger.info("Robot | Disabled Robot.")
+    GPIO.cleanup()
     
 while(1):
     if constants.isTestingMode == True:
@@ -60,7 +63,7 @@ while(1):
         disableRobot()
         x='z'
     elif x==bytes('en', 'UTF-8'):
-        logger.info("Robot Enabled")
+        logger.info("Enabling Robot...")
         enabled = True
         enableRobot()
         x='z'

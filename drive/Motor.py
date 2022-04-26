@@ -12,15 +12,15 @@ except (RuntimeError, ModuleNotFoundError):
 speed = 0.0
 motor = False
 
-class DriveMotor:
+class Motor:
   def __init__(self, motorPin, Logger):
-    logger.info("Robot | Code: DriveMotor.py Init.")
     global motor
     global logger
     global constants
     global pi
     motor = motorPin
     logger = Logger
+    logger.info("Robot | Code: DriveMotor.py Init.")
     constants = Constants()
     GPIO.setmode(GPIO.BCM)
     if constants.isTestingMode == False:
