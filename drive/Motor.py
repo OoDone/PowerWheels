@@ -30,7 +30,7 @@ class Motor:
       pi.set_servo_pulsewidth(motor, 0)
     
   def setMotorSpeed(self,Speed):
-    if Speed < constants.DriveConstants().motorMaxSpeed + 1 and Speed > constants.DriveConstants().motorMinSpeed - 1:
+    if not Speed > constants.DriveConstants().motorMaxSpeed and not Speed < constants.DriveConstants().motorMinSpeed:
       if constants.isTestingMode == False:
         pi.set_servo_pulsewidth(motor, speed)
       else: logger.info("TestMode: Set Motor Speed to " + str(Speed))
