@@ -3,6 +3,7 @@ from drive.DriveControl import DriveControl
 from Logger import Logger
 from Constants import Constants
 from other.Buzzer import Buzzer
+from autonomous.AutonMain import AutonMain
 try:
     import RPi.GPIO as GPIO
 except (RuntimeError, ModuleNotFoundError):
@@ -18,6 +19,7 @@ blServer = BluetoothServer(logger)
 driveControl = DriveControl(logger)
 constants = Constants()
 buzzer = Buzzer(logger)
+auton = AutonMain(logger)
 autonMode = 1
 autonEnabled = False
 enabled = False
@@ -45,8 +47,7 @@ while(1):
     if constants.isTestingMode == True:
         if enabled == False:
             enableRobot()
-            x=None
-        driveControl.driveRobot(bytes(input(), 'utf-8'))
+        x=bytes(input(), 'utf-8')
     else:
         x=blServer.return_data()
     if x == None:
@@ -82,6 +83,8 @@ while(1):
     elif x==bytes('au','UTF-8'):
         #Auton Mode
         logger.info("Auton")
+        auton.setAutonMode(0)
+        auton.enableAuton(True)
         #MainAuton.enableAuton(True, 1)
         #autonEnabled = MainAuton.getAutonEnabled()
     else:

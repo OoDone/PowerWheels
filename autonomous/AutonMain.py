@@ -1,5 +1,6 @@
 from Constants import Constants
 from time import sleep
+from autonomous.DriveForwardAuton import DriveForwardAuton
 
 autonEnabled = False
 class AutonMain:
@@ -33,7 +34,9 @@ class AutonMain:
         elif enabled == True:
             #AUTON ENABLED
             autonEnabled = enabled
-            logger.info("Robot | Enabling Autonomous In Mode " + autonMode)
+            logger.info("Robot | Enabling Autonomous In Mode " + str(autonMode))
+            driveForwardAuton = DriveForwardAuton(logger)
+            driveForwardAuton.start()
         else:
             #AUTON DISABLED
             autonEnabled = enabled
@@ -41,13 +44,12 @@ class AutonMain:
 
 
     def loop(self):
-        logger.info("TEMP AUTONLOOP")
         if autonEnabled:
-            logger.info("TEMP: REMOVE THIS IN AUTON ENABLED LOOP")
             if autonMode == 0:
                 #autonMode 0
                 logger.info("TEMP: REMOVE THIS IN AUTON ENABLED LOOP: AUTONMODE = 0")
-                #DriveForwardAuton().start() #MAKE EACH AUTON IN A DIFFERENT FILE AND CLASS
+                driveForwardAuton = DriveForwardAuton(logger)
+                driveForwardAuton.start() #MAKE EACH AUTON IN A DIFFERENT FILE AND CLASS
             elif autonMode == 1:
                 #autonMode 1
                 logger.info("TEMP: REMOVE THIS IN AUTON ENABLED LOOP: AUTONMODE = 1")
@@ -56,6 +58,6 @@ class AutonMain:
 
 
 
-    while(True):
-        sleep(0.02) #20 millisecond loop
-        loop()
+    #while(True):
+        #sleep(0.02) #20 millisecond loop
+        #loop()

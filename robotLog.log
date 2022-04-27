@@ -1,12 +1,21 @@
-2022/04/26 15:11:22.293 Logger INFO | Logger object created successfully..
-2022/04/26 15:11:22.293 BluetoothServer INFO | Robot | Code: BluetoothServer.py Initialized.
-2022/04/26 15:11:22.293 DriveControl INFO | Robot | Code: DriveControl.py Init.
-2022/04/26 15:11:22.293 Motor INFO | Robot | Code: Motor.py Init.
-2022/04/26 15:11:22.293 Buzzer INFO | Robot | Code: Buzzer.py Init.
-2022/04/26 15:11:22.293 Main INFO | Robot | Code: Main.py Init
-2022/04/26 15:11:23.294 Main INFO | Robot | Enabled Robot.
-2022/04/26 15:11:23.295 Main INFO | Robot | Robot in Test Mode!
-2022/04/26 15:11:31.756 Motor INFO | TestMode: Set Motor Speed to 1550.0
-2022/04/26 15:11:31.756 Main INFO | Bluetooth: disconnected!
-2022/04/26 15:11:31.756 Motor INFO | TestMode: Stopping motor...
-2022/04/26 15:11:31.756 Main INFO | Bluetooth: Reconnected!
+2022/04/26 16:26:29.530 Logger INFO | Logger object created successfully..
+2022/04/26 16:26:29.530 BluetoothServer INFO | Robot | Code: BluetoothServer.py Initialized.
+2022/04/26 16:26:29.530 DriveControl INFO | Robot | Code: DriveControl.py Init.
+2022/04/26 16:26:29.530 Motor INFO | Robot | Code: Motor.py Init.
+2022/04/26 16:26:29.531 Buzzer INFO | Robot | Code: Buzzer.py Init.
+2022/04/26 16:26:29.531 AutonMain INFO | Robot | Code: AutonMain.py Init
+2022/04/26 16:26:29.531 Main INFO | Robot | Code: Main.py Init
+2022/04/26 16:26:30.541 Main INFO | Robot | Enabled Robot.
+2022/04/26 16:26:30.541 Main INFO | Robot | Robot in Test Mode!
+2022/04/26 16:26:31.872 Main INFO | Auton
+2022/04/26 16:26:31.872 AutonMain INFO | Robot | Set Autonomous Mode to 0
+2022/04/26 16:26:31.873 AutonMain INFO | Robot | Enabling Autonomous In Mode 0
+2022/04/26 16:26:31.873 DriveForwardAuton INFO | Robot | Code: DriveForwardAuton.py Init
+2022/04/26 16:26:31.873 DriveControl INFO | Robot | Code: DriveControl.py Init.
+2022/04/26 16:26:31.874 Motor INFO | Robot | Code: Motor.py Init.
+2022/04/26 16:26:31.874 DriveForwardAuton INFO | Auton: Starting DriveForwardAuton...
+2022/04/26 16:26:31.874 selector_events DEBUG | Using selector: SelectSelector
+2022/04/26 16:26:31.876 DriveForwardAuton INFO | AUTON INITIALIZE
+2022/04/26 16:26:31.876 DriveControl INFO | Driving 5 meters at 100 percent speed.
+2022/04/26 16:26:31.876 Motor INFO | TestMode: Set Motor Speed to 100 Percent.
+2022/04/26 16:26:31.877 DriveForwardAuton INFO | Drive Distance Finished!
