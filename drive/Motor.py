@@ -53,7 +53,7 @@ class Motor:
       pi.set_servo_pulsewidth(motor, 0.0)
     else: logger.info("TestMode: Stopping motor...")
     
-  def getDriveSpeedPercent(self):
+  def getMotorSpeed(self):
     return speed
 
 #Getters for encoder ticks, motor speed
