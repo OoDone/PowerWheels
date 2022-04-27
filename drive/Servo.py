@@ -45,7 +45,7 @@ class Servo:
         position = positionPercent*5+constants.DriveConstants().servoNeutralPosition
       if constants.isTestingMode == False:
         pi.set_servo_pulsewidth(servo, position)
-      else: logger.info("TestMode: Set Servo Position to " + str(positionPercent))
+      else: logger.info("TestMode: Set Servo Position to " + str(position) + "(" + str(positionPercent) + "%)")
     else: logger.info("setServoPositionPercent: positionPercent not within allowed position range.")
     
   def stopServo(self):

@@ -16,6 +16,8 @@ class Constants:
     ESC = 4
     servoNeutralPosition = 1700 #1488 for 556-2420 & 1700 for 1500-1900
     directionTicksPer = 2 #(Ticks of rotation)/100 #100 is for input value
+    servoMaxLimitTicks = 1 #FIXME 
+    servoMinLimitTicks = 1 #FIXME
 
   #Auton Constants
   class AutonConstants:
