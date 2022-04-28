@@ -1,6 +1,6 @@
 import os
 from time import sleep
-from Constants import Constants
+from Variables import Constants
 try:
     import pigpio
     import RPi.GPIO as GPIO

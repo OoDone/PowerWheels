@@ -1,5 +1,5 @@
 import bluetooth
-from Constants import Constants
+from Variables import Constants
 from other.Buzzer import Buzzer
 connected = False
 class BluetoothServer:

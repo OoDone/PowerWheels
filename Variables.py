@@ -31,5 +31,9 @@ class Constants:
     uuid = "42b58f76-b26d-11ea-b733-cb205305bc99"
     port = 1
 
+  # Variables, Objects that change state
+  class Variables:
+    EXAMPLE = 1
+
 
 

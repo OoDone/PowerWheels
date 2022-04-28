@@ -1,7 +1,7 @@
 import time
 from drive.DriveControl import DriveControl
 from Logger import Logger
-from Constants import Constants
+from Variables import Constants
 from other.Buzzer import Buzzer
 from autonomous.AutonMain import AutonMain
 try:
