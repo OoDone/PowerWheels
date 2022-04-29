@@ -99,8 +99,11 @@ while True:
                 xd = x.decode('UTF-8').split(":")[1]
                 print("Collision warning " + xd + " cm")
             else:
-                data = return_data().replace("b'", "").replace("'","")
-                logger.info(data)
+                try:
+                    data = return_data().replace("b'", "").replace("'","")
+                    logger.info(data)
+                except:
+                    logger.warn("Cannot use .replace Line 103")
               
   
                

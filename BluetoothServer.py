@@ -12,7 +12,7 @@ class BluetoothServer:
     if constants.isTestingMode == False:
       self.StartServer()
 
-  def StartServer():
+  def StartServer(self):
     global connected
     global server_socket
     global client_socket
@@ -25,7 +25,7 @@ class BluetoothServer:
     logger.info("Bluetooth: Advertising Service!")
 
 
-    client_socket, address = server_socket.accept
+    client_socket, address = server_socket.accept()
     logger.info("Bluetooth: Accepting client!")
     logger.info("Bluetooth: Device connected!")
     client_socket.send("connected") #ADD CODE TO HANDLE ON CLIENT SIDE
