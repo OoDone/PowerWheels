@@ -46,7 +46,6 @@ class AutonMain:
         if autonEnabled:
             if autonMode == 0:
                 #autonMode 0
-                logger.info("TEMP: REMOVE THIS IN AUTON ENABLED LOOP: AUTONMODE = 0")
                 driveForwardAuton = DriveForwardAuton(logger)
                 driveForwardAuton.start() #MAKE EACH AUTON IN A DIFFERENT FILE AND CLASS
             elif autonMode == 1:
