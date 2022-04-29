@@ -1,6 +1,6 @@
 import pygame
 import bluetooth
-import Logger
+from Logger import Logger
 import sys
 from time import sleep
 
