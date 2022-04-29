@@ -22,6 +22,10 @@ class DriveForwardAuton:
         logger.info("AUTON INITIALIZE")
         await driveMotor.driveDistAuton(5, 100)
         logger.info("Drive Distance Finished!")
+        self.finishAuton()
+        
+    def finishAuton(self):
+        return True
 
     #def loop(self):
         #runs every 20 milliseconds

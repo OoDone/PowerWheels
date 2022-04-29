@@ -35,24 +35,34 @@ class AutonMain:
             #AUTON ENABLED
             autonEnabled = enabled
             logger.info("Robot | Enabling Autonomous In Mode " + str(autonMode))
-            self.auton()
+            self.auton(True)
         else:
             #AUTON DISABLED
             autonEnabled = enabled
             logger.info("Robot | Disabling Autonomous Mode.")
+            self.auton(False)
 
 
-    def auton(self):
-        if autonEnabled:
-            if autonMode == 0:
-                #autonMode 0
+    def auton(self, enable):
+        if autonMode == 0:
+            #autonMode 0
+            if enable:
                 driveForwardAuton = DriveForwardAuton(logger)
                 driveForwardAuton.start() #MAKE EACH AUTON IN A DIFFERENT FILE AND CLASS
-            elif autonMode == 1:
-                #autonMode 1
-                logger.info("TEMP: REMOVE THIS IN AUTON ENABLED LOOP: AUTONMODE = 1")
-                #CircleAuton().start() #Drives in circles #MAKE EACH AUTON IN A DIFFERENT FILE AND CLASS
+            else:
+                autonEnabled = False
+                self.enableAuton(False)
+        elif autonMode == 1:
+            #autonMode 1
+            logger.info("TEMP: REMOVE THIS IN AUTON ENABLED LOOP: AUTONMODE = 1")
+            #CircleAuton().start() #Drives in circles #MAKE EACH AUTON IN A DIFFERENT FILE AND CLASS
         else: logger.info("Auton(): Autonomous Mode Not Enabled")
+        
+        
+    def loop(self):
+        while autonEnabled:
+            if 
+            
     
 
 

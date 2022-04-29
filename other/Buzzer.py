@@ -15,6 +15,7 @@ class Buzzer:
     logger = Logger
     logger.info("Robot | Code: Buzzer.py Init.")
     constants = Constants()
+    GPIO.setmode(GPIO.BCM)
     GPIO.setup(constants.buzzerPin, GPIO.OUT)
     GPIO.output(constants.buzzerPin, GPIO.LOW)
   
@@ -25,7 +26,6 @@ class Buzzer:
         while (buzz > 0):
           if buzz > 0:
             logger.info("Buzzer Alert")
-            GPIO.setmode(GPIO.BCM)
             GPIO.output(constants.buzzerPin,GPIO.HIGH)
             sleep(length)
             GPIO.output(constants.buzzerPin,GPIO.LOW)

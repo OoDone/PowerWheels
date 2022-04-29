@@ -1,7 +1,7 @@
 #Example use:     constants.DriveConstants().ESC
 class Constants:
 
-  isTestingMode = True #Bypasses Need to be ran on Pi, disables bluetooth server, ETC
+  isTestingMode = False #Bypasses Need to be ran on Pi, disables bluetooth server, ETC
 
   #robot constants
   ultrasonicSensorEnabled = False
@@ -18,7 +18,7 @@ class Constants:
     directionTicksPer = 2 #(Ticks of rotation)/100 #100 is for input value
     servoMaxLimitTicks = 1900 #FIXME 
     servoMinLimitTicks = 1500 #FIXME
-    distanceTicks = 1000
+    distanceTicks = 100000
 
   #Auton Constants
   class AutonConstants:

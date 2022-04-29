@@ -31,14 +31,17 @@ class Motor:
       pi.set_servo_pulsewidth(motor, 0)
     
   def setMotorSpeed(self,Speed):
-    if not Speed > constants.DriveConstants().motorMaxSpeed and not Speed < constants.DriveConstants().motorMinSpeed:
+    if (Speed <= constants.DriveConstants().motorMaxSpeed and Speed >= constants.DriveConstants().motorMinSpeed) or Speed == 0:
       if constants.isTestingMode == False:
+        speed = Speed
         pi.set_servo_pulsewidth(motor, speed)
-      else: logger.info("TestMode: Set Motor Speed to " + str(Speed))
-    else: logger.info("setMotorSpeed: Speed not within allowed speed range.")
+      else:
+        logger.info("TestMode: Set Motor Speed to " + str(Speed))
+    else:
+      logger.info("setMotorSpeed: Speed not within allowed speed range.")
 
   def setMotorSpeedPercent(self,speedPercent):
-    if speedPercent > -101 and speedPercent < 101:
+    if speedPercent >= -100 and speedPercent <= 100:
       speed = 0.0
       if speedPercent > 0:
         speed = constants.DriveConstants().motorNeutralSpeed+speedPercent*5
