@@ -19,7 +19,7 @@ class Servo:
     global constants
     global pi
     logger = Logger
-    logger.info("Robot | Code: Motor.py Init.")
+    logger.info("Robot | Code: Servo.py Init.")
     constants = Constants()
     servo = servoPin
     GPIO.setmode(GPIO.BCM)
@@ -34,15 +34,15 @@ class Servo:
       if constants.isTestingMode == False:
         pi.set_servo_pulsewidth(servo, Position)
       else: logger.info("TestMode: Set Servo Position to " + str(Position))
-    else: logger.info("setServoPosition: Speed not within allowed position range.")
+    else: logger.info("setServoPosition: Position not within allowed position range.")
 
   def setServoPositionPercent(self,positionPercent):
     if positionPercent > -101 and positionPercent < 101:
       position = 0.0
       if positionPercent > 0:
-        position = constants.DriveConstants().servoNeutralPosition+positionPercent*5
+        position = constants.DriveConstants().servoNeutralPosition - positionPercent * constants.DriveConstants().directionTicksPer
       else:
-        position = positionPercent*5+constants.DriveConstants().servoNeutralPosition
+        position = -positionPercent * constants.DriveConstants().directionTicksPer + constants.DriveConstants().servoNeutralPosition
       if constants.isTestingMode == False:
         pi.set_servo_pulsewidth(servo, position)
       else: logger.info("TestMode: Set Servo Position to " + str(position) + "(" + str(positionPercent) + "%)")
