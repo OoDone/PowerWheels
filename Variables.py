@@ -18,6 +18,7 @@ class Constants:
     directionTicksPer = 2 #(Ticks of rotation)/100 #100 is for input value
     servoMaxLimitTicks = 1 #FIXME 
     servoMinLimitTicks = 1 #FIXME
+    distanceTicks = 1000
 
   #Auton Constants
   class AutonConstants:

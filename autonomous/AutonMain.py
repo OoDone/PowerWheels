@@ -52,10 +52,7 @@ class AutonMain:
                 #autonMode 1
                 logger.info("TEMP: REMOVE THIS IN AUTON ENABLED LOOP: AUTONMODE = 1")
                 #CircleAuton().start() #Drives in circles #MAKE EACH AUTON IN A DIFFERENT FILE AND CLASS
+        else: logger.info("Auton(): Autonomous Mode Not Enabled")
     
 
 
-
-    #while(True):
-        #sleep(0.02) #20 millisecond loop
-        #loop()

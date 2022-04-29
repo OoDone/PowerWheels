@@ -11,6 +11,7 @@ except (RuntimeError, ModuleNotFoundError):
 
 speed = 0.0
 motor = False
+ticks = 5
 
 class Motor:
   def __init__(self, motorPin, Logger):
@@ -55,6 +56,12 @@ class Motor:
     
   def getMotorSpeed(self):
     return speed
+
+  def getEncoderTicks(self):
+    return ticks
+
+  def setEncoderTicks(self, Ticks):
+    ticks = Ticks
 
 #Getters for encoder ticks, motor speed
 #Encoder logic
