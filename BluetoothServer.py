@@ -51,3 +51,16 @@ class BluetoothServer:
 
   def getStatus(self):
     return connected
+
+  def setStatus(self, Connected):
+    global connected
+    connected = Connected
+
+  def reconnect(self):
+    global client_socket
+    global address
+    client_socket, address = server_socket.accept()
+
+  def getClientSocket(self):
+    if client_socket != None:
+      return client_socket

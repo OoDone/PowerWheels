@@ -44,6 +44,9 @@ def disableRobot():
     GPIO.cleanup()
     
 while(1):
+    if blServer.getStatus():
+        if client_socket is None:
+            client_socket = blServer.getClientSocket()
     if constants.isTestingMode == True:
         if enabled == False:
             enableRobot()
@@ -55,7 +58,8 @@ while(1):
             logger.info("Bluetooth: disconnected!")
             driveControl.stopRobot()
             disconnected = True
-            client_socket, address = blServer.getServerSocket().accept()
+            blServer.setStatus(False)
+            blServer.reconnect()
             if disconnected == True:
                 logger.info("Bluetooth: Reconnected!")
     elif bytes(':','UTF-8') in x:
