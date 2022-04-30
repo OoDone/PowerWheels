@@ -55,7 +55,7 @@ while(1):
             logger.info("Bluetooth: disconnected!")
             driveControl.stopRobot()
             disconnected = True
-            client_socket = blServer.getServerSocket()
+            client_socket, address = blServer.getServerSocket().accept()
             if disconnected == True:
                 logger.info("Bluetooth: Reconnected!")
     elif bytes(':','UTF-8') in x:
