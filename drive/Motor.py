@@ -64,6 +64,7 @@ class Motor:
     return ticks
 
   def setEncoderTicks(self, Ticks):
+    global ticks
     ticks = Ticks
 
 #Getters for encoder ticks, motor speed

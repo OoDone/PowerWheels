@@ -26,6 +26,9 @@ class DriveForwardAuton:
         logger.info("Drive Distance Finished!")
         isAutonFinished = True
         
+    def stop(self):
+        logger.info("Stopping DriveForwardAuton")
+        
     def isFinished(self):
         return isAutonFinished
 

@@ -37,7 +37,8 @@ class Constants:
   class AutonConstants:
     autonMode = 1
     autonEnabled = False
-  
+    openLoopSpeed = 20 #Auton Open Loop Drive Speed Percent
+
   #Bluetooth Constants
   class BluetoothConstants:
     bd_addr = ""#"DC:A6:32:6B:38:BD"  #"B8:27:EB:D6:57:CE" 

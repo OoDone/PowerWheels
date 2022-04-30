@@ -49,6 +49,10 @@ class DriveControl:
 
   def stopDriveDistAuton(self):
     logger.info("DriveDistAuton: Stopping Robot...")
+
+  def driveOpenLoop(self, speedPercent):
+    driveMotor.setMotorSpeedPercent(speedPercent)
+    logger.info("Open Loop Driving Robot at {} Percent Speed", str(speedPercent))
     
     
   def stopRobot(self):

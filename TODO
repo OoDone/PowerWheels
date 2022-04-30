@@ -1,1 +1,6 @@
-ADD INIT LOGGER.INFO TO LOG WHEN CLASS IS INITIALIZED
+DriveControl:
+- Fix DriveDist Function(Implement encoder shit)
+- Implement stopDriveDist function()
+DriveForwardAuton:
+- Add function stop function to work with drive control stopDriveDist 
+
