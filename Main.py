@@ -60,7 +60,7 @@ while(1):
             driveControl.stopRobot()
             disconnected = True
             blServer.setStatus(False)
-            blServer.reconnect()
+            client_socket, address = blServer.reconnect()
             if disconnected == True:
                 logger.info("Bluetooth: Reconnected!")
     elif bytes(':','UTF-8') in x:
@@ -90,8 +90,6 @@ while(1):
         logger.info("Auton")
         auton.setAutonMode(0)
         auton.enableAuton(True)
-        #MainAuton.enableAuton(True, 1)
-        #autonEnabled = MainAuton.getAutonEnabled()
     else:
         client_socket.send("<<<  wrong data  >>>")
         client_socket.send("please enter the defined data to continue.....")

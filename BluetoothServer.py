@@ -60,6 +60,7 @@ class BluetoothServer:
     global client_socket
     global address
     client_socket, address = server_socket.accept()
+    return client_socket, address
 
   def getClientSocket(self):
     if client_socket != None:
