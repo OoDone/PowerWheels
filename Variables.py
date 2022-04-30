@@ -5,7 +5,7 @@ class Constants:
 
   #robot constants
   ultrasonicSensorEnabled = False
-  buzzer = False
+  buzzer = True
   buzzerPin=17
 
   #Robot Constants
