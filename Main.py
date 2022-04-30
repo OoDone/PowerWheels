@@ -27,7 +27,7 @@ disconnected = False
 logger.info("Robot | Code: Main.py Init")
 time.sleep(1)
 def enableRobot():
-    buzzer.buzz(0.5, 3) #3 long enable robot
+    buzzer.buzz(1, 3) #3 long enable robot
     global enabled
     enabled = True
     logger.info("Robot | Enabled Robot.")
