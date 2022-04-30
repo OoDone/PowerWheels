@@ -6,6 +6,7 @@ except (RuntimeError, ModuleNotFoundError):
     import fake_rpigpio.utils
     fake_rpigpio.utils.install()
     import RPi.GPIO as GPIO
+    print("WARN: Didnt find RPi Module, Using Fake_Rpigpio instead.")
 
 
 class Buzzer:
