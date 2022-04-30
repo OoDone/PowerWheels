@@ -12,7 +12,7 @@ class DriveControl:
     logger = Logger
     logger.info("Robot | Code: DriveControl.py Init.")
     constants = Constants()
-    driveMotor = Motor(constants.DriveConstants().ESC, logger)
+    driveMotor = Motor(constants.DriveConstants().motorPin, logger)
     steerServo = Servo(constants.DriveConstants().servoPin, logger)
   
   def driveRobot(self, x):
@@ -41,7 +41,10 @@ class DriveControl:
     #AWAIT UNTIL DISTANCETICKS(ADDED UP MOTOR TICKS) EQUALS DISTANCE
     logger.info("Driving " + str(distance) + " meters at " + str(speedPercent) + " percent speed.")
     driveMotor.setMotorSpeedPercent(speedPercent)
-    if driveMotor.getEncoderTicks() == distance * constants.DriveConstants().distanceTicks:
+    while driveMotor.getEncoderTicks() == distance * constants.DriveConstants().distanceTicks:
+      if driveMotor.getEncoderTicks() == distance * constants.DriveConstants().distanceTicks:
+        return
+    else:
       driveMotor.setEncoderTicks(driveMotor.getEncoderTicks() + 1)
       return
 

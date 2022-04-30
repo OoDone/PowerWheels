@@ -1,48 +1,23 @@
-2022/04/29 17:34:13.978 Logger INFO | Logger object created successfully..
-2022/04/29 17:34:13.980 BluetoothServer INFO | Robot | Code: BluetoothServer.py Initialized.
-2022/04/29 17:34:13.981 Buzzer INFO | Robot | Code: Buzzer.py Init.
-2022/04/29 17:34:13.984 BluetoothServer INFO | Bluetooth Bind: Listening on port 1
-2022/04/29 17:34:13.986 BluetoothServer INFO | Bluetooth: Advertising Service!
-2022/04/29 17:34:23.277 BluetoothServer INFO | Bluetooth: Accepting client!
-2022/04/29 17:34:23.279 BluetoothServer INFO | Bluetooth: Device connected!
-2022/04/29 17:34:23.281 DriveControl INFO | Robot | Code: DriveControl.py Init.
-2022/04/29 17:34:23.283 Motor INFO | Robot | Code: Motor.py Init.
-2022/04/29 17:34:24.530 Servo INFO | Robot | Code: Servo.py Init.
-2022/04/29 17:34:25.686 Buzzer INFO | Robot | Code: Buzzer.py Init.
-2022/04/29 17:34:25.687 AutonMain INFO | Robot | Code: AutonMain.py Init
-2022/04/29 17:34:25.688 Main INFO | Robot | Code: Main.py Init
-2022/04/29 17:34:33.938 Main INFO | Auton
-2022/04/29 17:34:33.939 AutonMain INFO | Robot | Set Autonomous Mode to 0
-2022/04/29 17:34:33.940 AutonMain INFO | Robot | Enabling Autonomous In Mode 0
-2022/04/29 17:34:33.940 DriveForwardAuton INFO | Robot | Code: DriveForwardAuton.py Init
-2022/04/29 17:34:33.941 DriveControl INFO | Robot | Code: DriveControl.py Init.
-2022/04/29 17:34:33.941 Motor INFO | Robot | Code: Motor.py Init.
-2022/04/29 17:34:35.102 Servo INFO | Robot | Code: Servo.py Init.
-2022/04/29 17:34:36.266 DriveForwardAuton INFO | Auton: Starting DriveForwardAuton...
-2022/04/29 17:34:36.269 selector_events DEBUG | Using selector: EpollSelector
-2022/04/29 17:34:36.271 DriveForwardAuton INFO | AUTON INITIALIZE
-2022/04/29 17:34:36.272 DriveControl INFO | Driving 5 meters at 100 percent speed.
-2022/04/29 17:34:36.273 DriveForwardAuton INFO | Drive Distance Finished!
-2022/04/29 17:34:50.041 Main INFO | Enabling Robot...
-2022/04/29 17:34:50.042 Main INFO | Robot | Enabled Robot.
-2022/04/29 17:34:51.471 Main INFO | Enabling Robot...
-2022/04/29 17:34:51.472 Main INFO | Robot | Enabled Robot.
-2022/04/29 17:34:52.135 Main INFO | Enabling Robot...
-2022/04/29 17:34:52.136 Main INFO | Robot | Enabled Robot.
-2022/04/29 17:34:53.581 Main INFO | Auton
-2022/04/29 17:34:53.582 AutonMain INFO | Robot | Cannot Change AutonMode While Autonomous Mode Is Enabled.
-2022/04/29 17:34:53.582 AutonMain INFO | Robot | Autonomous Already Enabled.
-2022/04/29 17:34:54.990 Main INFO | Auton
-2022/04/29 17:34:54.990 AutonMain INFO | Robot | Cannot Change AutonMode While Autonomous Mode Is Enabled.
-2022/04/29 17:34:54.991 AutonMain INFO | Robot | Autonomous Already Enabled.
-2022/04/29 17:34:55.646 Main INFO | Auton
-2022/04/29 17:34:55.647 AutonMain INFO | Robot | Cannot Change AutonMode While Autonomous Mode Is Enabled.
-2022/04/29 17:34:55.647 AutonMain INFO | Robot | Autonomous Already Enabled.
-2022/04/29 17:34:56.630 Main INFO | Enabling Robot...
-2022/04/29 17:34:56.632 Main INFO | Robot | Enabled Robot.
-2022/04/29 17:34:56.843 Main INFO | Enabling Robot...
-2022/04/29 17:34:56.844 Main INFO | Robot | Enabled Robot.
-2022/04/29 17:34:57.440 Main INFO | Enabling Robot...
-2022/04/29 17:34:57.440 Main INFO | Robot | Enabled Robot.
-2022/04/29 17:34:57.628 Main INFO | Enabling Robot...
-2022/04/29 17:34:57.629 Main INFO | Robot | Enabled Robot.
+2022/04/29 19:10:16.008 Logger INFO | Logger object created successfully..
+2022/04/29 19:10:16.008 BluetoothServer INFO | Robot | Code: BluetoothServer.py Initialized.
+2022/04/29 19:10:16.008 Buzzer INFO | Robot | Code: Buzzer.py Init.
+2022/04/29 19:10:16.009 DriveControl INFO | Robot | Code: DriveControl.py Init.
+2022/04/29 19:10:16.009 Motor INFO | Robot | Code: Motor.py Init.
+2022/04/29 19:10:16.009 Servo INFO | Robot | Code: Servo.py Init.
+2022/04/29 19:10:16.009 Buzzer INFO | Robot | Code: Buzzer.py Init.
+2022/04/29 19:10:16.009 AutonMain INFO | Robot | Code: AutonMain.py Init
+2022/04/29 19:10:16.010 Main INFO | Robot | Code: Main.py Init
+2022/04/29 19:10:17.022 Main INFO | Robot | Enabled Robot.
+2022/04/29 19:10:17.022 Main INFO | Robot | Robot in Test Mode!
+2022/04/29 19:10:31.913 Main INFO | Auton
+2022/04/29 19:10:31.914 AutonMain INFO | Robot | Set Autonomous Mode to 0
+2022/04/29 19:10:31.914 AutonMain INFO | Robot | Enabling Autonomous In Mode 0
+2022/04/29 19:10:31.914 DriveForwardAuton INFO | Robot | Code: DriveForwardAuton.py Init
+2022/04/29 19:10:31.914 DriveControl INFO | Robot | Code: DriveControl.py Init.
+2022/04/29 19:10:31.915 Motor INFO | Robot | Code: Motor.py Init.
+2022/04/29 19:10:31.915 Servo INFO | Robot | Code: Servo.py Init.
+2022/04/29 19:10:31.916 DriveForwardAuton INFO | Auton: Starting DriveForwardAuton...
+2022/04/29 19:10:31.916 selector_events DEBUG | Using selector: SelectSelector
+2022/04/29 19:10:31.918 DriveForwardAuton INFO | AUTON INITIALIZE
+2022/04/29 19:10:31.918 DriveControl INFO | Driving 5 meters at 100 percent speed.
+2022/04/29 19:10:31.919 Motor INFO | TestMode: Set Motor Speed to 100 Percent.

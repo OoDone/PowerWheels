@@ -1,24 +1,37 @@
 #Example use:     constants.DriveConstants().ESC
 class Constants:
 
-  isTestingMode = False #Bypasses Need to be ran on Pi, disables bluetooth server, ETC
+  isTestingMode = True #Bypasses Need to be ran on Pi, disables bluetooth server, ETC
 
   #robot constants
   ultrasonicSensorEnabled = False
   buzzer = False
   buzzerPin=17
+
+  #Robot Constants
+  class RobotConstants:
+    wheelBaseMeters = 2 #FIXME Wheelbase for Autonomous/Automated calculations IN METERS WB 
+    maxSteerAngle = 10 #FIXME Check steering angle, not 10
+    #Turning radius calculation: TR = WB/tan(a)
+
   #Drive constants
   class DriveConstants:
+    #Drive Motors
+    motorPin = 4
     motorNeutralSpeed = 1500
     motorMinSpeed = 1000
     motorMaxSpeed = 2000
+
+    #Steering Servos
     servoPin = 18
-    ESC = 4
     servoNeutralPosition = 1700 #1488 for 556-2420 & 1700 for 1500-1900
     directionTicksPer = 2 #(Ticks of rotation)/100 #100 is for input value
-    servoMaxLimitTicks = 1900 #FIXME 
-    servoMinLimitTicks = 1500 #FIXME
-    distanceTicks = 100000
+    servoMaxLimitTicks = 1900 
+    servoMinLimitTicks = 1500 
+
+    #Encoder 
+    driveTicksPerMeter = 1000
+
 
   #Auton Constants
   class AutonConstants:

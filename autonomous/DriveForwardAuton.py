@@ -3,6 +3,7 @@ from Variables import Constants
 from drive.DriveControl import DriveControl
 import asyncio
 
+isAutonFinished = False
 class DriveForwardAuton:
     def __init__(self, Logger):
         global logger
@@ -19,13 +20,14 @@ class DriveForwardAuton:
 
     async def initialize(self):
         #OPTIONAL, RUNS ONCE AT START AND IS ASYNC
+        global isAutonFinished
         logger.info("AUTON INITIALIZE")
         await driveMotor.driveDistAuton(5, 100)
         logger.info("Drive Distance Finished!")
-        self.finishAuton()
+        isAutonFinished = True
         
-    def finishAuton(self):
-        return True
+    def isFinished(self):
+        return isAutonFinished
 
     #def loop(self):
         #runs every 20 milliseconds
