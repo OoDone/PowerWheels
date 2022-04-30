@@ -1,7 +1,7 @@
 #Example use:     constants.DriveConstants().ESC
 class Constants:
 
-  isTestingMode = True #Bypasses Need to be ran on Pi, disables bluetooth server, ETC
+  isTestingMode = False #Bypasses Need to be ran on Pi, disables bluetooth server, ETC
 
   #robot constants
   ultrasonicSensorEnabled = False
