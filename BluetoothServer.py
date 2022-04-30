@@ -32,7 +32,7 @@ class BluetoothServer:
     logger.info("Bluetooth: Device connected!")
     client_socket.send("connected") #ADD CODE TO HANDLE ON CLIENT SIDE
     connected = True
-    Buzzer.buzz(self, 0.2, 1)
+    Buzzer.buzz(self, 0.3, 1)
     
   def return_data(self):
     try:
