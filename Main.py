@@ -24,6 +24,7 @@ autonMode = 1
 autonEnabled = False
 enabled = False
 disconnected = False
+client_socket = None
 logger.info("Robot | Code: Main.py Init")
 time.sleep(1)
 def enableRobot():
