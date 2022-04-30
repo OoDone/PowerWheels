@@ -41,12 +41,11 @@ class DriveControl:
     #AWAIT UNTIL DISTANCETICKS(ADDED UP MOTOR TICKS) EQUALS DISTANCE
     logger.info("Driving " + str(distance) + " meters at " + str(speedPercent) + " percent speed.")
     driveMotor.setMotorSpeedPercent(speedPercent)
-    while driveMotor.getEncoderTicks() == distance * constants.DriveConstants().distanceTicks:
-      if driveMotor.getEncoderTicks() == distance * constants.DriveConstants().distanceTicks:
+    while driveMotor.getEncoderTicks() == distance * constants.DriveConstants().driveTicksPerMeter:
+      if driveMotor.getEncoderTicks() == distance * constants.DriveConstants().driveTicksPerMeter:
         return
     else:
       driveMotor.setEncoderTicks(driveMotor.getEncoderTicks() + 1)
-      return
 
   def stopDriveDistAuton(self):
     logger.info("DriveDistAuton: Stopping Robot...")
