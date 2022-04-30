@@ -36,3 +36,21 @@ class Buzzer:
             break
       except:
         logger.warn("Robot: Exception in Buzz() function")
+  
+  def customBuzz(self, length, offLength, amount):
+    if constants.buzzer == True:
+      buzz=amount
+      try:
+        while (buzz > 0):
+          if buzz > 0:
+            logger.info("Buzzer Alert")
+            GPIO.output(constants.buzzerPin,GPIO.HIGH)
+            sleep(length)
+            GPIO.output(constants.buzzerPin,GPIO.LOW)
+            sleep(offLength)
+            buzz = buzz-1
+          else:
+            break
+      except:
+        logger.warn("Robot: Exception in Buzz() function")
+
