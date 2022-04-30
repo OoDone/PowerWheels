@@ -51,13 +51,13 @@ while(1):
     else:
         x=blServer.return_data()
     if x == None:
-        logger.info("Bluetooth: disconnected!")
-        driveControl.stopRobot()
-        disconnected = True
         if constants.isTestingMode == False:
+            logger.info("Bluetooth: disconnected!")
+            driveControl.stopRobot()
+            disconnected = True
             client_socket = blServer.getServerSocket()
-        if disconnected == True:
-            logger.info("Bluetooth: Reconnected!")
+            if disconnected == True:
+                logger.info("Bluetooth: Reconnected!")
     elif bytes(':','UTF-8') in x:
         if enabled == True:
             driveControl.driveRobot(x)

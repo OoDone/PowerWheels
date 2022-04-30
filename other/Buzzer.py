@@ -22,11 +22,11 @@ class Buzzer:
   
   def buzz(self, length, amount):
     if constants.buzzer == True:
+      logger.info("Buzzer Alert")
       buzz=amount
       try:
         while (buzz > 0):
           if buzz > 0:
-            logger.info("Buzzer Alert")
             GPIO.output(constants.buzzerPin,GPIO.HIGH)
             sleep(length)
             GPIO.output(constants.buzzerPin,GPIO.LOW)
@@ -39,11 +39,11 @@ class Buzzer:
   
   def customBuzz(self, length, offLength, amount):
     if constants.buzzer == True:
+      logger.info("Buzzer Alert")
       buzz=amount
       try:
         while (buzz > 0):
           if buzz > 0:
-            logger.info("Buzzer Alert")
             GPIO.output(constants.buzzerPin,GPIO.HIGH)
             sleep(length)
             GPIO.output(constants.buzzerPin,GPIO.LOW)
