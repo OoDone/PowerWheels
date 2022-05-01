@@ -45,12 +45,15 @@ def loop():
         #logger.warn("EXCEPTION: LOOP FUNCTION INFO: sysinfo: " + str(sys.exc_info()[0]) + " speed: " + str(speed) + " direction: " + str(direction))
 def check_pad():
     global discon
-    if j.get_name() == None and discon == False:
-        discon = True
-        logger.info("Joystick Disconnected")
-    if not j.get_name() == None and discon == True:
-        discon = False
-        logger.info("Joystick Reconnected")
+    try:
+        if j.get_power_level() == None and discon == False:
+            discon = True
+            logger.info("Joystick Disconnected")
+        if not j.get_power_level() == None and discon == True:
+            discon = False
+            logger.info("Joystick Reconnected")
+    except:
+        logger.info("Check_Pad Exception")
 
 x = None
 circle = None
