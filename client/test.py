@@ -50,15 +50,29 @@ while True:
             if event.type == pygame.JOYBUTTONDOWN:
                 if j.get_button(0): #X
                     logger.info("X Button DOWN")
+                    x = True
                 if j.get_button(1): #circle
                      logger.info("Circle Button DOWN")
+                     circle = True
                 if j.get_button(2): #Triangle wtf
                     logger.info("Triangle Button DOWN")
+                    triangle = True
                 if j.get_button(3): #Square
                     logger.info("Square Button DOWN")
+                    square = True
             elif event.type == pygame.JOYBUTTONUP:
-                if j.get_button(0): #X
+                if x and not j.get_button(0): #X
                     logger.info("X Button UP")
+                    x = False
+                elif circle and not j.get_button(1): #circle
+                    logger.info("Circle Button UP")
+                    circle = False
+                elif triangle and not j.get_button(2): #triangle
+                    logger.info("Triangle Button UP")
+                    triangle = False
+                elif square and not j.get_button(3): #square
+                    logger.info("Square Button UP")
+                    square = False
               
   
                
