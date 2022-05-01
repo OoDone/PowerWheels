@@ -59,8 +59,8 @@ butt4 = None
 butt5 = None
 butt6 = None
 discon = False
-sleep(1)
-while True:
+start = True
+while start:
     try:
         #loop()
         check_pad()
