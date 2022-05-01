@@ -49,7 +49,7 @@ def check_pad():
         if j.get_power_level() == "unknown" and discon == False:
             discon = True
             logger.info("Joystick Disconnected")
-        if not j.get_power_level() == "unknown" and discon == True:
+        elif not j.get_power_level() == "unknown" and discon == True:
             discon = False
             logger.info("Joystick Reconnected")
     except:
