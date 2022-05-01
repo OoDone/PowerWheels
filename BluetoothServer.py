@@ -25,12 +25,12 @@ class BluetoothServer:
     #enabledAlert(0.1, 3)
     bluetooth.advertise_service(server_socket, "SampleServer", service_classes=[bluetooth.SERIAL_PORT_CLASS],profiles=[bluetooth.SERIAL_PORT_PROFILE])
     logger.info("Bluetooth: Advertising Service!")
+    x.toString()
 
 
     client_socket, address = server_socket.accept()
     logger.info("Bluetooth: Accepting client!")
     logger.info("Bluetooth: Device connected!")
-    x.toString()
     client_socket.send("connected") #ADD CODE TO HANDLE ON CLIENT SIDE
     connected = True
     Buzzer.buzz(self, 0.3, 1)
