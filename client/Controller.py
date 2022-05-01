@@ -19,45 +19,28 @@ from time import sleep
 #12 = PS4 ON BUTTON
 #13 = TOUCHPAD PRESS
 
-def return_data():
-    try:
-        while True:
-            data = sock.recv(1024)
-            if not data:
-                break
-            print(data)
-            return data
-    except OSError:
-        pass
-bluetoothAddress = "DC:A6:32:6B:38:BD"  #"B8:27:EB:D6:57:CE"  
-#B8:27:EB:6B:AB:4B
 stickDeadband = 2
 
 logger = Logger("clientLog")
-sock = bluetooth.BluetoothSocket( bluetooth.RFCOMM )
 
-sock.connect((bluetoothAddress, 1))
-sock.setblocking(False)
 pygame.init()
 j = pygame.joystick.Joystick(0)
 j.init()
 def enableRobot():
-    sock.send("en")
     logger.info("Controller: Sending Enable Request!")
 def toggleAutonMode():
-    sock.send("au")
     logger.info("Controler: Autonomous Mode Toggled!")
 def disableAutonMode():
     logger.info("Controler: Disabled Autonomous Mode!")
     
 def stopRobot():
-    sock.send("s")
+    sock.send("s") #FIXME
     
 def squareDown():
-    sock.send("ho")
+    sock.send("ho")#FIXME
     
 def squareUp():
-    sock.send("ho")
+    sock.send("ho")#FIXME
  
 #enableRobot()
 
@@ -70,7 +53,7 @@ def loop():
             direction = 0.0
         if speed > -101 and direction > -101:
             logger.info("PRE: M:" + str(speed) + ":D:" + str(direction))
-            sock.send(":M:" + str(speed) + ":D:" + str(direction))
+            #FIXME SEND DATA
     except:
         logger.warn("EXCEPTION: LOOP FUNCTION INFO: sysinfo: " + str(sys.exc_info()[0]) + " speed: " + str(speed) + " direction: " + str(direction))
     
@@ -92,18 +75,6 @@ while True:
             elif event.type == pygame.JOYBUTTONUP:
                 if j.get_button(0): #square
                     squareUp()
-                
-        x=return_data()
-        if x is not None:
-            if bytes(':','UTF-8') in x:
-                xd = x.decode('UTF-8').split(":")[1]
-                print("Collision warning " + xd + " cm")
-            else:
-                try:
-                    data = return_data().replace("b'", "").replace("'","")
-                    logger.info(data)
-                except:
-                    logger.warn("Cannot use .replace Line 103")
               
   
                
