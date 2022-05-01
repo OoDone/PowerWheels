@@ -3,7 +3,7 @@ from Logger import Logger
 import sys
 from time import sleep
 
-#0 = SQUARE
+#0 = X
 #1 = X
 #2 = CIRCLE
 #3 = TRIANGLE
@@ -29,7 +29,7 @@ j.init()
 #enableRobot()
 
 def loop():
-    sleep(0.02) #sleep 20 ms
+    sleep(0.2) #sleep 20 ms
     try:
         speed = float(round(j.get_axis(1) * -100))
         direction = float(round(j.get_axis(3) * 100)) #axis 0
@@ -48,8 +48,8 @@ while True:
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.JOYBUTTONDOWN:
-                if j.get_button(0): #IDK
-                    logger.info("Button press DOWN")
+                if j.get_button(0): #X
+                    logger.info("X Button DOWN")
                 if j.get_button(1): #circle
                      logger.info("Circle Button DOWN")
                 if j.get_button(2): #Triangle wtf
@@ -57,8 +57,8 @@ while True:
                 if j.get_button(3): #Square
                     logger.info("Square Button DOWN")
             elif event.type == pygame.JOYBUTTONUP:
-                if j.get_button(0): #square
-                    logger.info("Square Button UP")
+                if j.get_button(0): #X
+                    logger.info("X Button UP")
               
   
                
