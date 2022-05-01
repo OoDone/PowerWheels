@@ -13,6 +13,8 @@ from time import sleep
 #7 = R2
 #8 = SHARE
 #9 = OPTIONS
+#10 = PS4 BUTTON
+
 #10 = LEFT ANALOG PRESS
 #11 = RIGHT ANALOG PRESS
 #12 = PS4 ON BUTTON
@@ -66,14 +68,14 @@ while True:
                 if j.get_button(3) and not square: #Square
                     logger.info("Square Button DOWN")
                     square = True
-                if j.get_button(8) and not butt4: #4
-                    logger.info("butt8 Button DOWN")
+                if j.get_button(11) and not butt4: #4
+                    logger.info("butt11 Button DOWN")
                     butt4 = True
-                if j.get_button(9) and not butt5: #R1
-                    logger.info("butt9 Button DOWN")
+                if j.get_button(12) and not butt5: #R1
+                    logger.info("butt12 Button DOWN")
                     butt5 = True
-                if j.get_button(10) and not butt6: #6
-                    logger.info("butt10 Button DOWN")
+                if j.get_button(13) and not butt6: #6
+                    logger.info("butt13 Button DOWN")
                     butt6 = True
             elif event.type == pygame.JOYBUTTONUP:
                 if x and not j.get_button(0): #X
@@ -88,14 +90,14 @@ while True:
                 elif square and not j.get_button(3): #square
                     logger.info("Square Button UP")
                     square = False
-                elif butt4 and not j.get_button(8): #4
-                    logger.info("butt8 Button UP")
+                elif butt4 and not j.get_button(11): #4
+                    logger.info("butt11 Button UP")
                     butt4 = False
-                elif butt5 and not j.get_button(9): #R1
-                    logger.info("butt9 Button UP")
+                elif butt5 and not j.get_button(12): #R1
+                    logger.info("butt12 Button UP")
                     butt5 = False
-                elif butt6 and not j.get_button(10): #6
-                    logger.info("butt10 Button UP")
+                elif butt6 and not j.get_button(13): #6
+                    logger.info("butt13 Button UP")
                     butt6 = False
   
                
