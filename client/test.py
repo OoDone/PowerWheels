@@ -41,23 +41,26 @@ def loop():
     #except:
         #logger.warn("EXCEPTION: LOOP FUNCTION INFO: sysinfo: " + str(sys.exc_info()[0]) + " speed: " + str(speed) + " direction: " + str(direction))
     
-    
+x = None
+circle = None
+square = None
+triangle = None
 while True:
     try:
         #loop()
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.JOYBUTTONDOWN:
-                if j.get_button(0): #X
+                if j.get_button(0) and not x: #X
                     logger.info("X Button DOWN")
                     x = True
-                if j.get_button(1): #circle
+                if j.get_button(1) and not circle: #circle
                      logger.info("Circle Button DOWN")
                      circle = True
-                if j.get_button(2): #Triangle wtf
+                if j.get_button(2) and not triangle: #Triangle wtf
                     logger.info("Triangle Button DOWN")
                     triangle = True
-                if j.get_button(3): #Square
+                if j.get_button(3) and not square: #Square
                     logger.info("Square Button DOWN")
                     square = True
             elif event.type == pygame.JOYBUTTONUP:
