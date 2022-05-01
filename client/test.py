@@ -44,7 +44,7 @@ def loop():
     
 while True:
     try:
-        loop()
+        #loop()
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.JOYBUTTONDOWN:
