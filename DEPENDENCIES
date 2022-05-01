@@ -1,0 +1,7 @@
+https://launchpad.net/ubuntu/+source/dbus/1.12.20-2ubuntu4
+http://ftp.de.debian.org/debian/pool/main/b/bluez/libbluetooth3_5.55-3.1_amd64.deb
+http://ftp.de.debian.org/debian/pool/main/b/bluez/libbluetooth-dev_5.55-3.1_amd64.deb
+
+cd /workspace/theia
+sudo apt install ./pybluez-master/libbluetooth3_5.55-3.1_amd64.deb 
+sudo apt install ./pybluez-master/libbluetooth-dev_5.55-3.1_amd64.deb 
