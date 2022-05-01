@@ -4,9 +4,9 @@ import sys
 from time import sleep
 
 #0 = X
-#1 = X
-#2 = CIRCLE
-#3 = TRIANGLE
+#1 = CIRCLE
+#2 = TRIANGLE
+#3 = SQUARE
 #4 = L1
 #5 = R1
 #6 = L2
@@ -45,6 +45,9 @@ x = None
 circle = None
 square = None
 triangle = None
+butt4 = None
+butt5 = None
+butt6 = None
 while True:
     try:
         #loop()
@@ -63,6 +66,15 @@ while True:
                 if j.get_button(3) and not square: #Square
                     logger.info("Square Button DOWN")
                     square = True
+                if j.get_button(4) and not butt4: #4
+                    logger.info("butt4 Button DOWN")
+                    butt4 = True
+                if j.get_button(5) and not butt5: #5
+                    logger.info("butt5 Button DOWN")
+                    butt5 = True
+                if j.get_button(6) and not butt6: #6
+                    logger.info("butt6 Button DOWN")
+                    butt6 = True
             elif event.type == pygame.JOYBUTTONUP:
                 if x and not j.get_button(0): #X
                     logger.info("X Button UP")
@@ -76,7 +88,15 @@ while True:
                 elif square and not j.get_button(3): #square
                     logger.info("Square Button UP")
                     square = False
-              
+                elif butt4 and not j.get_button(4): #4
+                    logger.info("butt4 Button UP")
+                    butt4 = False
+                elif butt5 and not j.get_button(5): #5
+                    logger.info("butt5 Button UP")
+                    butt5 = False
+                elif butt6 and not j.get_button(6): #6
+                    logger.info("butt6 Button UP")
+                    butt6 = False
   
                
     except KeyboardInterrupt:
