@@ -66,14 +66,14 @@ while True:
                 if j.get_button(3) and not square: #Square
                     logger.info("Square Button DOWN")
                     square = True
-                if j.get_button(4) and not butt4: #4
-                    logger.info("butt4 Button DOWN")
+                if j.get_button(8) and not butt4: #4
+                    logger.info("butt8 Button DOWN")
                     butt4 = True
-                if j.get_button(5) and not butt5: #5
-                    logger.info("butt5 Button DOWN")
+                if j.get_button(9) and not butt5: #R1
+                    logger.info("butt9 Button DOWN")
                     butt5 = True
-                if j.get_button(6) and not butt6: #6
-                    logger.info("butt6 Button DOWN")
+                if j.get_button(10) and not butt6: #6
+                    logger.info("butt10 Button DOWN")
                     butt6 = True
             elif event.type == pygame.JOYBUTTONUP:
                 if x and not j.get_button(0): #X
@@ -88,14 +88,14 @@ while True:
                 elif square and not j.get_button(3): #square
                     logger.info("Square Button UP")
                     square = False
-                elif butt4 and not j.get_button(4): #4
-                    logger.info("butt4 Button UP")
+                elif butt4 and not j.get_button(8): #4
+                    logger.info("butt8 Button UP")
                     butt4 = False
-                elif butt5 and not j.get_button(5): #5
-                    logger.info("butt5 Button UP")
+                elif butt5 and not j.get_button(9): #R1
+                    logger.info("butt9 Button UP")
                     butt5 = False
-                elif butt6 and not j.get_button(6): #6
-                    logger.info("butt6 Button UP")
+                elif butt6 and not j.get_button(10): #6
+                    logger.info("butt10 Button UP")
                     butt6 = False
   
                
