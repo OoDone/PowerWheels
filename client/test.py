@@ -67,7 +67,6 @@ while True:
                     triangle = True
                 if j.get_button(3) and not square: #Square
                     logger.info("Square Button DOWN")
-                    j.rumble(1.0,1.0,0)
                     square = True
             elif event.type == pygame.JOYBUTTONUP:
                 if x and not j.get_button(0): #X
@@ -81,7 +80,6 @@ while True:
                     triangle = False
                 elif square and not j.get_button(3): #square
                     logger.info("Square Button UP")
-                    j.stop_rumble()
                     square = False
   
                
