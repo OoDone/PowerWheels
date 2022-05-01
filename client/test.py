@@ -42,7 +42,15 @@ def loop():
             #FIXME SEND DATA
     #except:
         #logger.warn("EXCEPTION: LOOP FUNCTION INFO: sysinfo: " + str(sys.exc_info()[0]) + " speed: " + str(speed) + " direction: " + str(direction))
-    
+discon = False
+def check_pad():
+    if j.get_name() == None and discon == False:
+        discon = True
+        logger.info("Joystick Disconnected")
+    if not j.get_name() == None and discon == True:
+        discon = False
+        logger.info("Joystick Reconnected")
+
 x = None
 circle = None
 square = None
@@ -53,6 +61,7 @@ butt6 = None
 while True:
     try:
         #loop()
+        check_pad()
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.JOYBUTTONDOWN:
