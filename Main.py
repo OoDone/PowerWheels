@@ -14,7 +14,7 @@ except (RuntimeError, ModuleNotFoundError):
 from BluetoothServer import BluetoothServer
 
 #from Constants import Constants
-logger = Logger("robotLog")
+logger = Logger("/home/pi/Desktop/logs/robotLog")
 blServer = BluetoothServer(logger)
 driveControl = DriveControl(logger)
 constants = Constants()
