@@ -44,6 +44,7 @@ def loop():
     #except:
         #logger.warn("EXCEPTION: LOOP FUNCTION INFO: sysinfo: " + str(sys.exc_info()[0]) + " speed: " + str(speed) + " direction: " + str(direction))
 def check_pad():
+    global discon
     if j.get_name() == None and discon == False:
         discon = True
         logger.info("Joystick Disconnected")
