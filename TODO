@@ -1,1 +1,6 @@
-Rename constants to Variables
+DriveControl:
+- Fix DriveDist Function(Implement encoder shit)
+- Implement stopDriveDist function()
+DriveForwardAuton:
+- Add function stop function to work with drive control stopDriveDist 
+

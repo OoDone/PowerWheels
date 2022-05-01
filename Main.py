@@ -1,7 +1,7 @@
 import time
 from drive.DriveControl import DriveControl
 from Logger import Logger
-from Constants import Constants
+from Variables import Constants
 from other.Buzzer import Buzzer
 from autonomous.AutonMain import AutonMain
 try:
@@ -24,10 +24,11 @@ autonMode = 1
 autonEnabled = False
 enabled = False
 disconnected = False
+client_socket = None
 logger.info("Robot | Code: Main.py Init")
 time.sleep(1)
 def enableRobot():
-    buzzer.buzz(0.5, 3) #3 long enable robot
+    buzzer.customBuzz(0.05,0.05, 3) #3 long enable robot
     global enabled
     enabled = True
     logger.info("Robot | Enabled Robot.")
@@ -44,6 +45,9 @@ def disableRobot():
     GPIO.cleanup()
     
 while(1):
+    if blServer.getStatus():
+        if client_socket is None:
+            client_socket = blServer.getClientSocket()
     if constants.isTestingMode == True:
         if enabled == False:
             enableRobot()
@@ -51,13 +55,14 @@ while(1):
     else:
         x=blServer.return_data()
     if x == None:
-        logger.info("Bluetooth: disconnected!")
-        driveControl.stopRobot()
-        disconnected = True
         if constants.isTestingMode == False:
-            client_socket = blServer.getServerSocket()
-        if disconnected == True:
-            logger.info("Bluetooth: Reconnected!")
+            logger.info("Bluetooth: disconnected!")
+            driveControl.stopRobot()
+            disconnected = True
+            blServer.setStatus(False)
+            client_socket, address = blServer.reconnect()
+            if disconnected == True:
+                logger.info("Bluetooth: Reconnected!")
     elif bytes(':','UTF-8') in x:
         if enabled == True:
             driveControl.driveRobot(x)
@@ -85,8 +90,6 @@ while(1):
         logger.info("Auton")
         auton.setAutonMode(0)
         auton.enableAuton(True)
-        #MainAuton.enableAuton(True, 1)
-        #autonEnabled = MainAuton.getAutonEnabled()
     else:
         client_socket.send("<<<  wrong data  >>>")
         client_socket.send("please enter the defined data to continue.....")

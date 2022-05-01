@@ -1,5 +1,6 @@
 from drive.Motor import Motor
-from Constants import Constants
+from drive.Servo import Servo
+from Variables import Constants
 
 class DriveControl:
   
@@ -7,10 +8,12 @@ class DriveControl:
     global logger
     global constants
     global driveMotor
+    global steerServo
     logger = Logger
     logger.info("Robot | Code: DriveControl.py Init.")
     constants = Constants()
-    driveMotor = Motor(constants.DriveConstants().ESC, logger)
+    driveMotor = Motor(constants.DriveConstants().motorPin, logger)
+    steerServo = Servo(constants.DriveConstants().servoPin, logger)
   
   def driveRobot(self, x):
     speed = x.decode('UTF-8').split(':')[2].replace("'",'')
@@ -30,15 +33,26 @@ class DriveControl:
     else:
       driveMotor.setMotorSpeed(0)
     if direction < 0:
-      directionPosition = -direction * constants.DriveConstants().directionTicksPer + constants.DriveConstants().servoNeutralPosition #* 9.36 + 1489 # TEMP  
+      steerServo.setServoPosition(-direction * constants.DriveConstants().directionTicksPer + constants.DriveConstants().servoNeutralPosition) #* 9.36 + 1489 # TEMP  
     else:
-      directionPosition = constants.DriveConstants().servoNeutralPosition - direction * constants.DriveConstants().directionTicksPer   # 1489 - direction * directionTicksPer #* 9.36        #1489 mid servo position
-    #pi.set_servo_pulsewidth(servoPin, directionPosition)
+      steerServo.setServoPosition(constants.DriveConstants().servoNeutralPosition - direction * constants.DriveConstants().directionTicksPer)   # 1489 - direction * directionTicksPer #* 9.36        #1489 mid servo position
     
   async def driveDistAuton(self, distance, speedPercent):
     #AWAIT UNTIL DISTANCETICKS(ADDED UP MOTOR TICKS) EQUALS DISTANCE
     logger.info("Driving " + str(distance) + " meters at " + str(speedPercent) + " percent speed.")
     driveMotor.setMotorSpeedPercent(speedPercent)
+    while driveMotor.getEncoderTicks() == distance * constants.DriveConstants().driveTicksPerMeter:
+      if driveMotor.getEncoderTicks() == distance * constants.DriveConstants().driveTicksPerMeter:
+        return
+    else:
+      driveMotor.setEncoderTicks(driveMotor.getEncoderTicks() + 1)
+
+  def stopDriveDistAuton(self):
+    logger.info("DriveDistAuton: Stopping Robot...")
+
+  def driveOpenLoop(self, speedPercent):
+    driveMotor.setMotorSpeedPercent(speedPercent)
+    logger.info("Open Loop Driving Robot at {} Percent Speed", str(speedPercent))
     
     
   def stopRobot(self):

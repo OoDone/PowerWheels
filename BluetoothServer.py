@@ -1,18 +1,20 @@
 import bluetooth
-from Constants import Constants
+from Variables import Constants
 from other.Buzzer import Buzzer
 connected = False
 class BluetoothServer:
   def __init__(self, Logger):
     global logger
     global constants
+    global buzzer
     logger = Logger
     logger.info("Robot | Code: BluetoothServer.py Initialized.")
     constants = Constants()
+    buzzer = Buzzer(logger)
     if constants.isTestingMode == False:
       self.StartServer()
 
-  def StartServer():
+  def StartServer(self):
     global connected
     global server_socket
     global client_socket
@@ -25,12 +27,12 @@ class BluetoothServer:
     logger.info("Bluetooth: Advertising Service!")
 
 
-    client_socket, address = server_socket.accept
+    client_socket, address = server_socket.accept()
     logger.info("Bluetooth: Accepting client!")
     logger.info("Bluetooth: Device connected!")
     client_socket.send("connected") #ADD CODE TO HANDLE ON CLIENT SIDE
     connected = True
-    Buzzer.buzz(0.2,1)
+    Buzzer.buzz(self, 0.3, 1)
     
   def return_data(self):
     try:
@@ -49,3 +51,17 @@ class BluetoothServer:
 
   def getStatus(self):
     return connected
+
+  def setStatus(self, Connected):
+    global connected
+    connected = Connected
+
+  def reconnect(self):
+    global client_socket
+    global address
+    client_socket, address = server_socket.accept()
+    return client_socket, address
+
+  def getClientSocket(self):
+    if client_socket != None:
+      return client_socket

@@ -1,6 +1,6 @@
 import os
 from time import sleep
-from Constants import Constants
+from Variables import Constants
 try:
     import pigpio
     import RPi.GPIO as GPIO
@@ -11,6 +11,7 @@ except (RuntimeError, ModuleNotFoundError):
 
 speed = 0.0
 motor = False
+ticks = 5
 
 class Motor:
   def __init__(self, motorPin, Logger):
@@ -30,14 +31,17 @@ class Motor:
       pi.set_servo_pulsewidth(motor, 0)
     
   def setMotorSpeed(self,Speed):
-    if not Speed > constants.DriveConstants().motorMaxSpeed and not Speed < constants.DriveConstants().motorMinSpeed:
+    if (Speed <= constants.DriveConstants().motorMaxSpeed and Speed >= constants.DriveConstants().motorMinSpeed) or Speed == 0:
       if constants.isTestingMode == False:
+        speed = Speed
         pi.set_servo_pulsewidth(motor, speed)
-      else: logger.info("TestMode: Set Motor Speed to " + str(Speed))
-    else: logger.info("setMotorSpeed: Speed not within allowed speed range.")
+      else:
+        logger.info("TestMode: Set Motor Speed to " + str(Speed))
+    else:
+      logger.info("setMotorSpeed: Speed not within allowed speed range.")
 
   def setMotorSpeedPercent(self,speedPercent):
-    if speedPercent > -101 and speedPercent < 101:
+    if speedPercent >= -100 and speedPercent <= 100:
       speed = 0.0
       if speedPercent > 0:
         speed = constants.DriveConstants().motorNeutralSpeed+speedPercent*5
@@ -55,6 +59,13 @@ class Motor:
     
   def getMotorSpeed(self):
     return speed
+
+  def getEncoderTicks(self):
+    return ticks
+
+  def setEncoderTicks(self, Ticks):
+    global ticks
+    ticks = Ticks
 
 #Getters for encoder ticks, motor speed
 #Encoder logic
