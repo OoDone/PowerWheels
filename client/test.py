@@ -30,16 +30,16 @@ j.init()
 
 def loop():
     sleep(0.2) #sleep 20 ms
-    try:
-        speed = float(round(j.get_axis(1) * -100))
-        direction = float(round(j.get_axis(3) * 100)) #axis 0
-        if direction < stickDeadband and direction > -stickDeadband:
-            direction = 0.0
-        if speed > -101 and direction > -101:
-            logger.info("Data: M:" + str(speed) + ":D:" + str(direction))
+    #try:
+        #speed = float(round(j.get_axis(1) * -100))
+        #direction = float(round(j.get_axis(3) * 100)) #axis 0
+        #if direction < stickDeadband and direction > -stickDeadband:
+           # direction = 0.0
+        #if speed > -101 and direction > -101:
+            #logger.info("Data: M:" + str(speed) + ":D:" + str(direction))
             #FIXME SEND DATA
-    except:
-        logger.warn("EXCEPTION: LOOP FUNCTION INFO: sysinfo: " + str(sys.exc_info()[0]) + " speed: " + str(speed) + " direction: " + str(direction))
+    #except:
+        #logger.warn("EXCEPTION: LOOP FUNCTION INFO: sysinfo: " + str(sys.exc_info()[0]) + " speed: " + str(speed) + " direction: " + str(direction))
     
     
 while True:
