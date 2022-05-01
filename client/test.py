@@ -58,6 +58,8 @@ triangle = None
 butt4 = None
 butt5 = None
 butt6 = None
+discon = False
+sleep(1)
 while True:
     try:
         #loop()
