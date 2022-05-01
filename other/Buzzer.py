@@ -22,6 +22,7 @@ class Buzzer:
   
   def buzz(self, length, amount):
     if constants.buzzer == True:
+      GPIO.setmode(GPIO.BCM)
       logger.info("Buzzer Alert")
       buzz=amount
       try:
@@ -39,6 +40,7 @@ class Buzzer:
   
   def customBuzz(self, length, offLength, amount):
     if constants.buzzer == True:
+      GPIO.setmode(GPIO.BCM)
       logger.info("Buzzer Alert")
       buzz=amount
       try:
