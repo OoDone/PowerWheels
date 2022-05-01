@@ -42,7 +42,6 @@ def disableRobot():
     enabled = False
     driveControl.stopRobot()
     logger.info("Robot | Disabled Robot.")
-    GPIO.cleanup()
     
 while(1):
     if blServer.getStatus():
