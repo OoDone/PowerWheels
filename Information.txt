@@ -1,2 +1,7 @@
 System Service File: /etc/systemd/system/test.service
 To edit file: sudo nano /etc/systemd/system/test.service
+
+Service:
+Currently runs git pull(Branch set to Testing Currently)
+Then Runs Main.py
+CURRENT BRANCH: TESTING
