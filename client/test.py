@@ -14,11 +14,11 @@ from time import sleep
 #8 = SHARE
 #9 = OPTIONS
 #10 = PS4 BUTTON
+#11 = LEFT ANALOG PRESS 
+#12 = RIGHT ANALOG PRESS
 
-#10 = LEFT ANALOG PRESS
-#11 = RIGHT ANALOG PRESS
-#12 = PS4 ON BUTTON
-#13 = TOUCHPAD PRESS
+
+#13 = TOUCHPAD PRESS NO
 
 stickDeadband = 2
 
@@ -67,16 +67,8 @@ while True:
                     triangle = True
                 if j.get_button(3) and not square: #Square
                     logger.info("Square Button DOWN")
+                    j.rumble(1,1,0)
                     square = True
-                if j.get_button(11) and not butt4: #4
-                    logger.info("butt11 Button DOWN")
-                    butt4 = True
-                if j.get_button(12) and not butt5: #R1
-                    logger.info("butt12 Button DOWN")
-                    butt5 = True
-                if j.get_button(13) and not butt6: #6
-                    logger.info("butt13 Button DOWN")
-                    butt6 = True
             elif event.type == pygame.JOYBUTTONUP:
                 if x and not j.get_button(0): #X
                     logger.info("X Button UP")
@@ -89,16 +81,8 @@ while True:
                     triangle = False
                 elif square and not j.get_button(3): #square
                     logger.info("Square Button UP")
+                    j.stop_rumble()
                     square = False
-                elif butt4 and not j.get_button(11): #4
-                    logger.info("butt11 Button UP")
-                    butt4 = False
-                elif butt5 and not j.get_button(12): #R1
-                    logger.info("butt12 Button UP")
-                    butt5 = False
-                elif butt6 and not j.get_button(13): #6
-                    logger.info("butt13 Button UP")
-                    butt6 = False
   
                
     except KeyboardInterrupt:
