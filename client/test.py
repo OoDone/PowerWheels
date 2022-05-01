@@ -27,6 +27,7 @@ logger = Logger("clientLog")
 pygame.init()
 j = pygame.joystick.Joystick(0)
 j.init()
+discon = False
     
 #enableRobot()
 
@@ -42,7 +43,6 @@ def loop():
             #FIXME SEND DATA
     #except:
         #logger.warn("EXCEPTION: LOOP FUNCTION INFO: sysinfo: " + str(sys.exc_info()[0]) + " speed: " + str(speed) + " direction: " + str(direction))
-discon = False
 def check_pad():
     if j.get_name() == None and discon == False:
         discon = True
