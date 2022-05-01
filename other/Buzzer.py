@@ -43,16 +43,16 @@ class Buzzer:
       GPIO.setmode(GPIO.BCM)
       logger.info("Buzzer Alert")
       buzz=amount
-      try:
-        while (buzz > 0):
-          if buzz > 0:
-            GPIO.output(constants.buzzerPin,GPIO.HIGH)
-            sleep(length)
-            GPIO.output(constants.buzzerPin,GPIO.LOW)
-            sleep(offLength)
-            buzz = buzz-1
-          else:
-            break
-      except:
-        logger.warn("Robot: Exception in Buzz() function")
+      #try:
+      while (buzz > 0):
+        if buzz > 0:
+          GPIO.output(constants.buzzerPin,GPIO.HIGH)
+          sleep(length)
+          GPIO.output(constants.buzzerPin,GPIO.LOW)
+          sleep(offLength)
+          buzz = buzz-1
+        else:
+          break
+     # except:
+        #logger.warn("Robot: Exception in Buzz() function")
 
