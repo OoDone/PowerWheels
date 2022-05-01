@@ -1,0 +1,2 @@
+System Service File: /etc/systemd/system/test.service
+To edit file: sudo nano /etc/systemd/system/test.service
