@@ -30,6 +30,7 @@ logger = Logger("clientLog")
 blue = False
 speed = False
 direction = False
+connected = False
 
 
 def return_data():
