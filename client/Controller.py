@@ -81,12 +81,12 @@ def init():
 
 def enableRobot():
     sock.send("en")
-    logger.info("Controller: Sending Enable Request!")
+    logger.info("Client: Sending Enable Request!")
 def toggleAutonMode():
     sock.send("au")
-    logger.info("Controller: Autonomous Mode Toggled!")
+    logger.info("Client: Autonomous Mode Toggled!")
 def disableAutonMode():
-    logger.info("Controller: Disabled Autonomous Mode!")
+    logger.info("Client: Disabled Autonomous Mode!")
     
 def stopRobot():
     sock.send("s")
@@ -143,10 +143,12 @@ while connected:
             if bytes(':','UTF-8') in x:
                 xd = x.decode('UTF-8').split(":")[1]
                 print("Collision warning " + xd + " cm")
-            elif bytes('e','UTF-8') in x:
+            elif bytes('enable','UTF-8') in x:
                 xd = x.decode('UTF-8')
-                if xd == "enable":
-                    logger.info("Robot | Enabled Robot.")
+                logger.info("Robot | Enabled Robot.")
+            elif bytes('auton,','UTF-8') in x:
+                xd = x.decode('UTF-8').split(",")[1]
+                logger.info("Robot | {}d Autonomous Mode.", xd)
             else:
                 try:
                     data = return_data().replace("b'", "").replace("'","")

@@ -47,6 +47,7 @@ while(1):
     if blServer.getStatus():
         if client_socket is None:
             client_socket = blServer.getClientSocket()
+            auton.setSocket(client_socket)
     if constants.isTestingMode == True:
         if enabled == False:
             enableRobot()

@@ -12,6 +12,12 @@ class AutonMain:
         logger.info("Robot | Code: AutonMain.py Init")
         constants = Constants()
 
+    
+    def setSocket(self, Sock):
+        global sock
+        sock = Sock
+        logger.info("Set Socket!")
+
     def setAutonMode(self, mode):
         global autonMode
         if autonEnabled == False:
@@ -35,11 +41,13 @@ class AutonMain:
             #AUTON ENABLED
             autonEnabled = enabled
             logger.info("Robot | Enabling Autonomous In Mode " + str(autonMode))
+            sock.send("auton,enable")
             self.auton()
         else:
             #AUTON DISABLED
             autonEnabled = enabled
             logger.info("Robot | Disabling Autonomous Mode.")
+            sock.send("auton,disable")
 
 
     def auton(self):
