@@ -27,7 +27,7 @@ bluetoothAddress = "DC:A6:32:6B:38:BD"  #"B8:27:EB:D6:57:CE"
 #B8:27:EB:6B:AB:4B
 stickDeadband = 2
 logger = Logger("clientLog")
-blue = False
+joy = False
 speed = False
 direction = False
 connected = False
@@ -53,28 +53,30 @@ def init():
     connected = False
     timer = Timer()
     timer.start()
-    pygame.init()
     while not connected:
-        if timer.hasElapsed(5):
+        if timer.hasElapsed(3):
             timer.reset()
+            try:
+                if not connected:
+                    pygame.init()
+                    j = pygame.joystick.Joystick(0)
+                    j.init()
+                    joy = True
+            except:
+                joy = False
+                logger.warning("No Joystick Detected")
             try:
                 if not connected:
                     sock = bluetooth.BluetoothSocket( bluetooth.RFCOMM )
                     sock.connect((bluetoothAddress, 1))
                     sock.setblocking(False)
-                    blue = True
-            except:
-                logger.warning("Bluetooth: Cannot find Bluetooth Server")
-            try:
-                if not connected:
-                    j = pygame.joystick.Joystick(0)
-                    j.init()
-                    if blue:
-                        blue = False
+                    if joy:
+                        joy = False
                         connected = True
+                        timer.stop()
                         logger.info("Client: Connected To Robot!")
             except:
-                logger.warning("No Joystick Detected")
+                logger.warning("Bluetooth: Cannot find Bluetooth Server")
 
 
 def enableRobot():
