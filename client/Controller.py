@@ -63,7 +63,6 @@ def init():
                     j.init()
                     joy = True
             except:
-                pygame.joystick.Joystick(0).quit()
                 pygame.quit()
                 joy = False
                 logger.warning("No Joystick Detected")
