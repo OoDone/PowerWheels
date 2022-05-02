@@ -3,6 +3,8 @@ import bluetooth
 from Logger import Logger
 import sys
 from time import sleep
+import asyncio
+from timer import Timer
 
 #0 = SQUARE
 #1 = X
@@ -19,6 +21,8 @@ from time import sleep
 #12 = PS4 ON BUTTON
 #13 = TOUCHPAD PRESS
 
+
+
 def return_data():
     try:
         while True:
@@ -34,13 +38,44 @@ bluetoothAddress = "DC:A6:32:6B:38:BD"  #"B8:27:EB:D6:57:CE"
 stickDeadband = 2
 
 logger = Logger("clientLog")
-sock = bluetooth.BluetoothSocket( bluetooth.RFCOMM )
+bluetooth = False
+init = False
+speed = False
+direction = False
+async def init():
+    global sock
+    global j
+    joy = False
+    blue = False
+    timer = Timer()
+    timer.start()
+    while True:
+        if timer.hasElapsed(1):
+            timer.reset()
+            try:
+                if not init:
+                    sock = await bluetooth.BluetoothSocket( bluetooth.RFCOMM )
+                    await sock.connect((bluetoothAddress, 1))
+                    await sock.setblocking(False)
+                    bluetooth = True
+            except:
+                #if not blue:
+                blue = True
+                logger.warning("Bluetooth: Cannot find Bluetooth Server")
+            try:
+                if not init:
+                    await pygame.init()
+                    j = await pygame.joystick.Joystick(0)
+                    await j.init()
+                    if bluetooth:
+                        init = True
+                        bluetooth = False
+            except:
+                if not joy:
+                    joy = True
+                    logger.warning("No Joystick Detected")
 
-sock.connect((bluetoothAddress, 1))
-sock.setblocking(False)
-pygame.init()
-j = pygame.joystick.Joystick(0)
-j.init()
+
 def enableRobot():
     sock.send("en")
     logger.info("Controller: Sending Enable Request!")
@@ -63,6 +98,8 @@ def squareUp():
 
 def loop():
     sleep(0.02) #sleep 20 ms
+    global speed
+    global direction
     try:
         speed = float(round(j.get_axis(1) * -100))
         direction = float(round(j.get_axis(3) * 100)) #axis 0
@@ -73,9 +110,10 @@ def loop():
             sock.send(":M:" + str(speed) + ":D:" + str(direction))
     except:
         logger.warn("EXCEPTION: LOOP FUNCTION INFO: sysinfo: " + str(sys.exc_info()[0]) + " speed: " + str(speed) + " direction: " + str(direction))
+
+asyncio.run(init())
     
-    
-while True:
+while init:
     try:
         loop()
         events = pygame.event.get()
