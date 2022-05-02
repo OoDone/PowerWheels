@@ -34,8 +34,8 @@ def enableRobot():
     logger.info("Robot | Enabled Robot.")
     if constants.isTestingMode == True:
         logger.info("Robot | Robot in Test Mode!")
-    #if constants.isTestingMode == False and blServer.getStatus() == True:
-        #client_socket.send("Robot: Enabled Robot")
+    if constants.isTestingMode == False and blServer.getStatus() == True:
+        client_socket.send("enable")
 
 def disableRobot():
     global enabled
