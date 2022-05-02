@@ -30,3 +30,6 @@ class Timer:
             return True
         else:
             return False
+    
+    def reset(self):
+        self._start_time = time.perf_counter()

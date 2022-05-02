@@ -23,6 +23,16 @@ from timer import Timer
 
 
 
+bluetoothAddress = "DC:A6:32:6B:38:BD"  #"B8:27:EB:D6:57:CE"  
+#B8:27:EB:6B:AB:4B
+stickDeadband = 2
+connected = False
+logger = Logger("clientLog")
+blue = False
+speed = False
+direction = False
+
+
 def return_data():
     try:
         while True:
@@ -33,47 +43,35 @@ def return_data():
             return data
     except OSError:
         pass
-bluetoothAddress = "DC:A6:32:6B:38:BD"  #"B8:27:EB:D6:57:CE"  
-#B8:27:EB:6B:AB:4B
-stickDeadband = 2
 
-logger = Logger("clientLog")
-bluetooth = False
-init = False
-speed = False
-direction = False
+
+
 async def init():
     global sock
     global j
-    joy = False
-    blue = False
     timer = Timer()
     timer.start()
     while True:
-        if timer.hasElapsed(1):
+        if timer.hasElapsed(5):
             timer.reset()
             try:
-                if not init:
+                if not connected:
                     sock = await bluetooth.BluetoothSocket( bluetooth.RFCOMM )
                     await sock.connect((bluetoothAddress, 1))
                     await sock.setblocking(False)
-                    bluetooth = True
+                    blue = True
             except:
-                #if not blue:
-                blue = True
                 logger.warning("Bluetooth: Cannot find Bluetooth Server")
             try:
-                if not init:
+                if not connected:
                     await pygame.init()
                     j = await pygame.joystick.Joystick(0)
                     await j.init()
-                    if bluetooth:
-                        init = True
-                        bluetooth = False
+                    if blue:
+                        blue = False
+                        connected = True
             except:
-                if not joy:
-                    joy = True
-                    logger.warning("No Joystick Detected")
+                logger.warning("No Joystick Detected")
 
 
 def enableRobot():
@@ -81,9 +79,9 @@ def enableRobot():
     logger.info("Controller: Sending Enable Request!")
 def toggleAutonMode():
     sock.send("au")
-    logger.info("Controler: Autonomous Mode Toggled!")
+    logger.info("Controller: Autonomous Mode Toggled!")
 def disableAutonMode():
-    logger.info("Controler: Disabled Autonomous Mode!")
+    logger.info("Controller: Disabled Autonomous Mode!")
     
 def stopRobot():
     sock.send("s")
@@ -113,7 +111,12 @@ def loop():
 
 asyncio.run(init())
     
-while init:
+while connected:
+    try: 
+        sock.getpeername()
+        connected = True
+    except:
+        connected = False
     try:
         loop()
         events = pygame.event.get()
