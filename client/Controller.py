@@ -26,7 +26,6 @@ from timer import Timer
 bluetoothAddress = "DC:A6:32:6B:38:BD"  #"B8:27:EB:D6:57:CE"  
 #B8:27:EB:6B:AB:4B
 stickDeadband = 2
-connected = False
 logger = Logger("clientLog")
 blue = False
 speed = False
@@ -49,8 +48,11 @@ def return_data():
 async def init():
     global sock
     global j
+    global connected
+    connected = False
     timer = Timer()
     timer.start()
+    pygame.init()
     while True:
         if timer.hasElapsed(5):
             timer.reset()
@@ -64,7 +66,6 @@ async def init():
                 logger.warning("Bluetooth: Cannot find Bluetooth Server")
             try:
                 if not connected:
-                    pygame.init()
                     j = pygame.joystick.Joystick(0)
                     await j.init()
                     if blue:
