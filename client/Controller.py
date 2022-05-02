@@ -31,7 +31,7 @@ joy = False
 speed = False
 direction = False
 connected = False
-
+ready = False
 
 def return_data():
     try:
@@ -80,8 +80,11 @@ def init():
 
 
 def enableRobot():
-    sock.send("en")
-    logger.info("Client: Sending Enable Request!")
+    if ready:
+        sock.send("en")
+        logger.info("Client: Sending Enable Request!")
+    else:
+        logger.info("Client: Robot Still Starting.")
 def toggleAutonMode():
     sock.send("au")
     logger.info("Client: Autonomous Mode Toggled!")
@@ -146,6 +149,10 @@ while connected:
             elif bytes('enable','UTF-8') in x:
                 xd = x.decode('UTF-8')
                 logger.info("Robot | Enabled Robot.")
+            elif bytes('ready','UTF-8') in x:
+                xd = x.decode('UTF-8')
+                ready = True
+                logger.info("Robot | Robot Started.")
             else:
                 try:
                     data = return_data().replace("b'", "").replace("'","")

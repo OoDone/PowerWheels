@@ -26,7 +26,7 @@ enabled = False
 disconnected = False
 client_socket = None
 logger.info("Robot | Code: Main.py Init")
-time.sleep(1)
+#time.sleep(1)
 def enableRobot():
     buzzer.customBuzz(0.05,0.05, 3) #3 long enable robot
     global enabled
@@ -47,6 +47,7 @@ while(1):
     if blServer.getStatus():
         if client_socket is None:
             client_socket = blServer.getClientSocket()
+            client_socket.send("ready")
             #auton.setSocket(client_socket)
     if constants.isTestingMode == True:
         if enabled == False:
