@@ -63,18 +63,19 @@ def init():
                     j.init()
                     joy = True
             except:
+                j.quit()
+                pygame.quit()
                 joy = False
                 logger.warning("No Joystick Detected")
             try:
-                if not connected:
+                if not connected and joy:
                     sock = bluetooth.BluetoothSocket( bluetooth.RFCOMM )
                     sock.connect((bluetoothAddress, 1))
                     sock.setblocking(False)
-                    if joy:
-                        joy = False
-                        connected = True
-                        timer.stop()
-                        logger.info("Client: Connected To Robot!")
+                    joy = False
+                    connected = True
+                    timer.stop()
+                    logger.info("Client: Connected To Robot!")
             except:
                 logger.warning("Bluetooth: Cannot find Bluetooth Server")
 
