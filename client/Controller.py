@@ -155,3 +155,5 @@ while connected:
         print("EXITING NOW")
         j.quit()
         x.toString()
+        
+    init()
