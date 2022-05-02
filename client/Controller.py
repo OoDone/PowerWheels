@@ -72,6 +72,7 @@ def init():
                     if blue:
                         blue = False
                         connected = True
+                        logger.info("Client: Connected To Robot!")
             except:
                 logger.warning("No Joystick Detected")
 
