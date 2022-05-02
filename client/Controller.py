@@ -45,7 +45,7 @@ def return_data():
 
 
 
-async def init():
+def init():
     global sock
     global j
     global connected
@@ -58,16 +58,16 @@ async def init():
             timer.reset()
             try:
                 if not connected:
-                    sock = await bluetooth.BluetoothSocket( bluetooth.RFCOMM )
-                    await sock.connect((bluetoothAddress, 1))
-                    await sock.setblocking(False)
+                    sock = bluetooth.BluetoothSocket( bluetooth.RFCOMM )
+                    sock.connect((bluetoothAddress, 1))
+                    sock.setblocking(False)
                     blue = True
             except:
                 logger.warning("Bluetooth: Cannot find Bluetooth Server")
             try:
                 if not connected:
                     j = pygame.joystick.Joystick(0)
-                    await j.init()
+                    j.init()
                     if blue:
                         blue = False
                         connected = True
@@ -110,7 +110,7 @@ def loop():
     except:
         logger.warn("EXCEPTION: LOOP FUNCTION INFO: sysinfo: " + str(sys.exc_info()[0]) + " speed: " + str(speed) + " direction: " + str(direction))
 
-asyncio.run(init())
+#asyncio.run(init())
     
 while connected:
     try: 
