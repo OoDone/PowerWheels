@@ -25,7 +25,7 @@ def return_data():
             data = sock.recv(1024)
             if not data:
                 break
-            print(data)
+            #print(data)
             return data
     except OSError:
         pass
