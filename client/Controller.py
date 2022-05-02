@@ -143,12 +143,12 @@ while connected:
             if bytes(':','UTF-8') in x:
                 xd = x.decode('UTF-8').split(":")[1]
                 print("Collision warning " + xd + " cm")
-            elif bytes('enable','UTF-8') in x:
-                xd = x.decode('UTF-8')
-                logger.info("Robot | Enabled Robot.")
             elif bytes('auton,','UTF-8') in x:
                 xd = x.decode('UTF-8').split(",")[1]
                 logger.info("Robot | {}d Autonomous Mode.", xd)
+            elif bytes('enable','UTF-8') in x:
+                xd = x.decode('UTF-8')
+                logger.info("Robot | Enabled Robot.")
             else:
                 try:
                     data = return_data().replace("b'", "").replace("'","")
