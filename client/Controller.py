@@ -64,8 +64,8 @@ async def init():
                 logger.warning("Bluetooth: Cannot find Bluetooth Server")
             try:
                 if not connected:
-                    await pygame.init()
-                    j = await pygame.joystick.Joystick(0)
+                    pygame.init()
+                    j = pygame.joystick.Joystick(0)
                     await j.init()
                     if blue:
                         blue = False
