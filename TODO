@@ -4,3 +4,6 @@ DriveControl:
 DriveForwardAuton:
 - Add function stop function to work with drive control stopDriveDist 
 
+Main:
+- Make button X disable robot
+

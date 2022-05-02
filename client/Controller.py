@@ -124,6 +124,7 @@ while connected:
         connected = True
     except:
         connected = False
+        init()
     try:
         loop()
         events = pygame.event.get()
