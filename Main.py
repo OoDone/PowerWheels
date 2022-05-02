@@ -65,6 +65,7 @@ while(1):
             client_socket, address = blServer.reconnect()
             if disconnected == True:
                 client_socket.send("ready")
+                blServer.setStatus(True)
                 buzzer.buzz(0.3, 1)
                 logger.info("Bluetooth: Reconnected!")
     elif bytes(':','UTF-8') in x:
