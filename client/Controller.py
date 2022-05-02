@@ -54,7 +54,7 @@ def init():
     timer = Timer()
     timer.start()
     pygame.init()
-    while True:
+    while not connected:
         if timer.hasElapsed(5):
             timer.reset()
             try:
@@ -112,7 +112,7 @@ def loop():
         logger.warn("EXCEPTION: LOOP FUNCTION INFO: sysinfo: " + str(sys.exc_info()[0]) + " speed: " + str(speed) + " direction: " + str(direction))
 
 #asyncio.run(init())
-    
+init()   
 while connected:
     try: 
         sock.getpeername()
@@ -156,4 +156,3 @@ while connected:
         j.quit()
         x.toString()
         
-init()
