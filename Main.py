@@ -56,7 +56,7 @@ while(1):
     if x == None:
         if constants.isTestingMode == False:
             logger.info("Bluetooth: disconnected!")
-            buzzer.buzz(1, 1)
+            buzzer.buzz(0.4, 2)
             driveControl.stopRobot()
             disconnected = True
             blServer.setStatus(False)
