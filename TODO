@@ -7,3 +7,10 @@ DriveForwardAuton:
 Main:
 - Make button X disable robot
 
+Service:
+- fix need network to restart service
+
+General stuff:
+- set bluetooth address
+
+
