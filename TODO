@@ -13,6 +13,7 @@ bluetooth:
 Service:
 - fix need network to restart service
 - add RestartSec=1 to service file under [Service]
+- set After to network.target (Test if this works without the timer)
 
 General stuff:
 - set bluetooth address
