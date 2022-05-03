@@ -7,8 +7,12 @@ DriveForwardAuton:
 Main:
 - Make button X disable robot
 
+bluetooth:
+- Make discoverable before starting
+
 Service:
 - fix need network to restart service
+- add RestartSec=1 to service file under [Service]
 
 General stuff:
 - set bluetooth address
