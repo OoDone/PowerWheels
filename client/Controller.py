@@ -61,14 +61,19 @@ def init():
     logger.info("Init: After Timer Created And Started")
     while not connected:
         if timer.hasElapsed(3):
+            logger.info("Init: Timer Has Elapsed")
             timer.reset()
+            logger.info("Init: After Timer.Reset")
             try:
                 if not connected:
+                    logger.info("Init: Before Joystick Test")
                     pygame.init()
                     j = pygame.joystick.Joystick(0)
                     j.init()
                     joy = True
+                    logger.info("Init: After Joystick Test")
             except:
+                logger.info("Init: Top of Joystick Except")
                 pygame.quit()
                 joy = False
                 logger.warning("No Joystick Detected")
@@ -83,7 +88,7 @@ def init():
                     logger.info("Client: Connected To Robot!")
             except:
                 logger.warning("Bluetooth: Cannot find Bluetooth Server")
-                
+
 def enableRobot():
     if connected:
         if ready:
