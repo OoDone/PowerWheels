@@ -56,6 +56,9 @@ class DriveControl:
     driveMotor.setMotorSpeedPercent(speedPercent)
     logger.info("Open Loop Driving Robot at {} Percent Speed", str(speedPercent))
     
+  def steerServoPerc(self, steerPercent):
+    steerServo.setServoPercent(steerPercent)
+    
     
   def stopRobot(self):
     driveMotor.stopMotor()
