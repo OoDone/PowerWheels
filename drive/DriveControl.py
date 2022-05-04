@@ -35,8 +35,6 @@ class DriveControl:
     if direction < 0:
       steerServo.setServoPosition(constants.DriveConstants().servoNeutralPosition - direction * constants.DriveConstants().directionTicksPer)   # 1489 - direction * directionTicksPer #* 9.36        #1489 mid servo position
       logger.info("STEERSERVO: " + str(constants.DriveConstants().servoNeutralPosition - direction * constants.DriveConstants().directionTicksPer))
-      steerServo.setServoPosition(-direction * constants.DriveConstants().directionTicksPer + constants.DriveConstants().servoNeutralPosition) #* 9.36 + 1489 # TEMP
-      logger.info("STEERSERVO: " + str(-direction * constants.DriveConstants().directionTicksPer + constants.DriveConstants().servoNeutralPosition))
     else:
       steerServo.setServoPosition(-direction * constants.DriveConstants().directionTicksPer + constants.DriveConstants().servoNeutralPosition) #* 9.36 + 1489 # TEMP
       logger.info("STEERSERVO: " + str(-direction * constants.DriveConstants().directionTicksPer + constants.DriveConstants().servoNeutralPosition))
