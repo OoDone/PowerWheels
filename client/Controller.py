@@ -5,20 +5,19 @@ import sys
 from time import sleep
 from timer import Timer
 
-#0 = SQUARE
-#1 = X
-#2 = CIRCLE
-#3 = TRIANGLE
+#0 = X
+#1 = CIRCLE
+#2 = TRIANGLE
+#3 = SQUARE
 #4 = L1
 #5 = R1
 #6 = L2
 #7 = R2
 #8 = SHARE
 #9 = OPTIONS
-#10 = LEFT ANALOG PRESS
-#11 = RIGHT ANALOG PRESS
-#12 = PS4 ON BUTTON
-#13 = TOUCHPAD PRESS
+#10 = PS4 BUTTON
+#11 = LEFT ANALOG PRESS 
+#12 = RIGHT ANALOG PRESS
 
 
 
@@ -142,7 +141,11 @@ def loop():
     except:
         logger.warn("EXCEPTION: LOOP FUNCTION INFO: sysinfo: " + str(sys.exc_info()[0]) + " speed: " + str(speed) + " direction: " + str(direction))
 
-init()   
+init() 
+x = None
+circle = None
+square = None
+triangle = None  
 while connected:
     try: 
         sock.getpeername()
@@ -155,17 +158,27 @@ while connected:
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.JOYBUTTONDOWN:
-                if j.get_button(0): #X
-                    squareDown()
-                if j.get_button(1): #circle
+                if j.get_button(0) and not x: #X
+                    disableRobot()
+                    x = True
+                if j.get_button(1) and not circle: #circle
                      enableRobot()
-                if j.get_button(2): #Triangle wtf
+                     circle = True
+                if j.get_button(2) and not triangle: #Triangle
                     toggleAutonMode()
-                if j.get_button(3): #Square
+                    triangle = True
+                if j.get_button(3) and not square: #Square
                     disableAutonMode()
+                    square = True
             elif event.type == pygame.JOYBUTTONUP:
-                if j.get_button(0): #square
-                    squareUp()
+                if x and not j.get_button(0): #X
+                    x = False
+                elif circle and not j.get_button(1): #circle
+                    circle = False
+                elif triangle and not j.get_button(2): #triangle
+                    triangle = False
+                elif square and not j.get_button(3): #square
+                    square = False
                 
         x=return_data()
         if x is not None:
