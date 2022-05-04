@@ -21,7 +21,7 @@ class Timer:
         if self._start_time is None:
             raise TimerError(f"Timer is not running. Use .start() to start it")
 
-        elapsed_time = time.perf_counter() - self._start_time
+        #elapsed_time = time.perf_counter() - self._start_time
         self._start_time = None
 
     def hasElapsed(self, seconds):

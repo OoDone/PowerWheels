@@ -25,6 +25,7 @@ bluetoothAddress = "DC:A6:32:6B:38:BD" #Mine "DC:A6:32:6B:38:BD"      #School ot
 #School server: B8:27:EB:6B:AB:4B
 stickDeadband = 3
 logger = Logger("/home/pi/Desktop/logs/clientLog")
+logger.info("Logger Works!")
 joy = False
 speed = False
 direction = False
@@ -218,6 +219,7 @@ while connected:
         x.toString()
 
 while True:
+    logger.info("While True Loop")
     if not start:
         init() 
         start = True
