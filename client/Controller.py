@@ -80,6 +80,8 @@ def init():
                     logger.info("Client: Connected To Robot!")
             except:
                 logger.warning("Bluetooth: Cannot find Bluetooth Server")
+        else:
+            return
 
 def enableRobot():
     if connected:
@@ -127,19 +129,25 @@ def squareUp():
 #enableRobot()
 
 def loop():
-    sleep(0.02) #sleep 20 ms
-    global speed
-    global direction
-    try:
-        speed = float(round(j.get_axis(1) * -100))
-        direction = float(round(j.get_axis(3) * 100)) #axis 0
-        if direction < stickDeadband and direction > -stickDeadband:
-            direction = 0.0
-        if speed >= -100 and direction >= -100:
-            #logger.info("PRE: M:" + str(speed) + ":D:" + str(direction))
-            sock.send(":M:" + str(speed) + ":D:" + str(direction))
-    except:
-        logger.warn("EXCEPTION: LOOP FUNCTION INFO: sysinfo: " + str(sys.exc_info()[0]) + " speed: " + str(speed) + " direction: " + str(direction))
+    loopTimer = Timer()
+    loopTimer.start() 
+    if loopTimer.hasElapsed(0.02):
+    #sleep(0.02) #sleep 20 ms
+        loopTimer.reset()
+        global speed
+        global direction
+        try:
+            speed = float(round(j.get_axis(1) * -100))
+            direction = float(round(j.get_axis(3) * 100)) #axis 0
+            if direction < stickDeadband and direction > -stickDeadband:
+                direction = 0.0
+            if speed >= -100 and direction >= -100:
+                #logger.info("PRE: M:" + str(speed) + ":D:" + str(direction))
+                sock.send(":M:" + str(speed) + ":D:" + str(direction))
+        except:
+            logger.warn("EXCEPTION: LOOP FUNCTION INFO: sysinfo: " + str(sys.exc_info()[0]) + " speed: " + str(speed) + " direction: " + str(direction))
+    else:
+        return
         
 x = None
 circle = None
