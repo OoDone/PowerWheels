@@ -24,13 +24,12 @@ from timer import Timer
 bluetoothAddress = "DC:A6:32:6B:38:BD" #Mine "DC:A6:32:6B:38:BD"      #School other"B8:27:EB:D6:57:CE"  
 #School server: B8:27:EB:6B:AB:4B
 stickDeadband = 3
-logger = Logger("/home/pi/Desktop/logs/clientLog")
+logger = Logger("clientLog")
 joy = False
 speed = False
 direction = False
 connected = False
 ready = False
-start = False
 
 def return_data():
     try:
@@ -54,28 +53,18 @@ def init():
     ready = False
     connected = False
     joy = False
-    logger.info("Init Function Called")
     timer = Timer()
     timer.start()
-    logger.info("Init: After Timer Created And Started")
     while not connected:
         if timer.hasElapsed(3):
-            logger.info("Init: Timer Has Elapsed")
             timer.reset()
-            logger.info("Init: After Timer.Reset")
             try:
                 if not connected:
-                    logger.info("Init: Before Joystick Test")
                     pygame.joystick.init()
-                    logger.info("Init: after pygame init")
                     j = pygame.joystick.Joystick(0)
-                    logger.info("Init: after get joystick")
                     j.init()
-                    logger.info("Init: after joystick init")
                     joy = True
-                    logger.info("Init: After Joystick Test")
             except:
-                logger.info("Init: Top of Joystick Except")
                 pygame.quit()
                 joy = False
                 logger.warning("No Joystick Detected")
@@ -135,7 +124,7 @@ def squareUp():
         logger.info("Client: Not Connected To Robot")
 
 #enableRobot()
-
+init()
 def loop():
     loopTimer = Timer()
     loopTimer.start() 
@@ -154,8 +143,6 @@ def loop():
                 sock.send(":M:" + str(speed) + ":D:" + str(direction))
         except:
             logger.warn("EXCEPTION: LOOP FUNCTION INFO: sysinfo: " + str(sys.exc_info()[0]) + " speed: " + str(speed) + " direction: " + str(direction))
-    else:
-        logger.info("Else")
         
 x = None
 circle = None
@@ -224,10 +211,3 @@ while connected:
         print("EXITING NOW")
         j.quit()
         x.toString()
-
-while True:
-    if not start:
-        logger.info("Not Start, Calling Init Function")
-        init() 
-        start = True
-        
