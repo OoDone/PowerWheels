@@ -5,7 +5,7 @@ DriveForwardAuton:
 - Add function stop function to work with drive control stopDriveDist 
 
 Main:
-- Make button X disable robot
+- Fix allowed to enable more than once(And disable)
 
 
 Service:
@@ -13,5 +13,8 @@ Service:
 
 General stuff:
 - set bluetooth address
+
+Controller:
+- Fix allowed to enable more than once(And disable)
 
 https://www.freedesktop.org/software/systemd/man/systemd.service.html
