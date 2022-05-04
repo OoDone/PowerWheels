@@ -30,6 +30,7 @@ speed = False
 direction = False
 connected = False
 ready = False
+start = False
 
 def return_data():
     try:
@@ -80,7 +81,9 @@ def init():
             except:
                 logger.warning("Bluetooth: Cannot find Bluetooth Server")
 
-
+while not start:
+    init() 
+    start = True
 def enableRobot():
     if connected:
         if ready:
@@ -140,8 +143,7 @@ def loop():
             sock.send(":M:" + str(speed) + ":D:" + str(direction))
     except:
         logger.warn("EXCEPTION: LOOP FUNCTION INFO: sysinfo: " + str(sys.exc_info()[0]) + " speed: " + str(speed) + " direction: " + str(direction))
-
-init() 
+        
 x = None
 circle = None
 square = None
