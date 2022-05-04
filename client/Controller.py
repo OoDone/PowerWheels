@@ -3,7 +3,6 @@ import bluetooth
 from Logger import Logger
 import sys
 from time import sleep
-import asyncio
 from timer import Timer
 
 #0 = SQUARE
@@ -25,7 +24,7 @@ from timer import Timer
 
 bluetoothAddress = "DC:A6:32:6B:38:BD" #Mine "DC:A6:32:6B:38:BD"      #School other"B8:27:EB:D6:57:CE"  
 #School server: B8:27:EB:6B:AB:4B
-stickDeadband = 2
+stickDeadband = 3
 logger = Logger("clientLog")
 joy = False
 speed = False
@@ -50,7 +49,11 @@ def init():
     global sock
     global j
     global connected
+    global joy
+    global ready
+    ready = False
     connected = False
+    joy = False
     timer = Timer()
     timer.start()
     while not connected:
@@ -80,26 +83,48 @@ def init():
 
 
 def enableRobot():
-    if ready:
-        sock.send("en")
-        logger.info("Client: Sending Enable Request!")
+    if connected:
+        if ready:
+            sock.send("en")
+            logger.info("Client: Sending Enable Request!")
+        else:
+            logger.info("Client: Robot Still Starting.")
     else:
-        logger.info("Client: Robot Still Starting.")
+        logger.info("Client: Not Connected To Robot")
+
+def disableRobot():
+    if connected:
+        sock.send("di")
+        logger.info("Client: Sending Disable Request!")
+    else:
+        logger.info("Client: Not Connected To Robot")
 def toggleAutonMode():
-    sock.send("au")
-    logger.info("Client: Autonomous Mode Toggled!")
+    if connected:
+        sock.send("au")
+        logger.info("Client: Autonomous Mode Toggled!")
+    else:
+        logger.info("Client: Not Connected To Robot")
 def disableAutonMode():
-    logger.info("Client: Disabled Autonomous Mode!")
+    logger.info("Client: DOES NOTHING: Disabled Autonomous Mode!")
     
 def stopRobot():
-    sock.send("s")
-    
+    if connected:
+        sock.send("s")
+    else:
+        logger.info("Client: Not Connected To Robot")
+
 def squareDown():
-    sock.send("xd")
-    
+    if connected:
+        sock.send("xd")
+    else:
+        logger.info("Client: Not Connected To Robot")
+
 def squareUp():
-    sock.send("ho")
- 
+    if connected:
+        sock.send("ho")
+    else:
+        logger.info("Client: Not Connected To Robot")
+
 #enableRobot()
 
 def loop():
@@ -111,7 +136,7 @@ def loop():
         direction = float(round(j.get_axis(3) * 100)) #axis 0
         if direction < stickDeadband and direction > -stickDeadband:
             direction = 0.0
-        if speed > -101 and direction > -101:
+        if speed >= -100 and direction >= -100:
             #logger.info("PRE: M:" + str(speed) + ":D:" + str(direction))
             sock.send(":M:" + str(speed) + ":D:" + str(direction))
     except:
@@ -150,6 +175,9 @@ while connected:
             elif bytes('enable','UTF-8') in x:
                 xd = x.decode('UTF-8')
                 logger.info("Robot | Enabled Robot.")
+            elif bytes('disable','UTF-8') in x:
+                xd = x.decode('UTF-8')
+                logger.info("Robot | Disabled Robot.")
             elif bytes('ready','UTF-8') in x:
                 xd = x.decode('UTF-8')
                 ready = True
@@ -164,7 +192,7 @@ while connected:
   
                
     except KeyboardInterrupt:
-        stopRobot()
+        disableRobot()
         print("EXITING NOW")
         j.quit()
         x.toString()

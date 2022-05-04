@@ -62,4 +62,5 @@ class DriveControl:
     
   def stopRobot(self):
     driveMotor.stopMotor()
+    steerServo.stopServo()
     

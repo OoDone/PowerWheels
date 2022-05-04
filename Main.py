@@ -42,6 +42,11 @@ def disableRobot():
     enabled = False
     driveControl.stopRobot()
     logger.info("Robot | Disabled Robot.")
+    try:
+        if constants.isTestingMode == False and blServer.getStatus() == True:
+            client_socket.send("disable")
+    except:
+        logger.warning("Robot | Couldnt Inform Client Of New Status: Disabled")
     
 while(1):
     if blServer.getStatus():
@@ -72,13 +77,17 @@ while(1):
         if enabled == True:
             driveControl.driveRobot(x)
     elif x==bytes('s', 'UTF-8'):
+        driveControl.stopRobot()
         logger.info("Stopping robot...")
-        disableRobot()
         x='z'
     elif x==bytes('en', 'UTF-8'):
-        logger.info("Enabling Robot...")
         enabled = True
         enableRobot()
+        logger.info("Enabling Robot...")
+        x='z'
+    elif x==bytes('di', 'UTF-8'):
+        disableRobot()
+        logger.info("Disabling Robot...")
         x='z'
     elif x==bytes('e', 'UTF-8'):
         GPIO.cleanup()
