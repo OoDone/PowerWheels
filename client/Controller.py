@@ -83,9 +83,7 @@ def init():
                     logger.info("Client: Connected To Robot!")
             except:
                 logger.warning("Bluetooth: Cannot find Bluetooth Server")
-        else:
-            logger.info("Timer Not Elapsed")
-
+                
 def enableRobot():
     if connected:
         if ready:
