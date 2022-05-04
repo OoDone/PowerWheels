@@ -9,16 +9,9 @@ Main:
 
 
 Service:
-- fix need network to restart service
-- add RestartSec=1 to service file under [Service]
-- set After to network.target (Test if this works without the timer)
-- set User under Service tab to root(Or Pi, test if pi works first)
-- prefix git pull with "-"
-- prefix python Main.py with + to run with full privliges 
+- add RestartSec=1 to service file under [Service] - test
 
 General stuff:
 - set bluetooth address
 
 https://www.freedesktop.org/software/systemd/man/systemd.service.html
-
-
