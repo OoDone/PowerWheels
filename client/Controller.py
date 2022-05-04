@@ -81,9 +81,6 @@ def init():
             except:
                 logger.warning("Bluetooth: Cannot find Bluetooth Server")
 
-while not start:
-    init() 
-    start = True
 def enableRobot():
     if connected:
         if ready:
@@ -211,4 +208,9 @@ while connected:
         print("EXITING NOW")
         j.quit()
         x.toString()
+
+while True:
+    if not start:
+        init() 
+        start = True
         
