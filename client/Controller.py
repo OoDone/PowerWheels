@@ -95,7 +95,7 @@ def stopRobot():
     sock.send("s")
     
 def squareDown():
-    sock.send("ho")
+    sock.send("xd")
     
 def squareUp():
     sock.send("ho")
@@ -130,7 +130,7 @@ while connected:
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.JOYBUTTONDOWN:
-                if j.get_button(0): #IDK
+                if j.get_button(0): #X
                     squareDown()
                 if j.get_button(1): #circle
                      enableRobot()
