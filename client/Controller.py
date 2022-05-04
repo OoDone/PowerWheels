@@ -25,7 +25,6 @@ bluetoothAddress = "DC:A6:32:6B:38:BD" #Mine "DC:A6:32:6B:38:BD"      #School ot
 #School server: B8:27:EB:6B:AB:4B
 stickDeadband = 3
 logger = Logger("/home/pi/Desktop/logs/clientLog")
-logger.info("Logger Works!")
 joy = False
 speed = False
 direction = False
@@ -68,8 +67,11 @@ def init():
                 if not connected:
                     logger.info("Init: Before Joystick Test")
                     pygame.init()
+                    logger.info("Init: after pygame init")
                     j = pygame.joystick.Joystick(0)
+                    logger.info("Init: after get joystick")
                     j.init()
+                    logger.info("Init: after joystick init")
                     joy = True
                     logger.info("Init: After Joystick Test")
             except:
