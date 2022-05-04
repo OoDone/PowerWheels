@@ -219,8 +219,8 @@ while connected:
         x.toString()
 
 while True:
-    logger.info("While True Loop")
     if not start:
+        logger.info("Not Start, Calling Init Function")
         init() 
         start = True
         
