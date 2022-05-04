@@ -16,5 +16,6 @@ General stuff:
 
 Controller:
 - Fix allowed to enable more than once(And disable)
+- make button status's into a enum
 
 https://www.freedesktop.org/software/systemd/man/systemd.service.html
