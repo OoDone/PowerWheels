@@ -7,13 +7,12 @@ DriveForwardAuton:
 Main:
 - Make button X disable robot
 
-bluetooth:
-- Make discoverable before starting
 
 Service:
 - fix need network to restart service
 - add RestartSec=1 to service file under [Service]
 - set After to network.target (Test if this works without the timer)
+- set User under Service tab to root(Or Pi, test if pi works first)
 
 General stuff:
 - set bluetooth address
