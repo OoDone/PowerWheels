@@ -66,7 +66,7 @@ def init():
             try:
                 if not connected:
                     logger.info("Init: Before Joystick Test")
-                    pygame.init()
+                    #pygame.init()
                     logger.info("Init: after pygame init")
                     j = pygame.joystick.Joystick(0)
                     logger.info("Init: after get joystick")
