@@ -147,8 +147,8 @@ def loop():
         except:
             logger.warn("EXCEPTION: LOOP FUNCTION INFO: sysinfo: " + str(sys.exc_info()[0]) + " speed: " + str(speed) + " direction: " + str(direction))
     else:
-        return
-init()       
+        logger.info("Else")
+        
 x = None
 circle = None
 square = None
@@ -217,4 +217,8 @@ while connected:
         j.quit()
         x.toString()
 
+while True:
+    if not start:
+        init() 
+        start = True
         
