@@ -55,8 +55,10 @@ def init():
     ready = False
     connected = False
     joy = False
+    logger.info("Init Function Called")
     timer = Timer()
     timer.start()
+    logger.info("Init: After Timer Created And Started")
     while not connected:
         if timer.hasElapsed(3):
             timer.reset()
@@ -82,7 +84,7 @@ def init():
             except:
                 logger.warning("Bluetooth: Cannot find Bluetooth Server")
         else:
-            return
+            logger.info("Timer Not Elapsed")
 
 def enableRobot():
     if connected:
