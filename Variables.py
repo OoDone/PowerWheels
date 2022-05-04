@@ -25,7 +25,7 @@ class Constants:
     #Steering Servos
     servoPin = 18
     servoNeutralPosition = 1488 #1488 for 556-2420 & 1700 for 1500-1900
-    directionTicksPer = 9.36 #2
+    directionTicksPer = 9 #2
     servoMaxLimitTicks = 2420 #1900
     servoMinLimitTicks = 556 #1500
 
