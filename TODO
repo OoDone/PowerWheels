@@ -1,4 +1,5 @@
 DriveControl:
+- fix DriveDist Fake Encoder - Needs Testing
 - Fix DriveDist Function(Implement encoder shit)
 - Implement stopDriveDist function()
 DriveForwardAuton:
@@ -6,6 +7,9 @@ DriveForwardAuton:
 
 Main:
 - Fix allowed to enable more than once(And disable) - Needs Test
+
+Autonomous:
+- Add steer logic, distance logic, and sensor logic to Smart Auton
 
 
 Service:

@@ -12,6 +12,7 @@ class Constants:
   class RobotConstants:
     wheelBaseMeters = 2 #FIXME Wheelbase for Autonomous/Automated calculations IN METERS WB 
     maxSteerAngle = 10 #FIXME Check steering angle, not 10
+    minTurnRadius = 1 #FIXME 
     #Turning radius calculation: TR = WB/tan(a)
 
   #Drive constants
@@ -30,7 +31,7 @@ class Constants:
     servoMinLimitTicks = 588 #1500
 
     #Encoder 
-    driveTicksPerMeter = 1000
+    driveTicksPerMeter = 10000
 
 
   #Auton Constants

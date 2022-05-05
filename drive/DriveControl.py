@@ -46,7 +46,7 @@ class DriveControl:
     while driveMotor.getEncoderTicks() == distance * constants.DriveConstants().driveTicksPerMeter:
       if driveMotor.getEncoderTicks() == distance * constants.DriveConstants().driveTicksPerMeter:
         return
-    else:
+    while not driveMotor.getEncoderTicks() == distance * constants.DriveConstants().driveTicksPerMeter:
       driveMotor.setEncoderTicks(driveMotor.getEncoderTicks() + 1)
 
   def stopDriveDistAuton(self):
