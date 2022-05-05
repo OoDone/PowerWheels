@@ -16,7 +16,7 @@ class SmartAuton:
         global start
         start = True
         self.loop()
-        asyncio.run(self.initialize())
+        asyncio.run(self.initialize()) #Figure out positioning for this and loop function call
 
     def stop(self):
         global start
@@ -30,5 +30,4 @@ class SmartAuton:
 
     def loop(self):
         while start:
-            
             logger.info("TEMP SMARTAUTON LOOP")
