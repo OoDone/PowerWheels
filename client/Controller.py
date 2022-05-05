@@ -192,19 +192,19 @@ while connected:
                 elif square and not j.get_button(3): #square
                     square = False
                 
-        x=return_data()
-        if x is not None:
-            if bytes(':','UTF-8') in x:
-                xd = x.decode('UTF-8').split(":")[1]
+        data=return_data()
+        if data is not None:
+            if bytes(':','UTF-8') in data:
+                xd = data.decode('UTF-8').split(":")[1]
                 print("Collision warning " + xd + " cm")
-            elif bytes('enable','UTF-8') in x:
-                xd = x.decode('UTF-8')
+            elif bytes('enable','UTF-8') in data:
+                xd = data.decode('UTF-8')
                 logger.info("Robot | Enabled Robot.")
-            elif bytes('disable','UTF-8') in x:
-                xd = x.decode('UTF-8')
+            elif bytes('disable','UTF-8') in data:
+                xd = data.decode('UTF-8')
                 logger.info("Robot | Disabled Robot.")
-            elif bytes('ready','UTF-8') in x:
-                xd = x.decode('UTF-8')
+            elif bytes('ready','UTF-8') in data:
+                xd = data.decode('UTF-8')
                 ready = True
                 logger.info("Robot | Robot Started.")
             else:
@@ -220,7 +220,7 @@ while connected:
         disableRobot()
         print("EXITING NOW")
         j.quit()
-        x.toString()
+        data.toString()
 
 #class Button(enum.Enum):
     #x = False
