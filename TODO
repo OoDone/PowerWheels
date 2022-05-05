@@ -13,6 +13,7 @@ Service:
 
 General stuff:
 - set bluetooth address
+- add all status variables to variables class(eg. connected)
 
 Controller:
 - Fix allowed to enable more than once(And disable) - Needs test
