@@ -21,13 +21,19 @@ class DriveForwardAuton:
     async def initialize(self):
         #OPTIONAL, RUNS ONCE AT START AND IS ASYNC
         global isAutonFinished
+        global start
         logger.info("AUTON INITIALIZE")
         await driveMotor.driveDistAuton(5, 100)
-        logger.info("Drive Distance Finished!")
+        if start:
+            start = False
+            logger.info("Drive Distance Finished!")
         isAutonFinished = True
         
     def stop(self):
-        logger.info("Stopping DriveForwardAuton")
+        global start
+        start = False
+        driveMotor.stopDriveDistAuton()
+        logger.info("Force Stopping DriveForwardAuton")
         
     def isFinished(self):
         return isAutonFinished

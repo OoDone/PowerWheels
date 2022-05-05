@@ -1,7 +1,7 @@
 DriveControl:
 - fix DriveDist Fake Encoder - Needs Testing
 - Fix DriveDist Function(Implement encoder shit)
-- Implement stopDriveDist function()
+- Implement stopDriveDist function() - Needs Testing
 DriveForwardAuton:
 - Add function stop function to work with drive control stopDriveDist 
 
@@ -23,6 +23,6 @@ Controller:
 - Fix allowed to enable more than once(And disable) - Needs test
 
 Sensor:
-- Convert into a class and probably delete CollisionSensor class
-
+- Possibly delete CollisionSensor Class
+- CollisionSensor Class: Update pass in socket in init method, socket wont be valid after client restart
 https://www.freedesktop.org/software/systemd/man/systemd.service.html

@@ -41,15 +41,21 @@ class DriveControl:
     
   async def driveDistAuton(self, distance, speedPercent):
     #AWAIT UNTIL DISTANCETICKS(ADDED UP MOTOR TICKS) EQUALS DISTANCE
+    global stop
+    stop = False
     logger.info("Driving " + str(distance) + " meters at " + str(speedPercent) + " percent speed.")
     driveMotor.setMotorSpeedPercent(speedPercent)
-    while driveMotor.getEncoderTicks() == distance * constants.DriveConstants().driveTicksPerMeter:
+    while not driveMotor.getEncoderTicks() == distance * constants.DriveConstants().driveTicksPerMeter:
+      if stop:
+        return 
+      driveMotor.setEncoderTicks(driveMotor.getEncoderTicks() + 1)
       if driveMotor.getEncoderTicks() == distance * constants.DriveConstants().driveTicksPerMeter:
         return
-    while not driveMotor.getEncoderTicks() == distance * constants.DriveConstants().driveTicksPerMeter:
-      driveMotor.setEncoderTicks(driveMotor.getEncoderTicks() + 1)
+
 
   def stopDriveDistAuton(self):
+    global stop
+    stop = True
     logger.info("DriveDistAuton: Stopping Robot...")
 
   def driveOpenLoop(self, speedPercent):
