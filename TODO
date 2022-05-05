@@ -15,7 +15,7 @@ General stuff:
 - set bluetooth address
 
 Controller:
-- Fix allowed to enable more than once(And disable)
+- Fix allowed to enable more than once(And disable) - Needs test
 - make button status's into a enum 
 
 https://www.freedesktop.org/software/systemd/man/systemd.service.html

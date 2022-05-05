@@ -30,6 +30,7 @@ speed = False
 direction = False
 connected = False
 ready = False
+enabled = False
 
 def return_data():
     try:
@@ -81,19 +82,27 @@ def init():
                 logger.warning("Bluetooth: Cannot find Bluetooth Server")
 
 def enableRobot():
+    global enabled
     if connected:
-        if ready:
-            sock.send("en")
-            logger.info("Client: Sending Enable Request!")
+        if not enabled:
+            if ready:
+                sock.send("en")
+                enabled = True
+                logger.info("Client: Sending Enable Request!")
+            else:
+                logger.info("Client: Robot Still Starting.")
         else:
-            logger.info("Client: Robot Still Starting.")
+            logger.info("Client: Robot already Enabled.")
     else:
         logger.info("Client: Not Connected To Robot")
 
 def disableRobot():
     if connected:
-        sock.send("di")
-        logger.info("Client: Sending Disable Request!")
+        if enabled:
+            sock.send("di")
+            logger.info("Client: Sending Disable Request!")
+        else:
+            logger.info("Client: Robot Already Disabled.")
     else:
         logger.info("Client: Not Connected To Robot")
 def toggleAutonMode():
@@ -144,16 +153,17 @@ def loop():
         except:
             logger.warn("EXCEPTION: LOOP FUNCTION INFO: sysinfo: " + str(sys.exc_info()[0]) + " speed: " + str(speed) + " direction: " + str(direction))
         
-x = None
-circle = None
-square = None
-triangle = None  
+x = False
+circle = False
+square = False
+triangle = False 
 while connected:
     try: 
         sock.getpeername()
         connected = True
     except:
         connected = False
+        enabled = False
         init()
     try:
         loop()
@@ -211,3 +221,9 @@ while connected:
         print("EXITING NOW")
         j.quit()
         x.toString()
+
+#class Button(enum.Enum):
+    #x = False
+    #circle = False
+    #square = False
+    #triangle = False
