@@ -22,4 +22,7 @@ General stuff:
 Controller:
 - Fix allowed to enable more than once(And disable) - Needs test
 
+Sensor:
+- Convert into a class and probably delete CollisionSensor class
+
 https://www.freedesktop.org/software/systemd/man/systemd.service.html

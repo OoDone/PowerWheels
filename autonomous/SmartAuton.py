@@ -6,6 +6,7 @@ class SmartAuton:
         global logger
         global drive
         global constants
+        global distanceSensor
         constants = Constants()
         logger = Logger
         logger.info("Robot | Code: SmartAuton.py Init")
