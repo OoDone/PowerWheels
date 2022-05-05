@@ -5,7 +5,7 @@ DriveForwardAuton:
 - Add function stop function to work with drive control stopDriveDist 
 
 Main:
-- Fix allowed to enable more than once(And disable)
+- Fix allowed to enable more than once(And disable) - Needs Test
 
 
 Service:
@@ -16,6 +16,5 @@ General stuff:
 
 Controller:
 - Fix allowed to enable more than once(And disable) - Needs test
-- make button status's into a enum 
 
 https://www.freedesktop.org/software/systemd/man/systemd.service.html

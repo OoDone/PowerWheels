@@ -28,25 +28,31 @@ client_socket = None
 logger.info("Robot | Code: Main.py Init")
 #time.sleep(1)
 def enableRobot():
-    buzzer.customBuzz(0.05,0.05, 3) #3 long enable robot
     global enabled
-    enabled = True
-    logger.info("Robot | Enabled Robot.")
-    if constants.isTestingMode == True:
-        logger.info("Robot | Robot in Test Mode!")
-    if constants.isTestingMode == False and blServer.getStatus() == True:
-        client_socket.send("enable")
+    if not enabled:
+        buzzer.customBuzz(0.05,0.05, 3) #3 long enable robot
+        enabled = True
+        logger.info("Robot | Enabled Robot.")
+        if constants.isTestingMode == True:
+            logger.info("Robot | Robot in Test Mode!")
+        if constants.isTestingMode == False and blServer.getStatus() == True:
+            client_socket.send("enable")
+    else:
+        logger.info("Robot | Robot Already Enabled.")
 
 def disableRobot():
     global enabled
-    enabled = False
-    driveControl.stopRobot()
-    logger.info("Robot | Disabled Robot.")
-    try:
-        if constants.isTestingMode == False and blServer.getStatus() == True:
-            client_socket.send("disable")
-    except:
-        logger.warning("Robot | Couldnt Inform Client Of New Status: Disabled")
+    if enabled:
+        enabled = False
+        driveControl.stopRobot()
+        logger.info("Robot | Disabled Robot.")
+        try:
+            if constants.isTestingMode == False and blServer.getStatus() == True:
+                client_socket.send("disable")
+        except:
+            logger.warning("Robot | Couldnt Inform Client Of New Status: Disabled")
+    else:
+        logger.info("Robot | Robot Already Disabled")
     
 while(1):
     if blServer.getStatus():
