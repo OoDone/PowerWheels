@@ -13,7 +13,7 @@ Autonomous:
 
 
 Service:
-- add RestartSec=1 to service file under [Service] - test
+-
 
 General stuff:
 - set bluetooth address
