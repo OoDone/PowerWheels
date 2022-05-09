@@ -20,7 +20,7 @@ from timer import Timer
 
 
 
-bluetoothAddress = "DC:A6:32:6B:38:BD" #Mine "DC:A6:32:6B:38:BD"      #School other"B8:27:EB:D6:57:CE"  
+bluetoothAddress = "B8:27:EB:6B:AB:4B" #Mine "DC:A6:32:6B:38:BD"      #School other"B8:27:EB:D6:57:CE"  
 #School server: B8:27:EB:6B:AB:4B
 stickDeadband = 3
 logger = Logger("clientLog")
