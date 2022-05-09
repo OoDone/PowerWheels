@@ -6,7 +6,7 @@ DriveForwardAuton:
 - Add function stop function to work with drive control stopDriveDist 
 
 Main:
-- Fix allowed to enable more than once(And disable) - Needs Test
+- Fix allowed to enable more than once(And disable) - test
 
 Autonomous:
 - Add steer logic, distance logic, and sensor logic to Smart Auton
@@ -20,7 +20,7 @@ General stuff:
 - add all status variables to variables class(eg. connected)
 
 Controller:
-- Fix allowed to enable more than once(And disable) - Needs test
+- Fix allowed to enable more than once(And disable) - test
 
 Sensor:
 - Possibly delete CollisionSensor Class

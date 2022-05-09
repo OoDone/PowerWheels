@@ -28,17 +28,17 @@ client_socket = None
 logger.info("Robot | Code: Main.py Init")
 #time.sleep(1)
 def enableRobot():
-    #global enabled
-    #if not enabled:
-    buzzer.customBuzz(0.05,0.05, 3) #3 long enable robot
-    enabled = True
-    logger.info("Robot | Enabled Robot.")
-    if constants.isTestingMode == True:
-        logger.info("Robot | Robot in Test Mode!")
-    if constants.isTestingMode == False and blServer.getStatus() == True:
-        client_socket.send("enable")
-    #else:
-        #logger.info("Robot | Robot Already Enabled.")
+    global enabled
+    if not enabled:
+        buzzer.customBuzz(0.05,0.05, 3) #3 long enable robot
+        enabled = True
+        logger.info("Robot | Enabled Robot.")
+        if constants.isTestingMode == True:
+            logger.info("Robot | Robot in Test Mode!")
+        if constants.isTestingMode == False and blServer.getStatus() == True:
+            client_socket.send("enable")
+    else:
+        logger.info("Robot | Robot Already Enabled.")
 
 def disableRobot():
     global enabled

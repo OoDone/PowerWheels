@@ -61,9 +61,9 @@ def init():
             timer.reset()
             try:
                 if not connected:
-                    pygame.init()
-                    #pygame.display.init()
-                    #pygame.joystick.init()
+                    #pygame.init()
+                    pygame.display.init()
+                    pygame.joystick.init()
                     j = pygame.joystick.Joystick(0)
                     j.init()
                     joy = True
@@ -89,7 +89,6 @@ def enableRobot():
         if not enabled:
             if ready:
                 sock.send("en")
-                #enabled = True
                 logger.info("Client: Sending Enable Request!")
             else:
                 logger.info("Client: Robot Still Starting.")
@@ -100,11 +99,8 @@ def enableRobot():
 
 def disableRobot():
     if connected:
-        #if enabled:
         sock.send("di")
         logger.info("Client: Sending Disable Request!")
-        #else:
-            #logger.info("Client: Robot Already Disabled.")
     else:
         logger.info("Client: Not Connected To Robot")
 def toggleAutonMode():
@@ -138,25 +134,23 @@ def squareUp():
 init()
 
 def loop():
-    #logger.info("Loop")
-    #loopTimer = Timer()
-    #loopTimer.start() 
-    #if loopTimer.hasElapsed(0.02):
-    sleep(0.02) #sleep 20 ms
-        #logger.info("In HasElapsed")
-        #loopTimer.reset()
-    global speed
-    global direction
-    try:
-        speed = float(round(j.get_axis(1) * -100))
-        direction = float(round(j.get_axis(3) * 100)) #axis 0
-        if direction < stickDeadband and direction > -stickDeadband:
-            direction = 0.0
-        if speed >= -100 and direction >= -100:
-            logger.info("PRE: M:" + str(speed) + ":D:" + str(direction))
-            sock.send(":M:" + str(speed) + ":D:" + str(direction))
-    except:
-        logger.warn("EXCEPTION: LOOP FUNCTION INFO: sysinfo: " + str(sys.exc_info()[0]) + " speed: " + str(speed) + " direction: " + str(direction))
+    loopTimer = Timer()
+    loopTimer.start() 
+    if loopTimer.hasElapsed(0.02):
+    #sleep(0.02) #sleep 20 ms
+        loopTimer.reset()
+        global speed
+        global direction
+        try:
+            speed = float(round(j.get_axis(1) * -100))
+            direction = float(round(j.get_axis(3) * 100)) #axis 0
+            if direction < stickDeadband and direction > -stickDeadband:
+                direction = 0.0
+            if speed >= -100 and direction >= -100:
+                logger.info("PRE: M:" + str(speed) + ":D:" + str(direction))
+                sock.send(":M:" + str(speed) + ":D:" + str(direction))
+        except:
+            logger.warn("EXCEPTION: LOOP FUNCTION INFO: sysinfo: " + str(sys.exc_info()[0]) + " speed: " + str(speed) + " direction: " + str(direction))
         
 x = False
 circle = False
@@ -204,9 +198,11 @@ while connected:
                 print("Collision warning " + xd + " cm")
             elif bytes('enable','UTF-8') in data:
                 xd = data.decode('UTF-8')
+                enabled = True
                 logger.info("Robot | Enabled Robot.")
             elif bytes('disable','UTF-8') in data:
                 xd = data.decode('UTF-8')
+                enabled = False
                 logger.info("Robot | Disabled Robot.")
             elif bytes('ready','UTF-8') in data:
                 xd = data.decode('UTF-8')
