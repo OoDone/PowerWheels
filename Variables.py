@@ -39,6 +39,7 @@ class Constants:
     autonMode = 1
     autonEnabled = False
     openLoopSpeed = 20 #Auton Open Loop Drive Speed Percent
+    minDistance = 10 #Min distance to be within to turn away : IN CENTIMETERS
 
   #Bluetooth Constants
   class BluetoothConstants:

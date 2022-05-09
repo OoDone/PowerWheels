@@ -1,5 +1,6 @@
 from drive.DriveControl import DriveControl
 from Variables import Constants
+from other.DistanceSensor import DistanceSensor
 import asyncio
 class SmartAuton:
     def __init__(self, Logger):
@@ -9,6 +10,7 @@ class SmartAuton:
         global distanceSensor
         constants = Constants()
         logger = Logger
+        distanceSensor = DistanceSensor(logger)
         logger.info("Robot | Code: SmartAuton.py Init")
         drive = DriveControl(logger)
 
@@ -31,4 +33,7 @@ class SmartAuton:
 
     def loop(self):
         while start:
+            if distanceSensor.getSonar() <= constants.AutonConstants().minDistance:
+                logger.info("Auton: To close, Perform turn")
+                #asyncio.run(self.TURN ASYNC FUNCTION)
             logger.info("TEMP SMARTAUTON LOOP")
