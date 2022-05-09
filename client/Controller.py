@@ -3,6 +3,7 @@ import bluetooth
 from Logger import Logger
 import sys
 from timer import Timer
+from time import sleep
 
 #0 = X
 #1 = CIRCLE
