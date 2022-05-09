@@ -35,7 +35,7 @@ class SmartAuton:
         while start:
             if distanceSensor.getSonar() <= constants.AutonConstants().minDistance:
                 logger.info("Auton: To close, Perform turn")
-                drive.stopDriveDistAuton()
+                #drive. stop open loop drive
                 #asyncio.run(self.TURN ASYNC FUNCTION)
             logger.info("TEMP SMARTAUTON LOOP")
 
