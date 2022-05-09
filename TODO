@@ -2,6 +2,7 @@ DriveControl:
 - fix DriveDist Fake Encoder - Needs Testing
 - Fix DriveDist Function(Implement encoder shit)
 - Implement stopDriveDist function() - Needs Testing
+- add stopOpenLoopDrive function 
 DriveForwardAuton:
 - Add function stop function to work with drive control stopDriveDist 
 

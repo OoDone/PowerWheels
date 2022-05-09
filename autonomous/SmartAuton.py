@@ -35,5 +35,11 @@ class SmartAuton:
         while start:
             if distanceSensor.getSonar() <= constants.AutonConstants().minDistance:
                 logger.info("Auton: To close, Perform turn")
+                drive.stopDriveDistAuton()
                 #asyncio.run(self.TURN ASYNC FUNCTION)
             logger.info("TEMP SMARTAUTON LOOP")
+
+    
+    async def avoidObsticle():
+        steerPercent = 10 # Temp Calculate steer needed or get a constant
+        drive.steerServoPerc(steerPercent)
