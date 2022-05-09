@@ -147,7 +147,7 @@ def loop():
             if direction < stickDeadband and direction > -stickDeadband:
                 direction = 0.0
             if speed >= -100 and direction >= -100:
-                logger.info("PRE: M:" + str(speed) + ":D:" + str(direction))
+                #logger.info("PRE: M:" + str(speed) + ":D:" + str(direction))
                 sock.send(":M:" + str(speed) + ":D:" + str(direction))
         except:
             logger.warn("EXCEPTION: LOOP FUNCTION INFO: sysinfo: " + str(sys.exc_info()[0]) + " speed: " + str(speed) + " direction: " + str(direction))
