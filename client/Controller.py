@@ -141,7 +141,7 @@ def loop():
     #loopTimer = Timer()
     #loopTimer.start() 
     #if loopTimer.hasElapsed(0.02):
-    #sleep(0.02) #sleep 20 ms
+    sleep(0.02) #sleep 20 ms
         #logger.info("In HasElapsed")
         #loopTimer.reset()
     global speed
