@@ -98,11 +98,11 @@ def enableRobot():
 
 def disableRobot():
     if connected:
-        if enabled:
-            sock.send("di")
-            logger.info("Client: Sending Disable Request!")
-        else:
-            logger.info("Client: Robot Already Disabled.")
+        #if enabled:
+        sock.send("di")
+        logger.info("Client: Sending Disable Request!")
+        #else:
+            #logger.info("Client: Robot Already Disabled.")
     else:
         logger.info("Client: Not Connected To Robot")
 def toggleAutonMode():
