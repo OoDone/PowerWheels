@@ -60,6 +60,7 @@ def init():
             timer.reset()
             try:
                 if not connected:
+                    pygame.display.init()
                     pygame.joystick.init()
                     j = pygame.joystick.Joystick(0)
                     j.init()
