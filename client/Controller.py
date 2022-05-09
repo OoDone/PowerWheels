@@ -87,7 +87,7 @@ def enableRobot():
         if not enabled:
             if ready:
                 sock.send("en")
-                enabled = True
+                #enabled = True
                 logger.info("Client: Sending Enable Request!")
             else:
                 logger.info("Client: Robot Still Starting.")
