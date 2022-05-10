@@ -1,6 +1,7 @@
 from Variables import Constants
 from time import sleep
 from autonomous.DriveForwardAuton import DriveForwardAuton
+from autonomous.SmartAuton import SmartAuton
 
 autonEnabled = False
 class AutonMain:
@@ -32,7 +33,7 @@ class AutonMain:
             logger.info("Robot | Cannot Change AutonMode While Autonomous Mode Is Enabled.")
 
     def enableAuton(self, enabled):
-        global autonEnabled
+        #global autonEnabled
         if autonEnabled == True and enabled == True:
             logger.info("Robot | Autonomous Already Enabled.")
         elif autonEnabled == False and enabled == False:
@@ -59,6 +60,7 @@ class AutonMain:
             self.loop()
         elif autonMode == 1:
             #autonMode 1
+            auton = SmartAuton(logger)
             logger.info("TEMP: REMOVE THIS IN AUTON ENABLED LOOP: AUTONMODE = 1")
             #CircleAuton().start() #Drives in circles #MAKE EACH AUTON IN A DIFFERENT FILE AND CLASS
         else: logger.info("Auton(): Autonomous Mode Not Enabled")
@@ -68,6 +70,9 @@ class AutonMain:
         while autonEnabled:
             if auton.isFinished():
                 self.enableAuton(False)
+
+    def isEnabled(self):
+        return autonEnabled
             
     
 

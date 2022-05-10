@@ -40,6 +40,8 @@ class Constants:
     autonEnabled = False
     openLoopSpeed = 20 #Auton Open Loop Drive Speed Percent
     minDistance = 10 #Min distance to be within to turn away : IN CENTIMETERS
+    turnDistance = 10 #FIXME The distance to drive in autonomous while turning to avoid obstacle
+    avoidObsticleSpeed = 20 #Percent speed of car while turning to avoid obstacle
 
   #Bluetooth Constants
   class BluetoothConstants:

@@ -48,9 +48,10 @@ class DriveControl:
     while not driveMotor.getEncoderTicks() == distance * constants.DriveConstants().driveTicksPerMeter:
       if stop:
         return 
-      driveMotor.setEncoderTicks(driveMotor.getEncoderTicks() + 1)
-      if driveMotor.getEncoderTicks() == distance * constants.DriveConstants().driveTicksPerMeter:
-        return
+      else: 
+        driveMotor.setEncoderTicks(driveMotor.getEncoderTicks() + 1)
+        if driveMotor.getEncoderTicks() == distance * constants.DriveConstants().driveTicksPerMeter:
+          return
 
 
   def stopDriveDistAuton(self):
@@ -69,4 +70,6 @@ class DriveControl:
   def stopRobot(self):
     driveMotor.stopMotor()
     steerServo.stopServo()
+    global stop
+    stop = True
     

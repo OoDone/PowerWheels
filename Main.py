@@ -80,7 +80,7 @@ while(1):
                 buzzer.buzz(0.3, 1)
                 logger.info("Bluetooth: Reconnected!")
     elif bytes(':','UTF-8') in x:
-        if enabled == True:
+        if enabled == True and not auton.isEnabled():
             driveControl.driveRobot(x)
     elif x==bytes('s', 'UTF-8'):
         driveControl.stopRobot()
