@@ -197,15 +197,15 @@ while connected:
                 xd = data.decode('UTF-8').split(":")[1]
                 print("Collision warning " + xd + " cm")
             elif bytes('enable','UTF-8') in data:
-                xd = data.decode('UTF-8')
+                #xd = data.decode('UTF-8')
                 logger.info("Robot | Enabled Robot.")
                 enabled = True
             elif bytes('disable','UTF-8') in data:
-                xd = data.decode('UTF-8')
+                #xd = data.decode('UTF-8')
                 enabled = False
                 logger.info("Robot | Disabled Robot.")
             elif bytes('ready','UTF-8') in data:
-                xd = data.decode('UTF-8')
+                #xd = data.decode('UTF-8')
                 ready = True
                 logger.info("Robot | Robot Started.")
             else:
