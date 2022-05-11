@@ -28,7 +28,6 @@ client_socket = None
 logger.info("Robot | Code: Main.py Init")
 #time.sleep(1)
 def enableRobot():
-    global enabled
     if not enabled:
         buzzer.customBuzz(0.05,0.05, 3) #3 long enable robot
         enabled = True
