@@ -33,7 +33,7 @@ class AutonMain:
             logger.info("Robot | Cannot Change AutonMode While Autonomous Mode Is Enabled.")
 
     def enableAuton(self, enabled):
-        #global autonEnabled
+        global autonEnabled
         if autonEnabled == True and enabled == True:
             logger.info("Robot | Autonomous Already Enabled.")
         elif autonEnabled == False and enabled == False:
@@ -61,8 +61,8 @@ class AutonMain:
         elif autonMode == 1:
             #autonMode 1
             auton = SmartAuton(logger)
-            logger.info("TEMP: REMOVE THIS IN AUTON ENABLED LOOP: AUTONMODE = 1")
             #CircleAuton().start() #Drives in circles #MAKE EACH AUTON IN A DIFFERENT FILE AND CLASS
+            self.loop()
         else: logger.info("Auton(): Autonomous Mode Not Enabled")
         
         
