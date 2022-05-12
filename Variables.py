@@ -42,6 +42,7 @@ class Constants:
     minDistance = 10 #Min distance to be within to turn away : IN CENTIMETERS
     turnDistance = 10 #FIXME The distance to drive in autonomous while turning to avoid obstacle
     avoidObsticleSpeed = 20 #Percent speed of car while turning to avoid obstacle
+    avoidMinDistance = 2#FIXME distance to stop turning while avoiding obsticle IN CENTIMETERS
 
   #Bluetooth Constants
   class BluetoothConstants:

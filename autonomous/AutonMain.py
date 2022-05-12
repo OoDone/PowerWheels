@@ -61,6 +61,7 @@ class AutonMain:
         elif autonMode == 1:
             #autonMode 1
             auton = SmartAuton(logger)
+            auton.start()
             #CircleAuton().start() #Drives in circles #MAKE EACH AUTON IN A DIFFERENT FILE AND CLASS
             self.loop()
         else: logger.info("Auton(): Autonomous Mode Not Enabled")

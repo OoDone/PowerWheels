@@ -3,6 +3,8 @@ from Variables import Constants
 from other.DistanceSensor import DistanceSensor
 import asyncio
 class SmartAuton:
+    global isAvoiding
+    isAvoiding = False
     def __init__(self, Logger):
         global logger
         global drive
@@ -32,18 +34,27 @@ class SmartAuton:
         drive.driveOpenLoop(constants.AutonConstants().openLoopSpeed)
 
     def loop(self):
+        global isAvoiding
         while start:
-            if distanceSensor.getSonar() <= constants.AutonConstants().minDistance:
+            if distanceSensor.getSonar() <= constants.AutonConstants().minDistance and not isAvoiding:
                 logger.info("Auton: To close, Perform turn")
                 drive.stopRobot()
                 #asyncio.run(self.TURN ASYNC FUNCTION)
-            logger.info("TEMP SMARTAUTON LOOP")
+            elif distanceSensor.getSonar() <= constants.AutonConstants().avoidMinDistance and isAvoiding:
+                logger.info("Auton: Distance to close while avoiding obsticle, fallback to reverse avoid")
+                drive.stopRobot()
+                isAvoiding = False
+                drive.stopDriveDistAuton()
+                #Fall back to reverse here
+
 
     def isFinished():
         return False
 
     
     async def avoidObsticle():
+        global isAvoiding
+        isAvoiding = True
         steerPercent = 10 # Temp Calculate steer needed or get a constant
         drive.steerServoPerc(steerPercent)
         drive.driveDistAuton(constants.AutonConstants().turnDistance, constants.AutonConstants().avoidObsticleSpeed)
