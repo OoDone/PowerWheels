@@ -45,7 +45,9 @@ class DriveControl:
     stop = False
     logger.info("Driving " + str(distance) + " meters at " + str(speedPercent) + " percent speed.")
     driveMotor.setMotorSpeedPercent(speedPercent)
+    distanceDriven = 0
     while not driveMotor.getEncoderTicks() == distance * constants.DriveConstants().driveTicksPerMeter:
+      distanceDriven +=1 #FIXME MAKE GLOBAL VARIABLE AND GETTER FUNCTION
       if stop:
         return 
       else: 
@@ -72,4 +74,7 @@ class DriveControl:
     steerServo.stopServo()
     global stop
     stop = True
+
+  def getEncoderTicks(self):
+    return driveMotor.getMotorSpeed()
     

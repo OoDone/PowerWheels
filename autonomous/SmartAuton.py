@@ -4,7 +4,9 @@ from other.DistanceSensor import DistanceSensor
 import asyncio
 class SmartAuton:
     global isAvoiding
+    global prevTicksDistance
     isAvoiding = False
+    prevTicksDistance = 0
     def __init__(self, Logger):
         global logger
         global drive
@@ -48,13 +50,21 @@ class SmartAuton:
                 #Fall back to reverse here
 
 
-    def isFinished():
+    def isFinished(self):
         return False
 
     
-    async def avoidObsticle():
+    async def avoidObsticle(self):
         global isAvoiding
+        global prevTicksDistance
+        prevTicksDistance = drive.getEncoderTicks()
         isAvoiding = True
         steerPercent = 10 # Temp Calculate steer needed or get a constant
         drive.steerServoPerc(steerPercent)
         drive.driveDistAuton(constants.AutonConstants().turnDistance, constants.AutonConstants().avoidObsticleSpeed)
+
+    def reverseAvoid(self):
+        global prevTicksDistance
+        drive.steerServoPerc(10)# Same value as above
+        drive.driveDistAuton(constants.AutonConstants().turnDistance, constants.AutonConstants().avoidObsticleSpeed)
+
