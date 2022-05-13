@@ -14,7 +14,10 @@ except (RuntimeError, ModuleNotFoundError):
 from BluetoothServer import BluetoothServer
 
 #from Constants import Constants
-logger = Logger("/home/pi/Desktop/logs/robotLog")
+try:
+    logger = Logger("/home/pi/Desktop/logs/robotLog")
+except:
+    logger = Logger("robotLog")
 blServer = BluetoothServer(logger)
 driveControl = DriveControl(logger)
 constants = Constants()
@@ -28,6 +31,7 @@ client_socket = None
 logger.info("Robot | Code: Main.py Init")
 #time.sleep(1)
 def enableRobot():
+    global enabled
     if not enabled:
         buzzer.customBuzz(0.05,0.05, 3) #3 long enable robot
         enabled = True

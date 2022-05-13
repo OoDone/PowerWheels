@@ -1,23 +1,15 @@
-2022/04/29 19:10:16.008 Logger INFO | Logger object created successfully..
-2022/04/29 19:10:16.008 BluetoothServer INFO | Robot | Code: BluetoothServer.py Initialized.
-2022/04/29 19:10:16.008 Buzzer INFO | Robot | Code: Buzzer.py Init.
-2022/04/29 19:10:16.009 DriveControl INFO | Robot | Code: DriveControl.py Init.
-2022/04/29 19:10:16.009 Motor INFO | Robot | Code: Motor.py Init.
-2022/04/29 19:10:16.009 Servo INFO | Robot | Code: Servo.py Init.
-2022/04/29 19:10:16.009 Buzzer INFO | Robot | Code: Buzzer.py Init.
-2022/04/29 19:10:16.009 AutonMain INFO | Robot | Code: AutonMain.py Init
-2022/04/29 19:10:16.010 Main INFO | Robot | Code: Main.py Init
-2022/04/29 19:10:17.022 Main INFO | Robot | Enabled Robot.
-2022/04/29 19:10:17.022 Main INFO | Robot | Robot in Test Mode!
-2022/04/29 19:10:31.913 Main INFO | Auton
-2022/04/29 19:10:31.914 AutonMain INFO | Robot | Set Autonomous Mode to 0
-2022/04/29 19:10:31.914 AutonMain INFO | Robot | Enabling Autonomous In Mode 0
-2022/04/29 19:10:31.914 DriveForwardAuton INFO | Robot | Code: DriveForwardAuton.py Init
-2022/04/29 19:10:31.914 DriveControl INFO | Robot | Code: DriveControl.py Init.
-2022/04/29 19:10:31.915 Motor INFO | Robot | Code: Motor.py Init.
-2022/04/29 19:10:31.915 Servo INFO | Robot | Code: Servo.py Init.
-2022/04/29 19:10:31.916 DriveForwardAuton INFO | Auton: Starting DriveForwardAuton...
-2022/04/29 19:10:31.916 selector_events DEBUG | Using selector: SelectSelector
-2022/04/29 19:10:31.918 DriveForwardAuton INFO | AUTON INITIALIZE
-2022/04/29 19:10:31.918 DriveControl INFO | Driving 5 meters at 100 percent speed.
-2022/04/29 19:10:31.919 Motor INFO | TestMode: Set Motor Speed to 100 Percent.
+2022/05/13 14:14:55.529 Logger INFO | Logger object created successfully..
+2022/05/13 14:14:55.529 BluetoothServer INFO | Robot | Code: BluetoothServer.py Initialized.
+2022/05/13 14:14:55.530 Buzzer INFO | Robot | Code: Buzzer.py Init.
+2022/05/13 14:14:55.530 DriveControl INFO | Robot | Code: DriveControl.py Init.
+2022/05/13 14:14:55.530 Motor INFO | Robot | Code: Motor.py Init.
+2022/05/13 14:14:55.530 Servo INFO | Robot | Code: Servo.py Init.
+2022/05/13 14:14:55.530 Buzzer INFO | Robot | Code: Buzzer.py Init.
+2022/05/13 14:14:55.530 AutonMain INFO | Robot | Code: AutonMain.py Init
+2022/05/13 14:14:55.530 Main INFO | Robot | Code: Main.py Init
+2022/05/13 14:14:55.530 Buzzer INFO | Buzzer Alert
+2022/05/13 14:14:55.831 Main INFO | Robot | Enabled Robot.
+2022/05/13 14:14:55.831 Main INFO | Robot | Robot in Test Mode!
+2022/05/13 14:15:02.133 Motor INFO | TestMode: Set Motor Speed to 1550.0
+2022/05/13 14:15:02.133 Servo INFO | TestMode: Set Servo Position to 2388.0
+2022/05/13 14:15:02.133 DriveControl INFO | STEERSERVO: 2388.0
