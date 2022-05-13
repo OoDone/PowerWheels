@@ -32,6 +32,7 @@ class Constants:
 
     #Encoder 
     driveTicksPerMeter = 10000
+    maxEncoderTicks = 1000 #FIXME 
 
 
   #Auton Constants

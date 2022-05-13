@@ -43,17 +43,27 @@ class DriveControl:
     #AWAIT UNTIL DISTANCETICKS(ADDED UP MOTOR TICKS) EQUALS DISTANCE
     global stop
     stop = False
+    distanceTicks = distance * constants.DriveConstants().driveTicksPerMeter
     logger.info("Driving " + str(distance) + " meters at " + str(speedPercent) + " percent speed.")
     driveMotor.setMotorSpeedPercent(speedPercent)
     distanceDriven = 0
-    while not driveMotor.getEncoderTicks() == distance * constants.DriveConstants().driveTicksPerMeter:
+    while not driveMotor.getEncoderTicks() == distanceTicks:
       distanceDriven +=1 #FIXME MAKE GLOBAL VARIABLE AND GETTER FUNCTION
       if stop:
         return 
       else: 
         driveMotor.setEncoderTicks(driveMotor.getEncoderTicks() + 1)
-        if driveMotor.getEncoderTicks() == distance * constants.DriveConstants().driveTicksPerMeter:
+        if driveMotor.getEncoderTicks() == distanceTicks:
           return
+    #Real Encoder  Logic
+    #isSame = True
+    #while not distanceDriven == distanceTicks:
+      #if driveMotor.getEncoderTicks() == 0 and not isSame:
+        #isSame =True
+        #distanceDriven += constants.DriveConstants().maxEncoderTicks
+      #elif not driveMotor.getEncoderTicks() == 0 and isSame:
+        #isSame = False
+
 
 
   def stopDriveDistAuton(self):
