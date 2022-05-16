@@ -23,6 +23,7 @@ Service:
 General stuff:
 - set bluetooth address
 - add all status variables to variables class(eg. connected)
+- check if global flag for variable at top of the class removes the need for repeated global declarations in functions
 
 Controller:
 - Fix allowed to enable more than once(And disable) - test
