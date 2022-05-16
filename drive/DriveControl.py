@@ -32,7 +32,7 @@ class DriveControl:
       driveMotor.setMotorSpeed(constants.DriveConstants().motorNeutralSpeed + speed * 5)
     else:
       driveMotor.setMotorSpeed(0)
-    if direction < 0:
+    if direction > 0:
       steerServo.setServoPosition(-direction * constants.DriveConstants().directionTicksPer + constants.DriveConstants().servoNeutralPosition) #* 9.36 + 1489 # TEMP
       #logger.info("STEERSERVO: " + str(direction * constants.DriveConstants().directionTicksPer + constants.DriveConstants().servoNeutralPosition))
     else:
