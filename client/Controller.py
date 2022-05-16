@@ -167,14 +167,14 @@ while connected:
     try:
         loop()
         events = pygame.event.get()
-         for event in events:
-             if event.type == pygame.JOYBUTTONDOWN:
-                 if j.get_button(0) and not x: #X
+        for event in events:
+            if event.type == pygame.JOYBUTTONDOWN:
+                if j.get_button(0) and not x: #X
                     disableRobot()
                     x = True
                 if j.get_button(1) and not circle: #circle
-                    enableRobot()
-                    circle = True
+                     enableRobot()
+                     circle = True
                 if j.get_button(2) and not triangle: #Triangle
                     toggleAutonMode()
                     triangle = True
