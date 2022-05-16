@@ -83,9 +83,7 @@ while(1):
                 buzzer.buzz(0.3, 1)
                 logger.info("Bluetooth: Reconnected!")
     elif bytes(':','UTF-8') in x:
-        logger.info("Before Check Enabled And Auton Not Enabled")
         if enabled == True and not auton.isEnabled():
-            logger.info("Auton Not Enabled, Robot Enabled, Calling DriveRobot.")
             driveControl.driveRobot(x)
     elif x==bytes('s', 'UTF-8'):
         driveControl.stopRobot()
