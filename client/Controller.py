@@ -165,32 +165,31 @@ while connected:
         enabled = False
         init()
     try:
-        if enabled:
-            loop()
-            events = pygame.event.get()
-            for event in events:
-                if event.type == pygame.JOYBUTTONDOWN:
-                    if j.get_button(0) and not x: #X
-                        disableRobot()
-                        x = True
-                    if j.get_button(1) and not circle: #circle
-                        enableRobot()
-                        circle = True
-                    if j.get_button(2) and not triangle: #Triangle
-                        toggleAutonMode()
-                        triangle = True
-                    if j.get_button(3) and not square: #Square
-                        disableAutonMode()
-                        square = True
-                elif event.type == pygame.JOYBUTTONUP:
-                    if x and not j.get_button(0): #X
-                        x = False
-                    elif circle and not j.get_button(1): #circle
-                        circle = False
-                    elif triangle and not j.get_button(2): #triangle
-                        triangle = False
-                    elif square and not j.get_button(3): #square
-                        square = False
+        loop()
+        events = pygame.event.get()
+         for event in events:
+             if event.type == pygame.JOYBUTTONDOWN:
+                 if j.get_button(0) and not x: #X
+                    disableRobot()
+                    x = True
+                if j.get_button(1) and not circle: #circle
+                    enableRobot()
+                    circle = True
+                if j.get_button(2) and not triangle: #Triangle
+                    toggleAutonMode()
+                    triangle = True
+                if j.get_button(3) and not square: #Square
+                    disableAutonMode()
+                    square = True
+            elif event.type == pygame.JOYBUTTONUP:
+                if x and not j.get_button(0): #X
+                    x = False
+                elif circle and not j.get_button(1): #circle
+                    circle = False
+                elif triangle and not j.get_button(2): #triangle
+                    triangle = False
+                elif square and not j.get_button(3): #square
+                    square = False
                 
         data=return_data()
         if data is not None:
