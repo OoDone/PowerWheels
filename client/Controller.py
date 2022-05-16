@@ -138,6 +138,7 @@ def loop():
     loopTimer.start() 
     if loopTimer.hasElapsed(0.02):
     #sleep(0.02) #sleep 20 ms
+        logger.info("20ms timer")
         loopTimer.reset()
         global speed
         global direction
