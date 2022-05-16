@@ -134,15 +134,14 @@ def squareUp():
 init()
 
 def loop():
-    #loopTimer = Timer()
-    #loopTimer.start() 
+    #global loopTimer
     #if loopTimer.hasElapsed(0.02):
-    #sleep(0.02) #sleep 20 ms
         #logger.info("20ms timer")
         #loopTimer.reset()
     if enabled:
         global speed
         global direction
+        sleep(0.02) #sleep 20 ms
         try:
             speed = float(round(j.get_axis(1) * -100))
             direction = float(round(j.get_axis(3) * 100)) #axis 0
@@ -158,6 +157,9 @@ x = False
 circle = False
 square = False
 triangle = False 
+global loopTimer
+#loopTimer = Timer()
+#loopTimer.start() 
 while connected:
     try: 
         sock.getpeername()
