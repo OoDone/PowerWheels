@@ -26,9 +26,7 @@ General stuff:
 - check if global flag for variable at top of the class removes the need for repeated global declarations in functions
 
 Controller:
-- Fix allowed to enable more than once(And disable) - test
 
 Sensor:
-- Possibly delete CollisionSensor Class
 - CollisionSensor Class: Update pass in socket in init method, socket wont be valid after client restart
 https://www.freedesktop.org/software/systemd/man/systemd.service.html
