@@ -63,6 +63,8 @@ class DriveControl:
         #distanceDriven += constants.DriveConstants().maxEncoderTicks
       #elif not driveMotor.getEncoderTicks() == 0 and isSame:
         #isSame = False
+       #else:
+        #distanceDriven += constants.DriveConstants().maxEncoderTicks
 
 
 
