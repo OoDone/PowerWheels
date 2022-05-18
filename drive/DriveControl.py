@@ -1,7 +1,6 @@
 from drive.Motor import Motor
 from drive.Servo import Servo
 from Variables import Constants
-from Encoder import Encoder
 
 
 class DriveControl:
@@ -17,12 +16,7 @@ class DriveControl:
     driveMotor = Motor(constants.DriveConstants().motorPin, logger)
     steerServo = Servo(constants.DriveConstants().servoPin, logger)
   
-  def valueChanged(value):
-    logger.info("Encoder Value: {}", value)
-  global e1
-  #e1 = Encoder(21, 20)
-  e1 = Encoder(20, 21)
-  #A GPIO 20, B GPIO 21
+
   
   def driveRobot(self, x):
     speed = x.decode('UTF-8').split(':')[2].replace("'",'')
@@ -31,7 +25,7 @@ class DriveControl:
     try:
       speed = float(speed)
       direction = float(direction)
-      logger.info("Encoder Value: " + str(e1.read()))
+      #logger.info("Encoder Value: " + str(e1.read()))
     except:
       speed = 0.0
       direction = 0.0
@@ -53,28 +47,22 @@ class DriveControl:
     #AWAIT UNTIL DISTANCETICKS(ADDED UP MOTOR TICKS) EQUALS DISTANCE
     global stop
     stop = False
+    lastTicks = getEncoderTicks()
     distanceTicks = distance * constants.DriveConstants().driveTicksPerMeter
     logger.info("Driving " + str(distance) + " meters at " + str(speedPercent) + " percent speed.")
     driveMotor.setMotorSpeedPercent(speedPercent)
     distanceDriven = 0
-    while not driveMotor.getEncoderTicks() == distanceTicks:
-      distanceDriven +=1 #FIXME MAKE GLOBAL VARIABLE AND GETTER FUNCTION
+    while not driveMotor.getFakeEncoderTicks() == distanceTicks:
+      distanceDriven +=1 #FIXME REMOVE FOR REAL ENCODER
       if stop:
         return 
       else: 
-        driveMotor.setEncoderTicks(driveMotor.getEncoderTicks() + 1)
-        if driveMotor.getEncoderTicks() == distanceTicks:
+        driveMotor.setEncoderTicks(driveMotor.getFakeEncoderTicks() + 1)
+        if driveMotor.getFakeEncoderTicks() == distanceTicks:
           return
     #Real Encoder  Logic
-    #isSame = True
     #while not distanceDriven == distanceTicks:
-      #if driveMotor.getEncoderTicks() == 0 and not isSame:
-        #isSame =True
-        #distanceDriven += constants.DriveConstants().maxEncoderTicks
-      #elif not driveMotor.getEncoderTicks() == 0 and isSame:
-        #isSame = False
-       #else:
-        #distanceDriven += constants.DriveConstants().maxEncoderTicks
+      #distanceDriven = abs(getEncoderTicks()) - abs(lastTicks)
        
 
 
@@ -98,5 +86,8 @@ class DriveControl:
     stop = True
 
   def getEncoderTicks(self):
-    return driveMotor.getMotorSpeed()
+    return driveMotor.getEncoderTicks()
+
+  def getFakeEncoderTicks(self):
+    return driveMotor.getFakeEncoderTicks()
     

@@ -1,10 +1,10 @@
 DriveControl:
 - fix DriveDist Fake Encoder - Needs Testing
-- Fix DriveDist Function(Implement encoder shit)
+- Fix DriveDist Function(Implement Real encoder shit) - Test
 - Implement stopDriveDist function() - Needs Testing
-- add stopOpenLoopDrive function - test
+- fix encoder counts forwards while moving backwards, counts up both directions
 DriveForwardAuton:
-- Add function stop function to work with drive control stopDriveDist 
+- Add function stop function to work with drive control stopDriveDist - test
 
 Main:
 - Fix allowed to enable more than once(And disable) - test
@@ -14,21 +14,16 @@ Autonomous:
 - disable controller inputting to drivecontrol class, make controller stick values not effect drive - test
 - smaartauton: Make the avoidobstacle only stop turning if the distance is within a certain value(Smaller value then the first trigger value.)
 
-DriveControl:
-- Track TOTAL ticks traveled, this is NEEDED to keep track of distance, otherwise the distance wont be accurate 
 
 Service:
 -
 
 General stuff:
-- set bluetooth address
 - add all status variables to variables class(eg. connected)
 - check if global flag for variable at top of the class removes the need for repeated global declarations in functions
 
 Controller:
-- Fix allowed to enable more than once(And disable) - test
 
 Sensor:
-- Possibly delete CollisionSensor Class
 - CollisionSensor Class: Update pass in socket in init method, socket wont be valid after client restart
 https://www.freedesktop.org/software/systemd/man/systemd.service.html
