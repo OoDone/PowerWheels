@@ -1,7 +1,9 @@
 from Variables import Constants
 from time import sleep
 from autonomous.DriveForwardAuton import DriveForwardAuton
+from autonomous.SmartAuton import SmartAuton
 
+global autonEnabled
 autonEnabled = False
 class AutonMain:
     autonMode = 0
@@ -12,8 +14,15 @@ class AutonMain:
         logger.info("Robot | Code: AutonMain.py Init")
         constants = Constants()
 
+    
+    #def setSocket(self, Sock):
+        #global sock
+        #sock = Sock
+        #logger.info("Set Socket!")
+
     def setAutonMode(self, mode):
         global autonMode
+        global autonEnabled
         if autonEnabled == False:
             try:
                 mode = int(mode)
@@ -35,11 +44,13 @@ class AutonMain:
             #AUTON ENABLED
             autonEnabled = enabled
             logger.info("Robot | Enabling Autonomous In Mode " + str(autonMode))
+            #sock.send("auton,enable")
             self.auton()
         else:
             #AUTON DISABLED
             autonEnabled = enabled
             logger.info("Robot | Disabling Autonomous Mode.")
+            #sock.send("auton,disable")
 
 
     def auton(self):
@@ -51,15 +62,22 @@ class AutonMain:
             self.loop()
         elif autonMode == 1:
             #autonMode 1
-            logger.info("TEMP: REMOVE THIS IN AUTON ENABLED LOOP: AUTONMODE = 1")
+            auton = SmartAuton(logger)
+            auton.start()
             #CircleAuton().start() #Drives in circles #MAKE EACH AUTON IN A DIFFERENT FILE AND CLASS
+            self.loop()
         else: logger.info("Auton(): Autonomous Mode Not Enabled")
         
         
     def loop(self):
+        global autonEnabled
         while autonEnabled:
             if auton.isFinished():
                 self.enableAuton(False)
+
+    def isEnabled(self):
+        global autonEnabled
+        return autonEnabled
             
     
 

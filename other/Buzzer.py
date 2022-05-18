@@ -35,7 +35,7 @@ class Buzzer:
           else:
             break
       except:
-        logger.warn("Robot: Exception in Buzz() function")
+        logger.warn("Robot: Exception in buzz() function")
   
   def customBuzz(self, length, offLength, amount):
     if constants.buzzer == True:
@@ -52,5 +52,5 @@ class Buzzer:
           else:
             break
       except:
-        logger.warn("Robot: Exception in Buzz() function")
+        logger.warn("Robot: Exception in customBuzz() function")
 

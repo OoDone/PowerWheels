@@ -1,6 +1,29 @@
 DriveControl:
-- Fix DriveDist Function(Implement encoder shit)
-- Implement stopDriveDist function()
+- fix DriveDist Fake Encoder - Needs Testing
+- Fix DriveDist Function(Implement Real encoder shit) - Test
+- Implement stopDriveDist function() - Needs Testing
+- fix encoder counts forwards while moving backwards, counts up both directions
 DriveForwardAuton:
-- Add function stop function to work with drive control stopDriveDist 
+- Add function stop function to work with drive control stopDriveDist - test
 
+Main:
+- Fix allowed to enable more than once(And disable) - test
+
+Autonomous:
+- Add steer logic, distance logic, and sensor logic to Smart Auton
+- disable controller inputting to drivecontrol class, make controller stick values not effect drive - test
+- smaartauton: Make the avoidobstacle only stop turning if the distance is within a certain value(Smaller value then the first trigger value.)
+
+
+Service:
+-
+
+General stuff:
+- add all status variables to variables class(eg. connected)
+- check if global flag for variable at top of the class removes the need for repeated global declarations in functions
+
+Controller:
+
+Sensor:
+- CollisionSensor Class: Update pass in socket in init method, socket wont be valid after client restart
+https://www.freedesktop.org/software/systemd/man/systemd.service.html

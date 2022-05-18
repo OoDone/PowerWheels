@@ -14,7 +14,10 @@ except (RuntimeError, ModuleNotFoundError):
 from BluetoothServer import BluetoothServer
 
 #from Constants import Constants
-logger = Logger("robotLog")
+try:
+    logger = Logger("/home/pi/Desktop/logs/robotLog")
+except:
+    logger = Logger("robotLog")
 blServer = BluetoothServer(logger)
 driveControl = DriveControl(logger)
 constants = Constants()
@@ -26,28 +29,40 @@ enabled = False
 disconnected = False
 client_socket = None
 logger.info("Robot | Code: Main.py Init")
-time.sleep(1)
+#time.sleep(1)
 def enableRobot():
-    buzzer.customBuzz(0.05,0.05, 3) #3 long enable robot
     global enabled
-    enabled = True
-    logger.info("Robot | Enabled Robot.")
-    if constants.isTestingMode == True:
-        logger.info("Robot | Robot in Test Mode!")
-    #if constants.isTestingMode == False and blServer.getStatus() == True:
-        #client_socket.send("Robot: Enabled Robot")
+    if not enabled:
+        buzzer.customBuzz(0.05,0.05, 3) #3 long enable robot
+        enabled = True
+        logger.info("Robot | Enabled Robot.")
+        if constants.isTestingMode == True:
+            logger.info("Robot | Robot in Test Mode!")
+        if constants.isTestingMode == False and blServer.getStatus() == True:
+            client_socket.send("enable")
+    else:
+        logger.info("Robot | Robot Already Enabled.")
 
 def disableRobot():
     global enabled
-    enabled = False
-    driveControl.stopRobot()
-    logger.info("Robot | Disabled Robot.")
-    GPIO.cleanup()
+    if enabled:
+        enabled = False
+        driveControl.stopRobot()
+        logger.info("Robot | Disabled Robot.")
+        try:
+            if constants.isTestingMode == False and blServer.getStatus() == True:
+                client_socket.send("disable")
+        except:
+            logger.warning("Robot | Couldnt Inform Client Of New Status: Disabled")
+    else:
+        logger.info("Robot | Robot Already Disabled")
     
 while(1):
     if blServer.getStatus():
         if client_socket is None:
             client_socket = blServer.getClientSocket()
+            client_socket.send("ready")
+            #auton.setSocket(client_socket)
     if constants.isTestingMode == True:
         if enabled == False:
             enableRobot()
@@ -57,23 +72,30 @@ while(1):
     if x == None:
         if constants.isTestingMode == False:
             logger.info("Bluetooth: disconnected!")
+            buzzer.buzz(0.1, 2)
             driveControl.stopRobot()
             disconnected = True
             blServer.setStatus(False)
             client_socket, address = blServer.reconnect()
             if disconnected == True:
+                client_socket.send("ready")
+                blServer.setStatus(True)
+                buzzer.buzz(0.3, 1)
                 logger.info("Bluetooth: Reconnected!")
     elif bytes(':','UTF-8') in x:
-        if enabled == True:
+        if enabled == True and not auton.isEnabled():
             driveControl.driveRobot(x)
     elif x==bytes('s', 'UTF-8'):
+        driveControl.stopRobot()
         logger.info("Stopping robot...")
-        disableRobot()
         x='z'
     elif x==bytes('en', 'UTF-8'):
-        logger.info("Enabling Robot...")
-        enabled = True
         enableRobot()
+        logger.info("Enabling Robot...")
+        x='z'
+    elif x==bytes('di', 'UTF-8'):
+        disableRobot()
+        logger.info("Disabling Robot...")
         x='z'
     elif x==bytes('e', 'UTF-8'):
         GPIO.cleanup()
@@ -90,6 +112,9 @@ while(1):
         logger.info("Auton")
         auton.setAutonMode(0)
         auton.enableAuton(True)
+    elif x==bytes('xd','UTF-8'):
+        driveControl.steerServoPerc(100)
+        logger.info("Test steer 100%")
     else:
         client_socket.send("<<<  wrong data  >>>")
         client_socket.send("please enter the defined data to continue.....")

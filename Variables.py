@@ -12,6 +12,7 @@ class Constants:
   class RobotConstants:
     wheelBaseMeters = 2 #FIXME Wheelbase for Autonomous/Automated calculations IN METERS WB 
     maxSteerAngle = 10 #FIXME Check steering angle, not 10
+    minTurnRadius = 1 #FIXME 
     #Turning radius calculation: TR = WB/tan(a)
 
   #Drive constants
@@ -24,13 +25,14 @@ class Constants:
 
     #Steering Servos
     servoPin = 18
-    servoNeutralPosition = 1700 #1488 for 556-2420 & 1700 for 1500-1900
-    directionTicksPer = 2 #(Ticks of rotation)/100 #100 is for input value
-    servoMaxLimitTicks = 1900 
-    servoMinLimitTicks = 1500 
+    servoNeutralPosition = 1488 #1488 for 556-2420 & 1700 for 1500-1900
+    directionTicksPer = 9 #2
+    servoMaxLimitTicks = 2388 #1900
+    servoMinLimitTicks = 588 #1500
 
     #Encoder 
-    driveTicksPerMeter = 1000
+    driveTicksPerMeter = 10000
+    maxEncoderTicks = 1000 #FIXME 
 
 
   #Auton Constants
@@ -38,6 +40,10 @@ class Constants:
     autonMode = 1
     autonEnabled = False
     openLoopSpeed = 20 #Auton Open Loop Drive Speed Percent
+    minDistance = 10 #Min distance to be within to turn away : IN CENTIMETERS
+    turnDistance = 10 #FIXME The distance to drive in autonomous while turning to avoid obstacle
+    avoidObsticleSpeed = 20 #Percent speed of car while turning to avoid obstacle
+    avoidMinDistance = 2#FIXME distance to stop turning while avoiding obsticle IN CENTIMETERS
 
   #Bluetooth Constants
   class BluetoothConstants:
