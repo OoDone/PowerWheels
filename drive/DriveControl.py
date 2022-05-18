@@ -26,8 +26,6 @@ class DriveControl:
       speed = 0.0
       direction = 0.0
       logger.warn("Exception: speed or direction not a number")
-     
-    logger.info("Speed: " + str(speed) + " Direction: " + str(direction))
     if speed > 0:#0
       driveMotor.setMotorSpeed(speed*5+constants.DriveConstants().motorNeutralSpeed)
     elif speed < 0: #0
@@ -40,7 +38,6 @@ class DriveControl:
     else:
       steerServo.setServoPosition(constants.DriveConstants().servoNeutralPosition + direction * constants.DriveConstants().directionTicksPer)   # 1489 - direction * directionTicksPer #* 9.36        #1489 mid servo position
       #logger.info("STEERSERVO: " + str(constants.DriveConstants().servoNeutralPosition + direction * constants.DriveConstants().directionTicksPer))
-      logger.info("Else")
     
   async def driveDistAuton(self, distance, speedPercent):
     #AWAIT UNTIL DISTANCETICKS(ADDED UP MOTOR TICKS) EQUALS DISTANCE
