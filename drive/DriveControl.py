@@ -1,6 +1,8 @@
 from drive.Motor import Motor
 from drive.Servo import Servo
 from Variables import Constants
+from encoder import Encoder
+
 
 class DriveControl:
   
@@ -65,7 +67,11 @@ class DriveControl:
         #isSame = False
        #else:
         #distanceDriven += constants.DriveConstants().maxEncoderTicks
-
+        
+  def valueChanged(value):
+    logger.info("Encoder Value: {}", value)
+  
+  e1 = Encoder(21, 20, callback=valueChanged)
 
 
   def stopDriveDistAuton(self):
