@@ -1,5 +1,4 @@
 from time import sleep
-from gpiozero import Robot
 import cv2
 import numpy as np
 import math
@@ -17,13 +16,22 @@ g = 0.4
 testmode = 1 #to enable added features such as view and save on file
 
 key = ''
-r = Robot(left=(9,11), right=(24,23))  # 23,24 11,9
+start = False
 
 class Vision:
-    def __init__(Logger):
+    def __init__(self, Logger):
         global logger
         logger = Logger
         logger.info("Robot | Code: Vision.py Init")
+        
+    def start():
+        #FIXME Possibly needs global declaration here
+        start = True
+        logger.info("Starting Vision...")
+        
+    def stop():
+        start = False
+        logger.info("Stopping Vision...")
 
     def forward(): #... add onto the left 
         m1_speed = 0.8 #mr
@@ -98,7 +106,7 @@ class Vision:
         F.write("\n\nNew Test \n")
 
 
-    while(1):
+    while(start):
 
         _,frame = cap.read()
 
