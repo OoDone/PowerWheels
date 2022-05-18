@@ -20,7 +20,8 @@ class DriveControl:
   def valueChanged(value):
     logger.info("Encoder Value: {}", value)
   global e1
-  e1 = Encoder(21, 20)
+  #e1 = Encoder(21, 20)
+  e1 = Encoder(20, 21)
   
   def driveRobot(self, x):
     speed = x.decode('UTF-8').split(':')[2].replace("'",'')
