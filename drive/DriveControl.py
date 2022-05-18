@@ -22,6 +22,7 @@ class DriveControl:
   global e1
   #e1 = Encoder(21, 20)
   e1 = Encoder(20, 21)
+  #A GPIO 20, B GPIO 21
   
   def driveRobot(self, x):
     speed = x.decode('UTF-8').split(':')[2].replace("'",'')
