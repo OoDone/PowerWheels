@@ -1,7 +1,7 @@
 from drive.Motor import Motor
 from drive.Servo import Servo
 from Variables import Constants
-from encoder import Encoder
+from Encoder import Encoder
 
 
 class DriveControl:
@@ -17,6 +17,11 @@ class DriveControl:
     driveMotor = Motor(constants.DriveConstants().motorPin, logger)
     steerServo = Servo(constants.DriveConstants().servoPin, logger)
   
+  def valueChanged(value):
+    logger.info("Encoder Value: {}", value)
+  global e1
+  e1 = Encoder(21, 20)
+  
   def driveRobot(self, x):
     speed = x.decode('UTF-8').split(':')[2].replace("'",'')
     direction = x.decode('UTF-8').split(':')[4].replace("'",'')
@@ -24,6 +29,7 @@ class DriveControl:
     try:
       speed = float(speed)
       direction = float(direction)
+      logger.info("Encoder Value: {}", str(e1.read()))
     except:
       speed = 0.0
       direction = 0.0
@@ -67,11 +73,7 @@ class DriveControl:
         #isSame = False
        #else:
         #distanceDriven += constants.DriveConstants().maxEncoderTicks
-        
-  def valueChanged(value):
-    logger.info("Encoder Value: {}", value)
-  
-  e1 = Encoder(21, 20, callback=valueChanged)
+       
 
 
   def stopDriveDistAuton(self):
