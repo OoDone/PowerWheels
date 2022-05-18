@@ -3,6 +3,7 @@ from time import sleep
 from autonomous.DriveForwardAuton import DriveForwardAuton
 from autonomous.SmartAuton import SmartAuton
 
+global autonEnabled
 autonEnabled = False
 class AutonMain:
     autonMode = 0
@@ -21,6 +22,7 @@ class AutonMain:
 
     def setAutonMode(self, mode):
         global autonMode
+        global autonEnabled
         if autonEnabled == False:
             try:
                 mode = int(mode)
@@ -68,11 +70,13 @@ class AutonMain:
         
         
     def loop(self):
+        global autonEnabled
         while autonEnabled:
             if auton.isFinished():
                 self.enableAuton(False)
 
     def isEnabled(self):
+        global autonEnabled
         return autonEnabled
             
     

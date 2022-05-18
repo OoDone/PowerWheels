@@ -90,7 +90,6 @@ while(1):
         logger.info("Stopping robot...")
         x='z'
     elif x==bytes('en', 'UTF-8'):
-        enabled = True
         enableRobot()
         logger.info("Enabling Robot...")
         x='z'
