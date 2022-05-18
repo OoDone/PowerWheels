@@ -29,7 +29,7 @@ class DriveControl:
     try:
       speed = float(speed)
       direction = float(direction)
-      logger.info("Encoder Value: {}", str(e1.read()))
+      logger.info("Encoder Value: " + str(e1.read()))
     except:
       speed = 0.0
       direction = 0.0
