@@ -111,7 +111,7 @@ class Vision:
 
 
     while(start):
-
+        global cap
         _,frame = cap.read()
 
         #if testmode == 1:
