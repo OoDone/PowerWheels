@@ -17,6 +17,7 @@ g = 0.4
 testmode = 1 #to enable added features such as view and save on file
 
 key = ''
+global start
 start = False
 
 class Vision:
@@ -109,7 +110,6 @@ class Vision:
         F = open("./data/imagedetails.txt",'a')
         F.write("\n\nNew Test \n")
 
-    global start
     while start:
         global cap
         _,frame = cap.read()
