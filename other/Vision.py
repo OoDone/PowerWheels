@@ -35,10 +35,12 @@ class Vision:
         
     def start():
         #FIXME Possibly needs global declaration here
+        global start
         start = True
         logger.info("Starting Vision...")
         
     def stop():
+        global start
         start = False
         logger.info("Stopping Vision...")
 
