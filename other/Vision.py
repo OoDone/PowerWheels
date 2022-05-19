@@ -1,4 +1,5 @@
 from time import sleep
+import numpy.core.multiarray
 import cv2
 import numpy as np
 import math
@@ -21,8 +22,16 @@ start = False
 class Vision:
     def __init__(self, Logger):
         global logger
+        global cap
         logger = Logger
         logger.info("Robot | Code: Vision.py Init")
+        
+        cap = cv2.VideoCapture(0)
+        try:
+            if not os.path.exists('data'):
+                os.makedirs('data')
+        except OSError:
+            print ('Error: Creating directory of data')
         
     def start():
         #FIXME Possibly needs global declaration here
@@ -90,13 +99,6 @@ class Vision:
         return a
 
 
-    cap = cv2.VideoCapture(0)
-
-    try:
-        if not os.path.exists('data'):
-            os.makedirs('data')
-    except OSError:
-        print ('Error: Creating directory of data')
 
     StepSize = 5
     currentFrame = 0
