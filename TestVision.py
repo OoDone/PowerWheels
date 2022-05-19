@@ -1,5 +1,5 @@
 from Logger import Logger
-from Vision import Vision
+from other.Vision import Vision
 
 try:
   logger = Logger("TestVision")
