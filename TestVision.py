@@ -1,4 +1,5 @@
 from Logger import Logger
+#import numpy.core.multiarray
 from other.Vision import Vision
 
 try:
