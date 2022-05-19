@@ -109,8 +109,8 @@ class Vision:
         F = open("./data/imagedetails.txt",'a')
         F.write("\n\nNew Test \n")
 
-
-    while(start):
+    global start
+    while start:
         global cap
         _,frame = cap.read()
 
