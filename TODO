@@ -15,10 +15,7 @@ Autonomous:
 - smaartauton: Make the avoidobstacle only stop turning if the distance is within a certain value(Smaller value then the first trigger value.)
 
 Vision:
-- Added Open CV Vision class - test
-- Added logic loggers, wont do anything but log what it wants to do - test
-- IMPLEMENT VISION CLASS SO IT ACTUALLY GETS CALLED
-- Add Vision Start Method?
+- Test new multiprocessing for smartauton vision and loop. - test
 
 
 Service:

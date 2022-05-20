@@ -2,6 +2,7 @@ from drive.DriveControl import DriveControl
 from Variables import Constants
 from other.DistanceSensor import DistanceSensor
 from other.Vision import Vision
+from multiprocessing import Process
 import asyncio
 class SmartAuton:
     global isAvoiding
@@ -25,8 +26,10 @@ class SmartAuton:
         logger.info("Auton: Starting SmartAuton...")
         global start
         start = True
-        self.loop()
-        self.vision.startVision() #DOESNT RUN BECAUSE OF ABOVE LOOP CALL
+        Process(target=self.loop()).start()
+        Process(target=self.vision.startVision()).start()
+        #self.loop()
+        #self.vision.startVision() #DOESNT RUN BECAUSE OF ABOVE LOOP CALL
         asyncio.run(self.initialize()) #Figure out positioning for this and loop function call
 
     def stop(self):
