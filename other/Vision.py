@@ -102,17 +102,21 @@ class Vision:
         currentFrame = 0
         logger.info("Starting Vision...")
         while(1):
+            sleep(0.05)
             _,frame = cap.read()
-
             #if testmode == 1:
             name = './data/frame' + str(currentFrame) + '.jpg'
+            nameC = './data/frame' + str(currentFrame) + 'C.jpg'
+            nameB = './data/frame' + str(currentFrame) + 'B.jpg'
             print ('Creating...' + name)
         
             img = frame.copy()
 
             blur = cv2.bilateralFilter(img,9,40,40)
+            #cv2.imwrite(nameB, blur)
 
             edges = cv2.Canny(blur,50,100)
+            cv2.imwrite(nameC, edges)
 
             img_h = img.shape[0] - 1
 
@@ -184,9 +188,9 @@ class Vision:
             y = (min(c))
             print(y)
         
-            if forwardEdge[0] > 250: #200 # >230 works better 
+            if forwardEdge[0] > 100: #200 # >230 works better 
 
-                if y[1] < 310:
+                if y[1] < 310: #310
                     self.left()
                     #pwm.start(0)
                     #pwm1.start(40)
