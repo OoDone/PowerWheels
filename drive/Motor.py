@@ -1,7 +1,7 @@
 import os
 from time import sleep
 from Variables import Constants
-from Encoder import Encoder
+#from Encoder import Encoder
 try:
     import pigpio
     import RPi.GPIO as GPIO
@@ -27,7 +27,7 @@ class Motor:
     constants = Constants()
     GPIO.setmode(GPIO.BCM)
     #e1 = Encoder(21, 20)
-    e1 = Encoder(20, 21)
+    #e1 = Encoder(20, 21)
     #A GPIO 20, B GPIO 21
     if constants.isTestingMode == False:
       os.system("sudo pigpiod")
@@ -69,8 +69,8 @@ class Motor:
   def getFakeEncoderTicks(self):
     return ticks
 
-  def getEncoderTicks(self):
-    return e1.read()
+  #def getEncoderTicks(self):
+    #return e1.read()
 
   def setEncoderTicks(self, Ticks):
     global ticks

@@ -55,12 +55,12 @@ class AutonMain:
 
     def auton(self):
         global auton
-        if autonMode == 0:
+        if autonMode == 1:
             #autonMode 0
             auton = DriveForwardAuton(logger)
             auton.start()
             self.loop()
-        elif autonMode == 1:
+        elif autonMode == 0:
             #autonMode 1
             auton = SmartAuton(logger)
             auton.start()

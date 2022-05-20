@@ -13,6 +13,7 @@ class SmartAuton:
         global drive
         global constants
         global distanceSensor
+        global vision
         constants = Constants()
         logger = Logger
         distanceSensor = DistanceSensor(logger)
@@ -25,7 +26,7 @@ class SmartAuton:
         global start
         start = True
         self.loop()
-        vision.startVision()
+        self.vision.startVision() #DOESNT RUN BECAUSE OF ABOVE LOOP CALL
         asyncio.run(self.initialize()) #Figure out positioning for this and loop function call
 
     def stop(self):
@@ -62,7 +63,7 @@ class SmartAuton:
             elif vision.getLastDirection() == 2:
                 #right
                 drive.steerServoPerc(50)
-            elif vision.getLastDiretion() == 3:
+            elif vision.getLastDirection() == 3:
                 #left
                 drive.steerServoPerc(-50)
             elif vision.getLastDirection() == 4:

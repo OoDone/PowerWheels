@@ -117,6 +117,7 @@ class Vision:
         StepSize = 5
         currentFrame = 0
         logger.info("Starting Vision...")
+        print("Start Vision")
         while(1):
             sleep(0.05)
             _,frame = cap.read()

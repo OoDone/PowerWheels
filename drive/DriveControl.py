@@ -47,7 +47,7 @@ class DriveControl:
     #AWAIT UNTIL DISTANCETICKS(ADDED UP MOTOR TICKS) EQUALS DISTANCE
     global stop
     stop = False
-    lastTicks = getEncoderTicks()
+    #lastTicks = getEncoderTicks()
     distanceTicks = distance * constants.DriveConstants().driveTicksPerMeter
     logger.info("Driving " + str(distance) + " meters at " + str(speedPercent) + " percent speed.")
     driveMotor.setMotorSpeedPercent(speedPercent)
