@@ -112,9 +112,8 @@ while(1):
         logger.info("Auton")
         auton.setAutonMode(0)
         auton.enableAuton(True)
-    elif x==bytes('xd','UTF-8'):
-        driveControl.steerServoPerc(100)
-        logger.info("Test steer 100%")
+    elif x==bytes('ad','UTF-8'):
+        auton.enableAuton(False)
     else:
         client_socket.send("<<<  wrong data  >>>")
         client_socket.send("please enter the defined data to continue.....")

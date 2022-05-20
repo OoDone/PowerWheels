@@ -7,8 +7,8 @@ from time import sleep
 
 
 class DistanceSensor:
-    trigPin = 23
-    echoPin = 24
+    trigPin = 16
+    echoPin = 12
     MAX_DISTANCE = 10000
     timeOut=MAX_DISTANCE*60
     def __init__(self, Logger):

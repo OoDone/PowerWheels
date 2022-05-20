@@ -1,9 +1,6 @@
-2022/05/19 18:06:17.288 Logger INFO | Logger object created successfully..
-2022/05/19 18:06:17.289 Vision INFO | Robot | Code: Vision.py Init
-2022/05/19 18:06:18.837 Vision INFO | Starting Vision...
-2022/05/19 18:06:19.403 Vision INFO | Vision: Clear To Go Forward
-2022/05/19 18:06:19.516 Vision INFO | Vision: Obstacle, Attempting To Go Left
-2022/05/19 18:06:19.628 Vision INFO | Vision: Obstacle, Attempting To Go Left
-2022/05/19 18:06:19.732 Vision INFO | Vision: Obstacle, Attempting To Go Left
-2022/05/19 18:06:19.850 Vision INFO | Vision: Obstacle, Attempting To Go Left
-2022/05/19 18:06:19.964 Vision INFO | Vision: Obstacle, Attempting To Go Right
+2022/05/20 08:15:00.869 Logger INFO | Logger object created successfully..
+2022/05/20 08:15:00.871 Vision INFO | Robot | Code: Vision.py Init
+2022/05/20 08:15:01.675 Vision INFO | Starting Vision...
+2022/05/20 08:15:04.358 Vision INFO | Vision: Obstacle, Attempting To Go Right
+2022/05/20 08:15:05.245 Vision INFO | Vision: Obstacle, Attempting To Go Right
+2022/05/20 08:15:06.137 Vision INFO | Vision: Obstacle, Attempting To Go Right

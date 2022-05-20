@@ -1,6 +1,7 @@
 from drive.DriveControl import DriveControl
 from Variables import Constants
 from other.DistanceSensor import DistanceSensor
+from other.Vision import Vision
 import asyncio
 class SmartAuton:
     global isAvoiding
@@ -15,6 +16,7 @@ class SmartAuton:
         constants = Constants()
         logger = Logger
         distanceSensor = DistanceSensor(logger)
+        vision = Vision(logger)
         logger.info("Robot | Code: SmartAuton.py Init")
         drive = DriveControl(logger)
 
@@ -23,6 +25,7 @@ class SmartAuton:
         global start
         start = True
         self.loop()
+        vision.startVision()
         asyncio.run(self.initialize()) #Figure out positioning for this and loop function call
 
     def stop(self):
@@ -48,6 +51,26 @@ class SmartAuton:
                 isAvoiding = False
                 drive.stopDriveDistAuton()
                 #Fall back to reverse here
+            if vision.getLastDirection() == 0:
+                #Forward
+                drive.steerServoPerc(0)
+                logger.info("Forwards")
+            elif vision.getLastDirection() == 1:
+                #backwards
+                drive.steerServoPerc(0)
+                logger.info("Backwards")
+            elif vision.getLastDirection() == 2:
+                #right
+                drive.steerServoPerc(50)
+            elif vision.getLastDiretion() == 3:
+                #left
+                drive.steerServoPerc(-50)
+            elif vision.getLastDirection() == 4:
+                #stop
+                drive.stopRobot()
+            elif vision.getLastDirection() == 5:
+                #Not Set Yet
+                logger.info("No Vision Setting Yet")
 
 
     def isFinished(self):

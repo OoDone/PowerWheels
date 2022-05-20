@@ -18,6 +18,8 @@ testmode = 1 #to enable added features such as view and save on file
 
 key = ''
 start = False
+global lastDirection
+lastDirection = 5
 
 class Vision:
     def __init__(self, Logger):
@@ -39,24 +41,32 @@ class Vision:
             F.write("\n\nNew Test \n")
         
 
-    def forward(self): #... add onto the left 
+    def forward(self): #... add onto the left
+        global lastDirection
+        lastDirection = 0
         m1_speed = 0.8 #mr
         m2_speed = a #ml
         #r.value = (m1_speed, m2_speed)
         logger.info("Vision: Clear To Go Forward")
 
-    def backward(self): 
+    def backward(self):
+        global lastDirection
+        lastDirection = 1
         #r.reverse()
         logger.info("Vision: Clear To Go Backwards")
 
     def right(self):
+        global lastDirection
+        lastDirection = 2
         #r.right(speed=1)
         logger.info("Vision: Obstacle, Attempting To Go Right")
         #sleep(0.6) #0.5
         #forward()
 
  
-    def left(self): 
+    def left(self):
+        global lastDirection
+        lastDirection = 3
         #r.left(speed=1)
         logger.info("Vision: Obstacle, Attempting To Go Left")
         #sleep(0.6) #0.5
@@ -65,8 +75,14 @@ class Vision:
     def stop(self):
         m1_speed = 0.0
         m2_speed = 0.0
+        global lastDirection
+        lastDirection = 4
         #r.value = (m1_speed, m2_speed)
         logger.info("Vision: Obstacle?? Stopping")
+        
+    def getLastDirection(self):
+        global lastDirection
+        return lastDirection
    
     def calc_dist(self, p1,p2):
 
@@ -188,9 +204,9 @@ class Vision:
             y = (min(c))
             print(y)
         
-            if forwardEdge[0] > 100: #200 # >230 works better 
+            if forwardEdge[0] > 230: #200 # >230 works better 
 
-                if y[1] < 310: #310
+                if y[1] < 360: #310
                     self.left()
                     #pwm.start(0)
                     #pwm1.start(40)

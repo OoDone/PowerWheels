@@ -110,7 +110,11 @@ def toggleAutonMode():
     else:
         logger.info("Client: Not Connected To Robot")
 def disableAutonMode():
-    logger.info("Client: DOES NOTHING: Disabled Autonomous Mode!")
+    if connected:
+        sock.send("ad")
+        logger.info("Client: Disabled Autonomous Mode!")
+    else:
+        logger.info("Client: Not Connected To Robot.")
     
 def stopRobot():
     if connected:
