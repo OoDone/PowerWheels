@@ -27,11 +27,10 @@ class SmartAuton:
         logger.info("Auton: Starting SmartAuton...")
         global start
         start = True
+        Process(target=vision.startVision()).start()
+        logger.info("After Loop Start")
         thread=Thread(target=self.loop())
         thread.start()
-        logger.info("After Loop Start")
-        #test = Process(target=self.loop()).start()
-        Process(target=vision.startVision()).start()
         logger.info("After Start Vision")
         #self.loop()
         #self.vision.startVision() #DOESNT RUN BECAUSE OF ABOVE LOOP CALL
