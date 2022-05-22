@@ -27,7 +27,7 @@ class SmartAuton:
         global start
         start = True
         test = Process(target=self.loop())
-        test2 = Process(target=self.vision.startVision())
+        test2 = Process(target=vision.startVision())
         logger.info("After Start Vision")
         test.start()
         test2.start()
