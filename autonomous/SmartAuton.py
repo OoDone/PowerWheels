@@ -29,8 +29,9 @@ class SmartAuton:
         start = True
         thread=Thread(target=self.loop())
         thread.start()
+        logger.info("After Loop Start")
         #test = Process(target=self.loop()).start()
-        test2 = Process(target=vision.startVision()).start()
+        Process(target=vision.startVision()).start()
         logger.info("After Start Vision")
         #self.loop()
         #self.vision.startVision() #DOESNT RUN BECAUSE OF ABOVE LOOP CALL
@@ -49,7 +50,7 @@ class SmartAuton:
     def loop(self):
         global isAvoiding
         while start:
-            if distanceSensor.getSonar() <= constants.AutonConstants().minDistance and not isAvoiding:  #FIXME OPPOSITE <> SIGN
+            if distanceSensor.getSonar() >= constants.AutonConstants().minDistance and not isAvoiding:  #FIXME OPPOSITE <> SIGN
                 logger.info("Auton: To close, Perform turn")
                 drive.stopRobot()
                 #asyncio.run(self.TURN ASYNC FUNCTION)
