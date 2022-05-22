@@ -27,7 +27,7 @@ class SmartAuton:
         logger.info("Auton: Starting SmartAuton...")
         global start
         start = True
-        Process(target=vision.startVision()).start()
+        Thread(target=vision.startVision()).start()
         logger.info("After Loop Start")
         thread=Thread(target=self.loop())
         thread.start()
