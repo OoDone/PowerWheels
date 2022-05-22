@@ -49,7 +49,7 @@ class SmartAuton:
     def loop(self):
         global isAvoiding
         while start:
-            if distanceSensor.getSonar() >= constants.AutonConstants().minDistance and not isAvoiding:  #FIXME OPPOSITE <> SIGN
+            if distanceSensor.getSonar() <= constants.AutonConstants().minDistance and not isAvoiding:  #FIXME OPPOSITE <> SIGN
                 logger.info("Auton: To close, Perform turn")
                 drive.stopRobot()
                 #asyncio.run(self.TURN ASYNC FUNCTION)
