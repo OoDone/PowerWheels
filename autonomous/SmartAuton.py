@@ -26,9 +26,11 @@ class SmartAuton:
         logger.info("Auton: Starting SmartAuton...")
         global start
         start = True
-        Process(target=self.loop()).start()
-        Process(target=self.vision.startVision()).start()
+        test = Process(target=self.loop())
+        test2 = Process(target=self.vision.startVision())
         logger.info("After Start Vision")
+        test.start()
+        test2.start()
         #self.loop()
         #self.vision.startVision() #DOESNT RUN BECAUSE OF ABOVE LOOP CALL
         asyncio.run(self.initialize()) #Figure out positioning for this and loop function call
