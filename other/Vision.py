@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 import math
 import os
-
+import threading
 
 a = 1
 b = 0.9
@@ -21,8 +21,11 @@ start = False
 global lastDirection
 lastDirection = 5
 
-class Vision:
-    def __init__(self, Logger):
+class Vision: #(threading.Thread):
+    def __init__(self, Logger, threadID):
+        #threading.Thread.__init__(self)
+        #self.threadID = threadID
+        #self.name = name
         global logger
         global cap
         logger = Logger
@@ -40,6 +43,10 @@ class Vision:
             F = open("./data/imagedetails.txt",'a')
             F.write("\n\nNew Test \n")
         
+    def run(self):
+      logger.info("Starting " + self.name)
+      self.startVision()
+      logger.info("Exiting " + self.name)
 
     def forward(self): #... add onto the left
         global lastDirection

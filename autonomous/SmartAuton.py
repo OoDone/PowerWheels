@@ -15,25 +15,25 @@ class SmartAuton:
         global drive
         global constants
         global distanceSensor
-        global vision
+        #global vision
         constants = Constants()
         logger = Logger
         distanceSensor = DistanceSensor(logger)
-        vision = Vision(logger)
+        #vision = Vision(logger)
         logger.info("Robot | Code: SmartAuton.py Init")
         drive = DriveControl(logger)
 
     def start(self):
         logger.info("Auton: Starting SmartAuton...")
         global start
+        global visionT
         start = True
-        Thread(target=vision.startVision()).start()
-        logger.info("After Loop Start")
+        visionT = Vision(logger, 1) #Creates New Vision Thread
+        visionT.start()
+        logger.info("After Vision Start")
         thread=Thread(target=self.loop())
         thread.start()
         logger.info("After Start Vision")
-        #self.loop()
-        #self.vision.startVision() #DOESNT RUN BECAUSE OF ABOVE LOOP CALL
         asyncio.run(self.initialize()) #Figure out positioning for this and loop function call
 
     def stop(self):
