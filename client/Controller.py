@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import pygame
 import bluetooth
 from Logger import Logger

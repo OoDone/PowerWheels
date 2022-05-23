@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import os
 from time import sleep
 from Variables import Constants

@@ -1,7 +1,9 @@
+#!/usr/bin/python
+
 from drive.DriveControl import DriveControl
 from Variables import Constants
 from other.DistanceSensor import DistanceSensor
-from other.Vision import Vision
+from other import Vision
 from multiprocessing import Process
 from threading import Thread
 import asyncio
@@ -26,14 +28,15 @@ class SmartAuton:
     def start(self):
         logger.info("Auton: Starting SmartAuton...")
         global start
-        global visionT
+        #global visionT #FIXME
         start = True
-        visionT = Vision(logger, 1) #Creates New Vision Thread
-        visionT.start()
-        logger.info("After Vision Start")
-        thread=Thread(target=self.loop())
-        thread.start()
-        logger.info("After Start Vision")
+        #visionT = Vision.Vision(logger, 1) #Creates New Vision Thread #FIXME
+        #visionT.start() #FIXME
+        thread=Thread(target=self.loop()) #FIXME
+        thread.start() #FIXME
+        logger.info("After loop/vision Start")
+
+        #logger.info("After Start Vision") #FIXME
         asyncio.run(self.initialize()) #Figure out positioning for this and loop function call
 
     def stop(self):
@@ -49,6 +52,9 @@ class SmartAuton:
     def loop(self):
         global isAvoiding
         while start:
+            global vision
+            vision = Vision.Vision(logger)#FIXME
+            vision.startVision()#FIXME
             if distanceSensor.getSonar() <= constants.AutonConstants().minDistance and not isAvoiding:  #FIXME OPPOSITE <> SIGN
                 logger.info("Auton: To close, Perform turn")
                 drive.stopRobot()

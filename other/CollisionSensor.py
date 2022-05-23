@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from DistanceSensor import DistanceSensor
 
 class CollisionSensor:

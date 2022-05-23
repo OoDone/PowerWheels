@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from Logger import Logger
 #import numpy.core.multiarray
 from other.Vision import Vision

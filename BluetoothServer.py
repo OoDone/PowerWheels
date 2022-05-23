@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import bluetooth
 from Variables import Constants
 from other.Buzzer import Buzzer

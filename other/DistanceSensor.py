@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from asyncio.log import logger
 import time
 import RPi.GPIO as GPIO

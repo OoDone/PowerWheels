@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # timer.py
 
 import time
