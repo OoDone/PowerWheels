@@ -17,26 +17,30 @@ class SmartAuton:
         global drive
         global constants
         global distanceSensor
+        global vision
         #global vision
         constants = Constants()
         logger = Logger
         distanceSensor = DistanceSensor(logger)
         #vision = Vision(logger)
+        vision = Vision.Vision(logger)
         logger.info("Robot | Code: SmartAuton.py Init")
         drive = DriveControl(logger)
 
     def start(self):
         logger.info("Auton: Starting SmartAuton...")
         global start
+        global threadD
+        global thread
         #global visionT #FIXME
         start = True
         #visionT = Vision.Vision(logger, 1) #Creates New Vision Thread #FIXME
         #visionT.start() #FIXME
-        threadD=Thread(asyncio.run(self.initialize())) #Figure out positioning for this and loop function call
+        threadD=Thread(asyncio.run(self.initialize(drive))) #Figure out positioning for this and loop function call
         threadD.start()
         logger.info("After initialize() Start")
-        thread=Thread(asyncio.run(self.loop())) #FIXME
-        #thread=Thread(target=self.loop, args=()) 
+        #thread=Thread(asyncio.run(self.loop())) #FIXME
+        thread=Thread(target=self.loop, args=(logger, vision, lambda : start)) 
         thread.start() #FIXME
         logger.info("After loop/vision Start")
 
@@ -44,18 +48,21 @@ class SmartAuton:
 
     def stop(self):
         global start
-        logger.info("Disabling SmartAuton.")
+        global thread
         start = False
+        thread.join()
+        logger.info("Disabling SmartAuton.")
 
-    async def initialize(self):
+    async def initialize(self, drive2):
         #OPTIONAL, RUNS ONCE AT START AND IS ASYNC
         logger.info("AUTON INITIALIZE")
-        drive.driveOpenLoop(constants.AutonConstants().openLoopSpeed)
+        drive2.driveOpenLoop(constants.AutonConstants().openLoopSpeed)
 
-    async def loop(self):
+    def loop(self, logger, vision, start):
         global isAvoiding
-        vision = Vision.Vision(logger)#FIXME
-        while start:
+        logger.info("Starting loop!")
+        #vision = Vision.Vision(logger)#FIXME
+        while start():
             vision.startVision()#FIXME
             if distanceSensor.getSonar() <= constants.AutonConstants().minDistance and not isAvoiding:  #FIXME OPPOSITE <> SIGN
                 logger.info("Auton: To close, Perform turn")
@@ -87,6 +94,9 @@ class SmartAuton:
             elif vision.getLastDirection() == 5:
                 #Not Set Yet
                 logger.info("No Vision Setting Yet")
+        if not start():
+            logger.info("Start is False")
+            return
 
 
     def isFinished(self):
