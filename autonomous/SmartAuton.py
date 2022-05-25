@@ -18,7 +18,6 @@ class SmartAuton:
         global drive
         global constants
         global distanceSensor
-        global vision
         constants = Constants()
         logger = Logger
         distanceSensor = DistanceSensor(logger)
@@ -34,7 +33,7 @@ class SmartAuton:
         global thread
         global visionT #FIXME
         start = True
-        visionT = Vision.Vision(logger, 1) #Creates New Vision Thread #FIXME
+        visionT = Vision.Vision(logger, 1, start) #Creates New Vision Thread #FIXME
         visionT.start() #FIXME
         threadD=Thread(asyncio.run(self.initialize(drive))) #Figure out positioning for this and loop function call
         threadD.start()
@@ -49,18 +48,18 @@ class SmartAuton:
         global visionT
         start = False
         thread.join()
-        sleep(0.05)
+        visionT.stopVision()
         visionT.join()
-        logger.info("Disabling SmartAuton.")
+        logger.info("Disabled SmartAuton.")
+        drive.stopRobot()
 
     async def initialize(self, drive2):
         #OPTIONAL, RUNS ONCE AT START AND IS ASYNC
-        logger.info("AUTON INITIALIZE")
         drive2.driveOpenLoop(constants.AutonConstants().openLoopSpeed)
 
     def loop(self, logger, drive, vision):
         global isAvoiding
-        logger.info("Starting loop!")
+        logger.info("Started Loop Thread!")
         #vision = Vision.Vision(logger)#FIXME
         global start
         while start:

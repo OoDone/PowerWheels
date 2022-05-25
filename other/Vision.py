@@ -21,15 +21,17 @@ testmode = 1 #to enable added features such as view and save on file
 key = ''
 start = False
 global lastDirection
-lastDirection = 5 
+lastDirection = 0
 
 class Vision(threading.Thread):
-    def __init__(self, Logger, threadID):
+    def __init__(self, Logger, threadID, Start):
         threading.Thread.__init__(self)
         self.threadID = threadID
         self.name = "Vision-" + str(threadID)
         global logger
         global cap
+        global start
+        start = Start
         logger = Logger
         logger.info("Robot | Code: Vision.py Init")
         
@@ -126,8 +128,8 @@ class Vision(threading.Thread):
         logger.info("Starting Vision Thread: " + self.name)
         StepSize = 5
         currentFrame = 0
-        #logger.info("Starting Vision...")
         global start
+        logger.info("Start: " + str(start))
         while start:
             sleep(0.05)
             _,frame = cap.read()
@@ -266,6 +268,6 @@ class Vision(threading.Thread):
     def stopVision(self):
         global start
         start = False
-        logger.info("Stopping Vision...")
+        #logger.info("Stopping Vision...")
             
         
