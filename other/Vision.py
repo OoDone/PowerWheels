@@ -21,7 +21,7 @@ testmode = 1 #to enable added features such as view and save on file
 key = ''
 start = False
 global lastDirection
-lastDirection = 0
+lastDirection = 5
 
 class Vision(threading.Thread):
     def __init__(self, Logger, threadID, Start):
