@@ -6,6 +6,7 @@ from other.DistanceSensor import DistanceSensor
 from other import Vision
 from multiprocessing import Process
 from threading import Thread
+from time import sleep
 import asyncio
 class SmartAuton:
     global isAvoiding
@@ -48,6 +49,7 @@ class SmartAuton:
         global visionT
         start = False
         thread.join()
+        sleep(0.05)
         visionT.join()
         logger.info("Disabling SmartAuton.")
 
