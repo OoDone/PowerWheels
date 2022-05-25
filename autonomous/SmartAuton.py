@@ -40,7 +40,7 @@ class SmartAuton:
         threadD.start()
         logger.info("After initialize() Start")
         #thread=Thread(asyncio.run(self.loop())) #FIXME
-        thread=Thread(target=self.loop, args=(logger, vision, lambda : start)) 
+        thread=Thread(target=self.loop, args=(logger, vision)) 
         thread.start() #FIXME
         logger.info("After loop/vision Start")
 
@@ -58,11 +58,12 @@ class SmartAuton:
         logger.info("AUTON INITIALIZE")
         drive2.driveOpenLoop(constants.AutonConstants().openLoopSpeed)
 
-    def loop(self, logger, vision, start):
+    def loop(self, logger, vision):
         global isAvoiding
         logger.info("Starting loop!")
         #vision = Vision.Vision(logger)#FIXME
-        while start():
+        global start
+        while start:
             vision.startVision()#FIXME
             if distanceSensor.getSonar() <= constants.AutonConstants().minDistance and not isAvoiding:  #FIXME OPPOSITE <> SIGN
                 logger.info("Auton: To close, Perform turn")
