@@ -128,10 +128,7 @@ class Vision(threading.Thread):
         currentFrame = 0
         #logger.info("Starting Vision...")
         global start
-        while(1):
-            if not start:
-                logger.info("Stopping Vision Thread")
-                break #Stop Vision Thread
+        while start:
             sleep(0.05)
             _,frame = cap.read()
             #if testmode == 1:
@@ -257,6 +254,9 @@ class Vision(threading.Thread):
             if k == 27:
                 break
                 #return
+        else:
+            logger.info("Stopping Vision Thread")
+            return #Stop Vision Thread
             
 
 
