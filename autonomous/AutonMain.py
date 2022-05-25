@@ -67,15 +67,15 @@ class AutonMain:
             auton = SmartAuton(logger)
             auton.start()
             #CircleAuton().start() #Drives in circles #MAKE EACH AUTON IN A DIFFERENT FILE AND CLASS
-            self.loop()
+            #self.loop()
         else: logger.info("Auton(): Autonomous Mode Not Enabled")
         
         
     def loop(self):
         global autonEnabled
-        while autonEnabled:
-            if auton.isFinished():
-                self.enableAuton(False)
+        #while autonEnabled:
+        if auton.isFinished():
+            self.enableAuton(False)
 
     def isEnabled(self):
         global autonEnabled

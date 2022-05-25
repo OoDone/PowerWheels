@@ -60,6 +60,11 @@ def disableRobot():
         logger.info("Robot | Robot Already Disabled")
     
 while(1):
+    try:
+        if auton.isEnabled():
+            auton.loop()
+    except:
+        y=1
     if blServer.getStatus():
         if client_socket is None:
             client_socket = blServer.getClientSocket()
