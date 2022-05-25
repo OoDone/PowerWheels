@@ -23,11 +23,11 @@ start = False
 global lastDirection
 lastDirection = 5
 
-class Vision: #(threading.Thread):
-    def __init__(self, Logger):#, threadID):
-        #threading.Thread.__init__(self)
-        #self.threadID = threadID
-        #self.name = name
+class Vision(threading.Thread):
+    def __init__(self, Logger, threadID):
+        threading.Thread.__init__(self)
+        self.threadID = threadID
+        self.name = name
         global logger
         global cap
         logger = Logger
@@ -45,7 +45,7 @@ class Vision: #(threading.Thread):
             F = open("./data/imagedetails.txt",'a')
             F.write("\n\nNew Test \n")
         
-    def run(self):
+    def runOLD(self):
       logger.info("Starting " + self.name)
       self.startVision()
       logger.info("Exiting " + self.name)
@@ -122,137 +122,137 @@ class Vision: #(threading.Thread):
 
 
 
-    def startVision(self):
+    def run(self):
+        logger.info("Starting Vision Thread: " + self.name)
         StepSize = 5
         currentFrame = 0
-        logger.info("Starting Vision...")
-        print("Start Vision")
-        #while(1):
-        sleep(0.05)
-        _,frame = cap.read()
-        #if testmode == 1:
-        name = './data/frame' + str(currentFrame) + '.jpg'
-        nameC = './data/frame' + str(currentFrame) + 'C.jpg'
-        nameB = './data/frame' + str(currentFrame) + 'B.jpg'
-        print ('Creating...' + name)
-    
-        img = frame.copy()
-
-        blur = cv2.bilateralFilter(img,9,40,40)
-        #cv2.imwrite(nameB, blur)
-
-        edges = cv2.Canny(blur,50,100)
-        cv2.imwrite(nameC, edges)
-
-        img_h = img.shape[0] - 1
-
-        img_w = img.shape[1] - 1
-
-        EdgeArray = []
-
-        for j in range(0,img_w,StepSize):
-
-            pixel = (j,0)
-
-            for i in range(img_h-5,0,-1):
-
-                if edges.item(i,j) == 255:
-
-                    pixel = (j,i)
-
-                    break
-
-            EdgeArray.append(pixel)
-
-
-        for x in range(len(EdgeArray)-1):
-
-            cv2.line(img, EdgeArray[x], EdgeArray[x+1], (0,255,0), 1)
-
-
-
-        for x in range(len(EdgeArray)):
-
-            cv2.line(img, (x*StepSize, img_h), EdgeArray[x],(0,255,0),1)
-
-
-        chunks = self.getChunks(EdgeArray,int(len(EdgeArray)/3)) # 5
-
-        max_dist = 0
-
-        c = []
-
-        for i in range(len(chunks)-1):        
-
-            x_vals = []
-
-            y_vals = []
-
-            for (x,y) in chunks[i]:
-
-                x_vals.append(x)
-
-                y_vals.append(y)
-
-
-            avg_x = int(np.average(x_vals))
-
-            avg_y = int(np.average(y_vals))
-
-            c.append([avg_y,avg_x])
-
-            cv2.line(frame,(320,480),(avg_x,avg_y),(255,0,0),2)  
-
-        print(c)
-
-        forwardEdge = c[1]
-        print(forwardEdge)
-
-        cv2.line(frame,(320,480),(forwardEdge[1],forwardEdge[0]),(0,255,0),3)   
-        cv2.imwrite(name, frame)
+        #logger.info("Starting Vision...")
+        while(1):
+            sleep(0.05)
+            _,frame = cap.read()
+            #if testmode == 1:
+            name = './data/frame' + str(currentFrame) + '.jpg'
+            nameC = './data/frame' + str(currentFrame) + 'C.jpg'
+            nameB = './data/frame' + str(currentFrame) + 'B.jpg'
+            print ('Creating...' + name)
         
-        y = (min(c))
-        print(y)
-    
-        if forwardEdge[0] > 230: #200 # >230 works better 
+            img = frame.copy()
 
-            if y[1] < 360: #310
-                self.left()
-                #pwm.start(0)
-                #pwm1.start(40)
-                direction = "left "
-                print(direction)
+            blur = cv2.bilateralFilter(img,9,40,40)
+            #cv2.imwrite(nameB, blur)
 
-            else: 
-                self.right()
-                direction = "right "
-                print(direction)
+            edges = cv2.Canny(blur,50,100)
+            cv2.imwrite(nameC, edges)
 
-        else:
-            self.forward()
-#           sleep(0.005)
-            direction = "forward "
-            print(direction)
+            img_h = img.shape[0] - 1
+
+            img_w = img.shape[1] - 1
+
+            EdgeArray = []
+
+            for j in range(0,img_w,StepSize):
+
+                pixel = (j,0)
+
+                for i in range(img_h-5,0,-1):
+
+                    if edges.item(i,j) == 255:
+
+                        pixel = (j,i)
+
+                        break
+
+                EdgeArray.append(pixel)
+
+
+            for x in range(len(EdgeArray)-1):
+
+                cv2.line(img, EdgeArray[x], EdgeArray[x+1], (0,255,0), 1)
+
+
+
+            for x in range(len(EdgeArray)):
+
+                cv2.line(img, (x*StepSize, img_h), EdgeArray[x],(0,255,0),1)
+
+
+            chunks = self.getChunks(EdgeArray,int(len(EdgeArray)/3)) # 5
+
+            max_dist = 0
+
+            c = []
+
+            for i in range(len(chunks)-1):        
+
+                x_vals = []
+
+                y_vals = []
+
+                for (x,y) in chunks[i]:
+
+                    x_vals.append(x)
+
+                    y_vals.append(y)
+
+
+                avg_x = int(np.average(x_vals))
+
+                avg_y = int(np.average(y_vals))
+
+                c.append([avg_y,avg_x])
+
+                cv2.line(frame,(320,480),(avg_x,avg_y),(255,0,0),2)  
+
+            print(c)
+
+            forwardEdge = c[1]
+            print(forwardEdge)
+
+            cv2.line(frame,(320,480),(forwardEdge[1],forwardEdge[0]),(0,255,0),3)   
+            cv2.imwrite(name, frame)
+            
+            y = (min(c))
+            print(y)
         
-        if testmode == 1:
-            global F
-            F.write ("frame"+str(currentFrame)+".jpg" +" | " + str(c[0]) + " | " + str(c[1]) + " | " +str(c[2])  + " | " + direction + "\n") 
-            currentFrame +=1
+            if forwardEdge[0] > 230: #200 # >230 works better 
 
-        if testmode == 2:
+                if y[1] < 360: #310
+                    self.left()
+                    #pwm.start(0)
+                    #pwm1.start(40)
+                    direction = "left "
+                    print(direction)
 
-            cv2.imshow("frame",frame)
+                else: 
+                    self.right()
+                    direction = "right "
+                    print(direction)
 
-            cv2.imshow("Canny",edges)
+            else:
+                self.forward()
+    #           sleep(0.005)
+                direction = "forward "
+                print(direction)
+            
+            if testmode == 1:
+                global F
+                F.write ("frame"+str(currentFrame)+".jpg" +" | " + str(c[0]) + " | " + str(c[1]) + " | " +str(c[2])  + " | " + direction + "\n") 
+                currentFrame +=1
 
-            cv2.imshow("result",img)
+            if testmode == 2:
+
+                cv2.imshow("frame",frame)
+
+                cv2.imshow("Canny",edges)
+
+                cv2.imshow("result",img)
 
 
-        k = cv2.waitKey(5) & 0xFF  ##change to 5
+            k = cv2.waitKey(5) & 0xFF  ##change to 5
 
-        if k == 27:
-            #break
-            return
+            if k == 27:
+                break
+                #return
             
 
 

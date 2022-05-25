@@ -18,12 +18,11 @@ class SmartAuton:
         global constants
         global distanceSensor
         global vision
-        #global vision
         constants = Constants()
         logger = Logger
         distanceSensor = DistanceSensor(logger)
-        #vision = Vision(logger)
-        vision = Vision.Vision(logger)
+        #vision = Vision.Vision(logger)
+        #vision = Vision.Vision(logger, "Vision-1")
         logger.info("Robot | Code: SmartAuton.py Init")
         drive = DriveControl(logger)
 
@@ -32,17 +31,17 @@ class SmartAuton:
         global start
         global threadD
         global thread
-        #global visionT #FIXME
+        global visionT #FIXME
         start = True
-        #visionT = Vision.Vision(logger, 1) #Creates New Vision Thread #FIXME
-        #visionT.start() #FIXME
+        visionT = Vision.Vision(logger, 1) #Creates New Vision Thread #FIXME
+        visionT.start() #FIXME
+        logger.info("After vision Start")
         threadD=Thread(asyncio.run(self.initialize(drive))) #Figure out positioning for this and loop function call
         threadD.start()
         logger.info("After initialize() Start")
-        #thread=Thread(asyncio.run(self.loop())) #FIXME
-        thread=Thread(target=self.loop, args=(logger, vision)) 
+        thread=Thread(target=self.loop, args=(logger, drive))#, vision)) 
         thread.start() #FIXME
-        logger.info("After loop/vision Start")
+        logger.info("After loop Start")
 
         #logger.info("After Start Vision") #FIXME
 
@@ -58,13 +57,13 @@ class SmartAuton:
         logger.info("AUTON INITIALIZE")
         drive2.driveOpenLoop(constants.AutonConstants().openLoopSpeed)
 
-    def loop(self, logger, vision):
+    def loop(self, logger, drive):#, vision):
         global isAvoiding
         logger.info("Starting loop!")
         #vision = Vision.Vision(logger)#FIXME
         global start
         while start:
-            vision.startVision()#FIXME
+            #vision.startVision()#FIXME
             if distanceSensor.getSonar() <= constants.AutonConstants().minDistance and not isAvoiding:  #FIXME OPPOSITE <> SIGN
                 logger.info("Auton: To close, Perform turn")
                 drive.stopRobot()
