@@ -6,13 +6,9 @@ Currently runs git pull(Branch set to Testing Currently)
 Then Runs Main.py
 CURRENT BRANCH: TESTING
 
-import concurrent.futures
+pip install numpy
+pip install opencv-python
+pip install fake_rpigpio
 
-def foo(bar):
-    print('hello {}'.format(bar))
-    return 'foo'
 
-with concurrent.futures.ThreadPoolExecutor() as executor:
-    future = executor.submit(foo, 'world!')
-    return_value = future.result()
-    print(return_value)
+

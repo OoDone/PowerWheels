@@ -6,7 +6,7 @@ import cv2
 import numpy as np
 import math
 import os
-#import threading
+import threading
 
 a = 1
 b = 0.9
@@ -21,13 +21,13 @@ testmode = 1 #to enable added features such as view and save on file
 key = ''
 start = False
 global lastDirection
-lastDirection = 5
+lastDirection = 5 
 
 class Vision(threading.Thread):
     def __init__(self, Logger, threadID):
         threading.Thread.__init__(self)
         self.threadID = threadID
-        self.name = name
+        self.name = "Vision-" + str(threadID)
         global logger
         global cap
         logger = Logger
@@ -127,7 +127,11 @@ class Vision(threading.Thread):
         StepSize = 5
         currentFrame = 0
         #logger.info("Starting Vision...")
+        global start
         while(1):
+            if not start:
+                logger.info("Stopping Vision Thread")
+                break #Stop Vision Thread
             sleep(0.05)
             _,frame = cap.read()
             #if testmode == 1:

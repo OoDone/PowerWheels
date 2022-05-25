@@ -12,17 +12,20 @@ except (RuntimeError, ModuleNotFoundError):
     import fake_rpigpio.utils
     fake_rpigpio.utils.install()
     import RPi.GPIO as GPIO
-
-from BluetoothServer import BluetoothServer
+try:
+    from BluetoothServer import BluetoothServer
+except:
+    print("Cannot Import BluetoothServer")
 
 #from Constants import Constants
 try:
     logger = Logger("/home/pi/Desktop/logs/robotLog")
 except:
     logger = Logger("robotLog")
-blServer = BluetoothServer(logger)
 driveControl = DriveControl(logger)
 constants = Constants()
+if not constants.isTestingMode:
+    blServer = BluetoothServer(logger)
 buzzer = Buzzer(logger)
 auton = AutonMain(logger)
 autonMode = 1
@@ -65,17 +68,17 @@ while(1):
             auton.loop()
     except:
         y=1
-    if blServer.getStatus():
-        if client_socket is None:
-            client_socket = blServer.getClientSocket()
-            client_socket.send("ready")
-            #auton.setSocket(client_socket)
     if constants.isTestingMode == True:
         if enabled == False:
             enableRobot()
         x=bytes(input(), 'utf-8')
     else:
         x=blServer.return_data()
+        if blServer.getStatus():
+            if client_socket is None:
+                client_socket = blServer.getClientSocket()
+                client_socket.send("ready")
+                #auton.setSocket(client_socket)
     if x == None:
         if constants.isTestingMode == False:
             logger.info("Bluetooth: disconnected!")

@@ -35,21 +35,20 @@ class SmartAuton:
         start = True
         visionT = Vision.Vision(logger, 1) #Creates New Vision Thread #FIXME
         visionT.start() #FIXME
-        logger.info("After vision Start")
         threadD=Thread(asyncio.run(self.initialize(drive))) #Figure out positioning for this and loop function call
         threadD.start()
-        logger.info("After initialize() Start")
         thread=Thread(target=self.loop, args=(logger, drive, visionT))#, vision)) 
         thread.start() #FIXME
-        logger.info("After loop Start")
 
         #logger.info("After Start Vision") #FIXME
 
     def stop(self):
         global start
         global thread
+        global visionT
         start = False
         thread.join()
+        visionT.join()
         logger.info("Disabling SmartAuton.")
 
     async def initialize(self, drive2):
@@ -94,8 +93,8 @@ class SmartAuton:
             elif vision.getLastDirection() == 5:
                 #Not Set Yet
                 logger.info("No Vision Setting Yet")
-        if not start():
-            logger.info("Start is False")
+        if not start:
+            logger.info("Stopping Loop Thread")
             return
 
 

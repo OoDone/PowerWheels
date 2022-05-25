@@ -52,6 +52,8 @@ class AutonMain:
             #AUTON DISABLED
             autonEnabled = enabled
             logger.info("Robot | Disabling Autonomous Mode.")
+            global auton
+            auton.stop()
             #sock.send("auton,disable")
 
 
