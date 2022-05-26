@@ -27,6 +27,7 @@ class AutonDrive:
         driveRobot = True
         driveDirection = isReverse
         logger.info("DriveThread: Driving Robot...")
+        #MAKE FUNCTIONS IN THE DRIVETHREAD CLASS TO CALL INSTEAD OF SETTTING GLOBAL VARIABLES
 
 
 class DriveThread(threading.Thread):
