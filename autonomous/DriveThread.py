@@ -48,12 +48,12 @@ class DriveThread(threading.Thread):
         logger.info("DriveThread: Stopping Thread...")
 
 
-    def stopRobot():
+    def stopRobot(self):
         global stop
         stop = True
         logger.info("DriveThread: Stopping robot..")
 
-    def driveRobot(isReverse):
+    def driveRobot(self,isReverse):
         #if isReverse is true, drive backwards, else drive forwards
         global driveDirection
         global stop
@@ -63,5 +63,9 @@ class DriveThread(threading.Thread):
         else:
             driveDirection = "F"
         logger.info("DriveThread: Driving Robot...")
+
+    def getDriveDirection(self):
+        return driveDirection
+
             
         

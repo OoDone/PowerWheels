@@ -9,6 +9,7 @@ from threading import Thread
 from time import sleep
 from DriveThread import DriveThread
 import asyncio
+from client.timer import Timer
 class SmartAuton:
     global isAvoiding
     global prevTicksDistance
@@ -61,12 +62,20 @@ class SmartAuton:
         logger.info("Started Loop Thread!")
         global start
         stop = False
+        timer = Timer()
         while start:
+            if timer.hasElapsed(2):
+                logger.info("Done Backing Up!")
+                timer.reset()
+                timer.stop()
+                driveThread.driveRobot(False)
+                #FIXME Add turn direction so it doesnt go back into the object it just backed up for
             if distanceSensor.getSonar() <= constants.AutonConstants().minDistance and not isAvoiding:  #FIXME OPPOSITE <> SIGN
                 logger.info("Auton: To close, Perform turn")
                 #drive.stopRobot()
                 driveThread.stopRobot()
-                driveThread.driveRobot(False)
+                driveThread.driveRobot(True)
+                timer.start()
                 #stop = True
                 #drive.driveOpenLoop(-constants.AutonConstants().openLoopSpeed)
             elif distanceSensor.getSonar() <= constants.AutonConstants().avoidMinDistance and isAvoiding:
