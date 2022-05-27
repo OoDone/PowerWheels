@@ -7,6 +7,7 @@ from other import Vision
 from multiprocessing import Process
 from threading import Thread
 from time import sleep
+from DriveThread import DriveThread
 import asyncio
 class SmartAuton:
     global isAvoiding
@@ -29,27 +30,24 @@ class SmartAuton:
     def start(self):
         logger.info("Auton: Starting SmartAuton...")
         global start
-        global threadD
-        global thread
-        global visionT #FIXME
         start = True
-        visionT = Vision.Vision(logger, 1, start) #Creates New Vision Thread #FIXME
-        visionT.start() #FIXME
-        threadD=Thread(asyncio.run(self.initialize(drive))) #Figure out positioning for this and loop function call
-        threadD.start()
-        thread=Thread(target=self.loop, args=(logger, drive, visionT))#, vision)) 
-        thread.start() #FIXME
+        self.visionThread = Vision.Vision(logger, 1, start) #Creates New Vision Thread #FIXME
+        visionThread.start() #FIXME
+        self.driveThread=DriveThread(logger, 1, drive, start) #Figure out positioning for this and loop function call
+        driveThread.start()
+        self.loopThread=Thread(target=self.loop, args=(logger, drive, visionThread))#, vision)) 
+        loopThread.start() #FIXME
 
         #logger.info("After Start Vision") #FIXME
 
     def stop(self):
         global start
-        global thread
-        global visionT
         start = False
-        thread.join()
-        visionT.stopVision()
-        visionT.join()
+        self.loopThread.join()
+        self.visionThread.stopVision()
+        self.visionThread.join()
+        self.driveThread.stopThread()
+        self.driveThread.join()
         logger.info("Disabled SmartAuton.")
         drive.stopRobot()
 
