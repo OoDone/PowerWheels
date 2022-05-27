@@ -62,11 +62,14 @@ class SmartAuton:
         logger.info("Started Loop Thread!")
         #vision = Vision.Vision(logger)#FIXME
         global start
+        stop = False
         while start:
             #vision.startVision()#FIXME
             if distanceSensor.getSonar() <= constants.AutonConstants().minDistance and not isAvoiding:  #FIXME OPPOSITE <> SIGN
                 logger.info("Auton: To close, Perform turn")
-                drive.stopRobot()
+                #drive.stopRobot()
+                #stop = True
+                #drive.driveOpenLoop(-constants.AutonConstants().openLoopSpeed)
                 #asyncio.run(self.TURN ASYNC FUNCTION)
             elif distanceSensor.getSonar() <= constants.AutonConstants().avoidMinDistance and isAvoiding:
                 logger.info("Auton: Distance to close while avoiding obsticle, fallback to reverse avoid")
@@ -74,26 +77,29 @@ class SmartAuton:
                 isAvoiding = False
                 drive.stopDriveDistAuton()
                 #Fall back to reverse here
-            if vision.getLastDirection() == 0:
+            elif isAvoiding:
+                drive.driveOpenLoop(constants.AutonConstants().openLoopSpeed)
+            if vision.getLastDirection() == 0 and not stop:
                 #Forward
                 drive.steerServoPerc(0)
-                logger.info("Forwards")
+                #logger.info("Forwards")
             elif vision.getLastDirection() == 1:
                 #backwards
                 drive.steerServoPerc(0)
-                logger.info("Backwards")
+                #logger.info("Backwards")
             elif vision.getLastDirection() == 2:
                 #right
-                drive.steerServoPerc(50)
+                drive.steerServoPerc(-100)
             elif vision.getLastDirection() == 3:
                 #left
-                drive.steerServoPerc(-50)
+                drive.steerServoPerc(50)
             elif vision.getLastDirection() == 4:
                 #stop
                 drive.stopRobot()
             elif vision.getLastDirection() == 5:
                 #Not Set Yet
-                logger.info("No Vision Setting Yet")
+                x=1
+                #logger.info("No Vision Setting Yet")
         if not start:
             logger.info("Stopping Loop Thread")
             return
