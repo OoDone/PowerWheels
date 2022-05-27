@@ -57,23 +57,23 @@ class SmartAuton:
 
     def loop(self, logger, drive, vision):
         global isAvoiding
+        global driveThread
         logger.info("Started Loop Thread!")
-        #vision = Vision.Vision(logger)#FIXME
         global start
         stop = False
         while start:
-            #vision.startVision()#FIXME
             if distanceSensor.getSonar() <= constants.AutonConstants().minDistance and not isAvoiding:  #FIXME OPPOSITE <> SIGN
                 logger.info("Auton: To close, Perform turn")
                 #drive.stopRobot()
+                driveThread.stopRobot()
+                driveThread.driveRobot(False)
                 #stop = True
                 #drive.driveOpenLoop(-constants.AutonConstants().openLoopSpeed)
-                #asyncio.run(self.TURN ASYNC FUNCTION)
             elif distanceSensor.getSonar() <= constants.AutonConstants().avoidMinDistance and isAvoiding:
                 logger.info("Auton: Distance to close while avoiding obsticle, fallback to reverse avoid")
-                drive.stopRobot()
+                #drive.stopRobot()
+                driveThread.stopRobot()
                 isAvoiding = False
-                drive.stopDriveDistAuton()
                 #Fall back to reverse here
             elif isAvoiding:
                 drive.driveOpenLoop(constants.AutonConstants().openLoopSpeed)

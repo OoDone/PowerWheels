@@ -17,7 +17,7 @@ class DriveThread(threading.Thread):
         self.start = Start
         self.drive = Drive
         logger = Logger
-        self.constants = Constants(logger)
+        self.constants = Constants()
         logger.info("Robot | Code: DriveThread.py Init")
         
 
@@ -26,7 +26,6 @@ class DriveThread(threading.Thread):
         logger.info("Starting Drive Thread: " + self.name)
         global start
         while start:
-            logger.info("Run Loop")
             if not stop:
                 if driveDirection  == "N":
                     #No direction yet
@@ -46,6 +45,8 @@ class DriveThread(threading.Thread):
     def stopThread(self):
         global start
         start = False
+        logger.info("DriveThread: Stopping Thread...")
+
 
     def stopRobot():
         global stop
