@@ -71,7 +71,6 @@ class SmartAuton:
                 timer.stop()
                 driveThread.driveRobot(False)
                 stop = False
-                #FIXME Add turn direction so it doesnt go back into the object it just backed up for
             if distanceSensor.getSonar() <= constants.AutonConstants().minDistance and not isAvoiding:  #FIXME OPPOSITE <> SIGN
                 logger.info("Auton: To close, Perform turn")
                 #drive.stopRobot()
@@ -79,7 +78,9 @@ class SmartAuton:
                 driveThread.driveRobot(True)
                 timer.start()
                 stop = True
-                #drive.driveOpenLoop(-constants.AutonConstants().openLoopSpeed)
+                #IF not using vision to avoid do below
+                drive.steerServoPerc(50) #steer left 
+                #FIXME Add turn direction so it doesnt go back into the object it just backed up for
             elif distanceSensor.getSonar() <= constants.AutonConstants().avoidMinDistance and isAvoiding:
                 logger.info("Auton: Distance to close while avoiding obsticle, fallback to reverse avoid")
                 #drive.stopRobot()
@@ -92,19 +93,19 @@ class SmartAuton:
                 #Forward
                 drive.steerServoPerc(0)
                 #logger.info("Forwards")
-            elif vision.getLastDirection() == 1:
+            elif vision.getLastDirection() == 1 and not stop:
                 #backwards
                 drive.steerServoPerc(0)
                 #logger.info("Backwards")
-            elif vision.getLastDirection() == 2:
+            elif vision.getLastDirection() == 2 and not stop:
                 #right
                 drive.steerServoPerc(-100)
-            elif vision.getLastDirection() == 3:
+            elif vision.getLastDirection() == 3 and not stop:
                 #left
                 drive.steerServoPerc(50)
-            elif vision.getLastDirection() == 4:
+            elif vision.getLastDirection() == 4 and not stop:
                 #stop
-                drive.stopRobot()
+                driveThread.stopRobot()
             elif vision.getLastDirection() == 5:
                 #Not Set Yet
                 x=1
