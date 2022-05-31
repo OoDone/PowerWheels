@@ -24,8 +24,7 @@ class DriveThread(threading.Thread):
         
     def run(self):
         logger.info("Starting Drive Thread: " + self.name)
-        global start
-        while start:
+        while self.start:
             if not stop:
                 if driveDirection  == "N":
                     #No direction yet
@@ -43,8 +42,7 @@ class DriveThread(threading.Thread):
             return #Stop Drive Thread
 
     def stopThread(self):
-        global start
-        start = False
+        self.start = False
         logger.info("DriveThread: Stopping Thread...")
 
 
