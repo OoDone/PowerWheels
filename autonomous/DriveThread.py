@@ -7,7 +7,7 @@ from Variables import Constants
 
 start = False
 stop = False
-driveDirection = "N"
+driveDirection = "F"
 class DriveThread(threading.Thread):
     def __init__(self, Logger, threadID, Drive, Start):
         threading.Thread.__init__(self)
@@ -29,7 +29,6 @@ class DriveThread(threading.Thread):
         logger.info("Starting Drive Thread: " + self.name)
         global start
         global driveDirection
-        driveDirection = "F"
         while start:
             if not stop:
                 if driveDirection  == "N":
@@ -40,6 +39,7 @@ class DriveThread(threading.Thread):
                     drive.driveOpenLoopNL(constants.AutonConstants().openLoopSpeed)
                 elif driveDirection  == "B":
                     #Backwards
+                    logger.info("Backwards")
                     drive.driveOpenLoopNL(-constants.AutonConstants().openLoopSpeed)
             else:
                 drive.stopRobot()
@@ -64,9 +64,10 @@ class DriveThread(threading.Thread):
         stop = False
         if isReverse:
             driveDirection = "B"
+            logger.info("DriveThread: Driving Robot Backwards...")
         else:
             driveDirection = "F"
-        logger.info("DriveThread: Driving Robot...")
+            logger.info("DriveThread: Driving Robot Forwards...")
 
     def getDriveDirection(self):
         return driveDirection
