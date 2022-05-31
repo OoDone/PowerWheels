@@ -34,7 +34,7 @@ class SmartAuton:
         start = True
         self.visionThread = Vision.Vision(logger, 1, start) #Creates New Vision Thread #FIXME
         self.visionThread.start() #FIXME
-        self.driveThread=DriveThread(logger, 1, drive, start) #Figure out positioning for this and loop function call
+        self.driveThread=DriveThread(logger, 2, drive, start) #Figure out positioning for this and loop function call
         self.driveThread.start()
         self.loopThread=Thread(target=self.loop, args=(logger, drive, visionThread))#, vision)) 
         self.loopThread.start() #FIXME
