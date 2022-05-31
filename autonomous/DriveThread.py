@@ -28,6 +28,8 @@ class DriveThread(threading.Thread):
     def run(self):
         logger.info("Starting Drive Thread: " + self.name)
         global start
+        global driveDirection
+        driveDirection = "N"
         while start:
             if not stop:
                 if driveDirection  == "N":
