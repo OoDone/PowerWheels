@@ -36,7 +36,7 @@ class SmartAuton:
         self.visionThread.start() #FIXME
         self.driveThread=DriveThread(logger, 2, drive, start) #Figure out positioning for this and loop function call
         self.driveThread.start()
-        self.loopThread=Thread(target=self.loop, args=(logger, drive, visionThread))#, vision)) 
+        self.loopThread=Thread(target=self.loop, args=(logger, drive, self.visionThread, self.driveThread))#, vision)) 
         self.loopThread.start() #FIXME
 
         #logger.info("After Start Vision") #FIXME
@@ -56,9 +56,9 @@ class SmartAuton:
         #OPTIONAL, RUNS ONCE AT START AND IS ASYNC
         drive2.driveOpenLoop(constants.AutonConstants().openLoopSpeed)
 
-    def loop(self, logger, drive, vision):
+    def loop(self, logger, drive, vision, driveThread):
         global isAvoiding
-        global driveThread
+        #global driveThread
         logger.info("Started Loop Thread!")
         global start
         stop = False
