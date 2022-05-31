@@ -37,10 +37,10 @@ class DriveThread(threading.Thread):
                     x=1
                 elif driveDirection  == "F":
                     #Forwards
-                    drive.driveOpenLoop(constants.AutonConstants().openLoopSpeed)
+                    drive.driveOpenLoopNL(constants.AutonConstants().openLoopSpeed)
                 elif driveDirection  == "B":
                     #Backwards
-                    drive.driveOpenLoop(-constants.AutonConstants().openLoopSpeed)
+                    drive.driveOpenLoopNL(-constants.AutonConstants().openLoopSpeed)
             else:
                 drive.stopRobot()
         else:
@@ -50,7 +50,6 @@ class DriveThread(threading.Thread):
     def stopThread(self):
         global start
         start = False
-        logger.info("DriveThread: Stopping Thread...")
 
 
     def stopRobot(self):
