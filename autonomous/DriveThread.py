@@ -29,7 +29,7 @@ class DriveThread(threading.Thread):
         logger.info("Starting Drive Thread: " + self.name)
         global start
         global driveDirection
-        driveDirection = "N"
+        driveDirection = "F"
         while start:
             if not stop:
                 if driveDirection  == "N":
