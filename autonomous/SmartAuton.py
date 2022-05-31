@@ -7,7 +7,7 @@ from other import Vision
 from multiprocessing import Process
 from threading import Thread
 from time import sleep
-from DriveThread import DriveThread
+from autonomous.DriveThread import DriveThread
 import asyncio
 from client.timer import Timer
 class SmartAuton:
@@ -33,11 +33,11 @@ class SmartAuton:
         global start
         start = True
         self.visionThread = Vision.Vision(logger, 1, start) #Creates New Vision Thread #FIXME
-        visionThread.start() #FIXME
+        self.visionThread.start() #FIXME
         self.driveThread=DriveThread(logger, 1, drive, start) #Figure out positioning for this and loop function call
-        driveThread.start()
+        self.driveThread.start()
         self.loopThread=Thread(target=self.loop, args=(logger, drive, visionThread))#, vision)) 
-        loopThread.start() #FIXME
+        self.loopThread.start() #FIXME
 
         #logger.info("After Start Vision") #FIXME
 
