@@ -53,6 +53,7 @@ def disableRobot():
     if enabled:
         enabled = False
         driveControl.stopRobot()
+        auton.enableAuton(False)
         logger.info("Robot | Disabled Robot.")
         try:
             if constants.isTestingMode == False and blServer.getStatus() == True:
@@ -61,7 +62,7 @@ def disableRobot():
             logger.warning("Robot | Couldnt Inform Client Of New Status: Disabled")
     else:
         logger.info("Robot | Robot Already Disabled")
-    
+   
 while(1):
     try:
         if auton.isEnabled():
@@ -100,12 +101,12 @@ while(1):
         logger.info("Stopping robot...")
         x='z'
     elif x==bytes('en', 'UTF-8'):
-        enableRobot()
         logger.info("Enabling Robot...")
+        enableRobot()
         x='z'
     elif x==bytes('di', 'UTF-8'):
-        disableRobot()
         logger.info("Disabling Robot...")
+        disableRobot()
         x='z'
     elif x==bytes('e', 'UTF-8'):
         GPIO.cleanup()

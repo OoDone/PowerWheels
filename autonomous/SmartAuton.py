@@ -101,24 +101,27 @@ class LoopThread(threading.Thread):
         timer = Timer()
         isAvoiding = False
         while start:
-            logger.info("DISTANCESENSOR: " + str(distanceSensor.getSonar()))
+            #logger.info("DISTANCESENSOR: " + str(distanceSensor.getSonar()))
             if timer.hasStarted() and timer.hasElapsed(2):
                 logger.info("Done Backing Up!")
                 timer.reset()
                 timer.stop()
                 driveThread.driveRobot(False)
                 stop = False
-            if distanceSensor.getSonar() <= constants.AutonConstants().minDistance:  #FIXME OPPOSITE <> SIGN
+                isAvoiding = False
+            if distanceSensor.getSonar() <= constants.AutonConstants().minDistance and not isAvoiding:  #FIXME OPPOSITE <> SIGN
                 logger.info("Auton: To close, Perform turn")
                 #drive.stopRobot()
                 #driveThread.stopRobot()
                 driveThread.driveRobot(True)
-                timer.start()
+                isAvoiding = True
+                if not timer.hasStarted():
+                    timer.start()
                 stop = True
                 #IF not using vision to avoid do below
                 drive.steerServoPerc(50) #steer left 
                 #FIXME Add turn direction so it doesnt go back into the object it just backed up for
-            elif distanceSensor.getSonar() <= constants.AutonConstants().avoidMinDistance and isAvoiding:
+            elif distanceSensor.getSonar() <= constants.AutonConstants().avoidMinDistance and 1==2:#isAvoiding:
                 logger.info("Auton: Distance to close while avoiding obsticle, fallback to reverse avoid")
                 #drive.stopRobot()
                 driveThread.stopRobot()

@@ -39,7 +39,7 @@ class DriveThread(threading.Thread):
                     drive.driveOpenLoopNL(constants.AutonConstants().openLoopSpeed)
                 elif driveDirection  == "B":
                     #Backwards
-                    logger.info("Backwards")
+                    #logger.info("Backwards")
                     drive.driveOpenLoopNL(-constants.AutonConstants().openLoopSpeed)
             else:
                 drive.stopRobot()
