@@ -65,7 +65,10 @@ class SmartAuton:
         start = Start
         stop = False
         timer = Timer()
-        while start:
+        while 1:
+            if not start:
+                logger.info("Stopped Loop Thread")
+                return
             logger.info("DISTANCESENSOR: " + distanceSensor.getSonar())
             if timer.hasElapsed(2):
                 logger.info("Done Backing Up!")
