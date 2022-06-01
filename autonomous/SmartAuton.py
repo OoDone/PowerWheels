@@ -102,7 +102,7 @@ class LoopThread(threading.Thread):
         isAvoiding = False
         while start:
             logger.info("DISTANCESENSOR: " + str(distanceSensor.getSonar()))
-            if timer.hasElapsed(2):
+            if timer.hasStarted() and timer.hasElapsed(2):
                 logger.info("Done Backing Up!")
                 timer.reset()
                 timer.stop()
@@ -125,7 +125,7 @@ class LoopThread(threading.Thread):
                 isAvoiding = False
                 #Fall back to reverse here
             elif isAvoiding:
-                drive.driveOpenLoop(constants.AutonConstants().openLoopSpeed)
+                drive.driveOpenLoopNL(constants.AutonConstants().openLoopSpeed)
             if vision.getLastDirection() == 0 and not stop:
                 #Forward
                 drive.steerServoPerc(0)

@@ -57,7 +57,7 @@ class Motor:
         speed = speedPercent*5+constants.DriveConstants().motorNeutralSpeed
       if constants.isTestingMode == False:
         pi.set_servo_pulsewidth(motor, speed)
-      else: logger.info("TestMode: Set Motor Speed to " + str(speedPercent) + " Percent.")
+      #else: logger.info("TestMode: Set Motor Speed to " + str(speedPercent) + " Percent.")
     else: logger.info("setMotorSpeedPercent: SpeedPercent not within allowed speed range.")
     
   def stopMotor(self):
