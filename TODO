@@ -1,22 +1,16 @@
 DriveControl:
-- fix DriveDist Fake Encoder - Needs Testing
-- Fix DriveDist Function(Implement Real encoder shit) - Test
-- Implement stopDriveDist function() - Needs Testing
 - fix encoder counts forwards while moving backwards, counts up both directions
+
 DriveForwardAuton:
-- Add function stop function to work with drive control stopDriveDist - test
 
 Main:
-- Fix allowed to enable more than once(And disable) - test
+- Fix need to disabled before it allows you to enable 
+- Put try except around main loop and kill auton threads on error and exit program
 
 Autonomous:
-- Add steer logic, distance logic, and sensor logic to Smart Auton
-- disable controller inputting to drivecontrol class, make controller stick values not effect drive - test
 - smaartauton: Make the avoidobstacle only stop turning if the distance is within a certain value(Smaller value then the first trigger value.)
-- AutonMain- Make loop get called in main.py loop so autonomous and the robot can still be disabled
 
 Vision:
-- Test new multiprocessing for smartauton vision and loop. - test
 
 
 Service:
