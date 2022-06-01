@@ -37,7 +37,7 @@ class SmartAuton:
         self.visionThread.start() #FIXME
         self.driveThread=DriveThread(logger, 2, drive, start) #Figure out positioning for this and loop function call
         self.driveThread.start()
-        self.loopThread=Thread(target=self.loop, args=(logger, drive, self.visionThread, self.driveThread, distanceSensor))#, vision)) 
+        self.loopThread=Thread(target=self.loop, args=(logger, drive, self.visionThread, self.driveThread, distanceSensor, constants))#, vision)) 
         self.loopThread.start() #FIXME
 
         #logger.info("After Start Vision") #FIXME
@@ -57,7 +57,7 @@ class SmartAuton:
         #OPTIONAL, RUNS ONCE AT START AND IS ASYNC
         drive2.driveOpenLoop(constants.AutonConstants().openLoopSpeed)
 
-    def loop(self, logger, drive, vision, driveThread, distanceSensor):
+    def loop(self, logger, drive, vision, driveThread, distanceSensor, constants):
         global isAvoiding
         #global driveThread
         logger.info("Started Loop Thread!")
@@ -71,10 +71,10 @@ class SmartAuton:
                 timer.stop()
                 driveThread.driveRobot(False)
                 stop = False
-            if distanceSensor.getSonar() <= constants.AutonConstants().minDistance and not isAvoiding:  #FIXME OPPOSITE <> SIGN
+            if distanceSensor.getSonar() <= constants.AutonConstants().minDistance:  #FIXME OPPOSITE <> SIGN
                 logger.info("Auton: To close, Perform turn")
                 #drive.stopRobot()
-                driveThread.stopRobot()
+                #driveThread.stopRobot()
                 driveThread.driveRobot(True)
                 timer.start()
                 stop = True
