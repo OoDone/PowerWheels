@@ -6,6 +6,7 @@ from other.DistanceSensor import DistanceSensor
 from other import Vision
 from multiprocessing import Process
 from threading import Thread
+import threading
 from time import sleep
 from autonomous.DriveThread import DriveThread
 import asyncio
@@ -19,28 +20,23 @@ class SmartAuton:
         global logger
         global drive
         global constants
-        global distanceSensor
         constants = Constants()
         logger = Logger
-        distanceSensor = DistanceSensor(logger)
-        #vision = Vision.Vision(logger)
-        #vision = Vision.Vision(logger, "Vision-1")
         logger.info("Robot | Code: SmartAuton.py Init")
         drive = DriveControl(logger)
 
     def start(self):
         logger.info("Auton: Starting SmartAuton...")
         global start
-        global distanceSensor
         start = True
         self.visionThread = Vision.Vision(logger, 1, start) #Creates New Vision Thread #FIXME
         self.visionThread.start() #FIXME
-        self.driveThread=DriveThread(logger, 2, drive, start) #Figure out positioning for this and loop function call
+        self.driveThread=DriveThread(logger, 1, drive, start) #Figure out positioning for this and loop function call
         self.driveThread.start()
-        self.loopThread=Thread(target=self.loop, args=(logger, drive, self.visionThread, self.driveThread, distanceSensor, constants, start))#, vision)) 
+        #CHECK IF ALL THREAD IDS CAN BE 1 FIXME
+        self.loopThread=LoopThread(logger, 1, drive, self.visionThread, self.driveThread, start) 
         self.loopThread.start() #FIXME
 
-        #logger.info("After Start Vision") #FIXME
 
     def stop(self):
         global start
@@ -50,26 +46,62 @@ class SmartAuton:
         self.visionThread.join()
         self.driveThread.stopThread()
         self.driveThread.join()
+        self.loopThread.stopThread()
+        self.loopThread.join()
         logger.info("Disabled SmartAuton.")
         drive.stopRobot()
 
-    async def initialize(self, drive2):
-        #OPTIONAL, RUNS ONCE AT START AND IS ASYNC
-        drive2.driveOpenLoop(constants.AutonConstants().openLoopSpeed)
 
-    def loop(self, logger, drive, vision, driveThread, distanceSensor, constants, Start):
+    def isFinished(self):
+        return False
+
+    
+    async def avoidObsticle(self):
         global isAvoiding
-        #global driveThread
+        global prevTicksDistance
+        prevTicksDistance = drive.getEncoderTicks()
+        isAvoiding = True
+        steerPercent = 10 # Temp Calculate steer needed or get a constant
+        drive.steerServoPerc(steerPercent)
+        drive.driveDistAuton(constants.AutonConstants().turnDistance, constants.AutonConstants().avoidObsticleSpeed)
+
+    def reverseAvoid(self):
+        global prevTicksDistance
+        drive.steerServoPerc(10)# Same value as above
+        drive.driveDistAuton(constants.AutonConstants().turnDistance, constants.AutonConstants().avoidObsticleSpeed)
+
+    
+class LoopThread(threading.Thread):
+
+    def __init__(self, Logger, threadID, Drive, Vision, DriveThread, Start):
+        threading.Thread.__init__(self)
+        self.threadID = threadID
+        self.name = "Loop-" + str(threadID)
+        global logger
+        global drive
+        global start
+        global constants
+        global driveThread
+        global vision
+        global distanceSensor
+        driveThread = DriveThread
+        vision = Vision
+        start = Start
+        drive = Drive
+        logger = Logger
+        constants = Constants()
+        distanceSensor = DistanceSensor(logger)
+        logger.info("Robot | Code: SmartAuton.LoopThread Init")
+
+    
+    def run(self):
         logger.info("Started Loop Thread!")
         global start
-        start = Start
         stop = False
         timer = Timer()
-        while 1:
-            if not start:
-                logger.info("Stopped Loop Thread")
-                return
-            logger.info("DISTANCESENSOR: " + distanceSensor.getSonar())
+        isAvoiding = False
+        while start:
+            logger.info("DISTANCESENSOR: " + str(distanceSensor.getSonar()))
             if timer.hasElapsed(2):
                 logger.info("Done Backing Up!")
                 timer.reset()
@@ -119,22 +151,7 @@ class SmartAuton:
             logger.info("Stopping Loop Thread")
             return
 
-
-    def isFinished(self):
-        return False
-
-    
-    async def avoidObsticle(self):
-        global isAvoiding
-        global prevTicksDistance
-        prevTicksDistance = drive.getEncoderTicks()
-        isAvoiding = True
-        steerPercent = 10 # Temp Calculate steer needed or get a constant
-        drive.steerServoPerc(steerPercent)
-        drive.driveDistAuton(constants.AutonConstants().turnDistance, constants.AutonConstants().avoidObsticleSpeed)
-
-    def reverseAvoid(self):
-        global prevTicksDistance
-        drive.steerServoPerc(10)# Same value as above
-        drive.driveDistAuton(constants.AutonConstants().turnDistance, constants.AutonConstants().avoidObsticleSpeed)
+    def stopThread(self):
+        global start
+        start = False
 
