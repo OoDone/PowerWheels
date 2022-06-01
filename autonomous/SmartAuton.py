@@ -57,11 +57,12 @@ class SmartAuton:
         #OPTIONAL, RUNS ONCE AT START AND IS ASYNC
         drive2.driveOpenLoop(constants.AutonConstants().openLoopSpeed)
 
-    def loop(self, logger, drive, vision, driveThread, distanceSensor, constants):
+    def loop(self, logger, drive, vision, driveThread, distanceSensor, constants, Start):
         global isAvoiding
         #global driveThread
         logger.info("Started Loop Thread!")
         global start
+        start = Start
         stop = False
         timer = Timer()
         while start:
