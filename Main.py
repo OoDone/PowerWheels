@@ -141,6 +141,6 @@ while(1):
             client_socket.send("<<<  wrong data  >>>")
             client_socket.send("please enter the defined data to continue.....")
     except:
-        logger.info("Robot | Error in Main Loop, Shutting down program.")
+        logger.info("Robot | Error in Main Loop, Shutting down program(Change to continue and not crash?).")
         disableRobot()
         crash.toString()
