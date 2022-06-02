@@ -75,7 +75,7 @@ while(1):
         y=1
     try:
         input_state = GPIO.input(constants.RobotConstants().killSwitchPin) #Read and store value of input to a variable
-        if input_state == True and not constants.isTestingMode: #True is not on(Robot disabled)
+        if input_state and not constants.isTestingMode: #True is not on(Robot disabled)
             global enabled
             if enabled:
                 disableRobot() #Disable robot every time its enabled while the kill switch is active(In off position)
