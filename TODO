@@ -5,7 +5,9 @@ DriveForwardAuton:
 
 Main:
 - Fix need to disabled before it allows you to enable 
-- Put try except around main loop and kill auton threads on error and exit program
+- Put try except around main loop and kill auton threads on error and exit program - TEST
+- Add killSwitch - TEST
+- Check if Ready byte is sent to Controller - TEST
 
 Autonomous:
 - smaartauton: Make the avoidobstacle only stop turning if the distance is within a certain value(Smaller value then the first trigger value.)

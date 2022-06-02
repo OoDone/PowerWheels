@@ -15,6 +15,7 @@ class Constants:
     wheelBaseMeters = 2 #FIXME Wheelbase for Autonomous/Automated calculations IN METERS WB 
     maxSteerAngle = 10 #FIXME Check steering angle, not 10
     minTurnRadius = 1 #FIXME 
+    killSwitchPin = 26 #Pin for killswitch DO NOT MIXUP OR PI CAN FRY ITSELF
     #Turning radius calculation: TR = WB/tan(a)
 
   #Drive constants
