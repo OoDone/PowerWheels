@@ -42,5 +42,4 @@ class DistanceSensor:
         return distance
     
     def ultrasonicRead(self):
-        #print(self.getSonar())
         return self.getSonar()

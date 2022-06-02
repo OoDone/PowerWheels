@@ -34,7 +34,6 @@ enabled = False
 disconnected = False
 client_socket = None
 logger.info("Robot | Code: Main.py Init")
-#time.sleep(1)
 GPIO.setmode(GPIO.BCM)         #Set GPIO pin numbering
 GPIO.setup(constants.RobotConstants().killSwitchPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
@@ -90,7 +89,6 @@ while(1):
                     client_socket = blServer.getClientSocket()
                     client_socket.send("ready")
                     logger.info("READY")
-                    #auton.setSocket(client_socket)
         if x == None:
             if constants.isTestingMode == False:
                 logger.info("Bluetooth: disconnected!")
@@ -125,13 +123,10 @@ while(1):
             break
         elif x==bytes('ho','UTF-8'):
             if buzzer == False:
-                #GPIO.output(buzzerPin,GPIO.HIGH)
                 buzzer = True
             elif buzzer == True:
-                #GPIO.output(buzzerPin,GPIO.LOW)
                 buzzer = False
         elif x==bytes('au','UTF-8'):
-            #Auton Mode
             logger.info("Auton")
             auton.setAutonMode(0)
             auton.enableAuton(True)

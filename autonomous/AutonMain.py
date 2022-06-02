@@ -42,14 +42,12 @@ class AutonMain:
             logger.info("Robot | Autonomous Already Enabled.")
         elif autonEnabled == False and enabled == False:
             logger.info("Robot | Autonomous Already Disabled.")
-        elif enabled == True:
-            #AUTON ENABLED
+        elif enabled == True: #AUTON ENABLED
             autonEnabled = enabled
             logger.info("Robot | Enabling Autonomous In Mode " + str(autonMode))
             #sock.send("auton,enable")
             self.auton()
-        else:
-            #AUTON DISABLED
+        else: #AUTON DISABLED
             autonEnabled = enabled
             logger.info("Robot | Disabling Autonomous Mode.")
             global auton
