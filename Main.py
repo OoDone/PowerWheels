@@ -57,7 +57,7 @@ def disableRobot():
         enabled = False
         driveControl.stopRobot()
         auton.enableAuton(False)
-        GPIO.cleanup #FIXME might not work
+        GPIO.cleanup() #FIXME might not work
         logger.info("Robot | Disabled Robot.")
         try:
             if constants.isTestingMode == False and blServer.getStatus() == True:
@@ -75,7 +75,7 @@ while(1):
         y=1
     try:
         input_state = GPIO.input(constants.RobotConstants().killSwitchPin) #Read and store value of input to a variable
-        if input_state == True: #True is not on(Robot disabled)
+        if input_state == True and not constants.isTestingMode: #True is not on(Robot disabled)
             global enabled
             if enabled:
                 disableRobot() #Disable robot every time its enabled while the kill switch is active(In off position)
@@ -95,6 +95,7 @@ while(1):
             if constants.isTestingMode == False:
                 logger.info("Bluetooth: disconnected!")
                 buzzer.buzz(0.1, 2)
+                auton.enableAuton(False)
                 driveControl.stopRobot()
                 disconnected = True
                 blServer.setStatus(False)

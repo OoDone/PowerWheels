@@ -17,6 +17,9 @@ class Constants:
     minTurnRadius = 1 #FIXME 
     killSwitchPin = 26 #Pin for killswitch DO NOT MIXUP OR PI CAN FRY ITSELF
     #Turning radius calculation: TR = WB/tan(a)
+    trigPin = 16
+    echoPin = 12
+    distSensorMaxDist = 10000 #Max distance the distance sensor can actually read(Can be changed)
 
   #Drive constants
   class DriveConstants:
