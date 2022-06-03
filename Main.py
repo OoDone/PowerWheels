@@ -58,6 +58,8 @@ def disableRobot():
         auton.enableAuton(False)
         GPIO.cleanup() #FIXME might not work
         logger.info("Robot | Disabled Robot.")
+        GPIO.setmode(GPIO.BCM)         #Set GPIO pin numbering
+        GPIO.setup(constants.RobotConstants().killSwitchPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         try:
             if constants.isTestingMode == False and blServer.getStatus() == True:
                 client_socket.send("disable")
