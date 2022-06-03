@@ -72,74 +72,73 @@ while(1):
             auton.loop()
     except:
         y=1
-    try:
-        GPIO.setmode(GPIO.BCM)         #Set GPIO pin numbering
-        GPIO.setup(constants.RobotConstants().killSwitchPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        input_state = GPIO.input(constants.RobotConstants().killSwitchPin) #Read and store value of input to a variable
-        logger.info("Input_State: " + str(input_state))
-        if input_state and not constants.isTestingMode: #True is not on(Robot disabled)
-            #global enabled
-            logger.info("KillSwitch Off")
-            if enabled:
-                disableRobot() #Disable robot every time its enabled while the kill switch is active(In off position)
-        if constants.isTestingMode == True:
-            if enabled == False:
-                enableRobot()
-            x=bytes(input(), 'utf-8')
-        else:
-            x=blServer.return_data()
-            if blServer.getStatus():
-                if client_socket is None:
-                    client_socket = blServer.getClientSocket()
-                    client_socket.send("ready")
-                    logger.info("READY")
-        if x == None:
-            if constants.isTestingMode == False:
-                logger.info("Bluetooth: disconnected!")
-                buzzer.buzz(0.1, 2)
-                auton.enableAuton(False)
-                driveControl.stopRobot()
-                disconnected = True
-                blServer.setStatus(False)
-                client_socket, address = blServer.reconnect()
-                if disconnected == True:
-                    client_socket.send("ready")
-                    blServer.setStatus(True)
-                    buzzer.buzz(0.3, 1)
-                    logger.info("Bluetooth: Reconnected!")
-        elif bytes(':','UTF-8') in x:
-            if enabled == True and not auton.isEnabled():
-                driveControl.driveRobot(x)
-        elif x==bytes('s', 'UTF-8'):
-            driveControl.stopRobot()
-            logger.info("Stopping robot...")
-            x='z'
-        elif x==bytes('en', 'UTF-8'):
-            logger.info("Enabling Robot...")
+    #try:
+    GPIO.setmode(GPIO.BCM)         #Set GPIO pin numbering
+    GPIO.setup(constants.RobotConstants().killSwitchPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    input_state = GPIO.input(constants.RobotConstants().killSwitchPin) #Read and store value of input to a variable
+    logger.info("Input_State: " + str(input_state))
+    if input_state and not constants.isTestingMode: #True is not on(Robot disabled)
+        #global enabled
+        if enabled:
+            disableRobot() #Disable robot every time its enabled while the kill switch is active(In off position)
+    if constants.isTestingMode == True:
+        if enabled == False:
             enableRobot()
-            x='z'
-        elif x==bytes('di', 'UTF-8'):
-            logger.info("Disabling Robot...")
-            disableRobot()
-            x='z'
-        elif x==bytes('e', 'UTF-8'):
-            GPIO.cleanup()
-            break
-        elif x==bytes('ho','UTF-8'):
-            if buzzer == False:
-                buzzer = True
-            elif buzzer == True:
-                buzzer = False
-        elif x==bytes('au','UTF-8'):
-            logger.info("Auton")
-            auton.setAutonMode(0)
-            auton.enableAuton(True)
-        elif x==bytes('ad','UTF-8'):
+        x=bytes(input(), 'utf-8')
+    else:
+        x=blServer.return_data()
+        if blServer.getStatus():
+            if client_socket is None:
+                client_socket = blServer.getClientSocket()
+                client_socket.send("ready")
+                logger.info("READY")
+    if x == None:
+        if constants.isTestingMode == False:
+            logger.info("Bluetooth: disconnected!")
+            buzzer.buzz(0.1, 2)
             auton.enableAuton(False)
-        else:
-            client_socket.send("<<<  wrong data  >>>")
-            client_socket.send("please enter the defined data to continue.....")
-    except:
-        logger.info("Robot | Error in Main Loop, Shutting down program(Change to continue and not crash?).")
+            driveControl.stopRobot()
+            disconnected = True
+            blServer.setStatus(False)
+            client_socket, address = blServer.reconnect()
+            if disconnected == True:
+                client_socket.send("ready")
+                blServer.setStatus(True)
+                buzzer.buzz(0.3, 1)
+                logger.info("Bluetooth: Reconnected!")
+    elif bytes(':','UTF-8') in x:
+        if enabled == True and not auton.isEnabled():
+            driveControl.driveRobot(x)
+    elif x==bytes('s', 'UTF-8'):
+        driveControl.stopRobot()
+        logger.info("Stopping robot...")
+        x='z'
+    elif x==bytes('en', 'UTF-8'):
+        logger.info("Enabling Robot...")
+        enableRobot()
+        x='z'
+    elif x==bytes('di', 'UTF-8'):
+        logger.info("Disabling Robot...")
         disableRobot()
-        crash.toString()
+        x='z'
+    elif x==bytes('e', 'UTF-8'):
+        GPIO.cleanup()
+        break
+    elif x==bytes('ho','UTF-8'):
+        if buzzer == False:
+            buzzer = True
+        elif buzzer == True:
+            buzzer = False
+    elif x==bytes('au','UTF-8'):
+        logger.info("Auton")
+        auton.setAutonMode(0)
+        auton.enableAuton(True)
+    elif x==bytes('ad','UTF-8'):
+        auton.enableAuton(False)
+    else:
+        client_socket.send("<<<  wrong data  >>>")
+        client_socket.send("please enter the defined data to continue.....")
+    #except:
+        #logger.info("Robot | Error in Main Loop, Shutting down program(Change to continue and not crash?).")
+        #disableRobot()
+        #crash.toString()
