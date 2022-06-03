@@ -74,6 +74,7 @@ while(1):
         y=1
     try:
         input_state = GPIO.input(constants.RobotConstants().killSwitchPin) #Read and store value of input to a variable
+        logger.info("Input_State: " + str(input_state))
         if input_state and not constants.isTestingMode: #True is not on(Robot disabled)
             #global enabled
             logger.info("KillSwitch Off")
