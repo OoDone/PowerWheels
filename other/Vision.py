@@ -7,6 +7,7 @@ import numpy as np
 import math
 import os
 import threading
+from Variables import Constants
 
 a = 1
 b = 0.9
@@ -31,6 +32,8 @@ class Vision(threading.Thread):
         global logger
         global cap
         global start
+        global constants
+        constants = Constants()
         start = Start
         logger = Logger
         logger.info("Robot | Code: Vision.py Init")
@@ -124,19 +127,20 @@ class Vision(threading.Thread):
         while start:
             sleep(0.05)
             _,frame = cap.read()
-            #if testmode == 1:
-            name = './data/frame' + str(currentFrame) + '.jpg'
-            nameC = './data/frame' + str(currentFrame) + 'C.jpg'
-            nameB = './data/frame' + str(currentFrame) + 'B.jpg'
-            print ('Creating...' + name)
-        
             img = frame.copy()
 
             blur = cv2.bilateralFilter(img,9,40,40)
             #cv2.imwrite(nameB, blur)
 
             edges = cv2.Canny(blur,50,100)
-            cv2.imwrite(nameC, edges)
+            if constants.AutonConstants().logVisionImages:
+                name = './data/frame' + str(currentFrame) + '.jpg'
+                nameC = './data/frame' + str(currentFrame) + 'C.jpg'
+                nameB = './data/frame' + str(currentFrame) + 'B.jpg'
+                print ('Creating...' + name)
+        
+
+                cv2.imwrite(nameC, edges)
 
             img_h = img.shape[0] - 1
 

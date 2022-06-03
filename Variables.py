@@ -50,6 +50,7 @@ class Constants:
     turnDistance = 10 #FIXME The distance to drive in autonomous while turning to avoid obstacle
     avoidObsticleSpeed = 10 #Percent speed of car while turning to avoid obstacle
     avoidMinDistance = 40#FIXME distance to stop turning while avoiding obsticle IN CENTIMETERS
+    logVisionImages = True
 
   #Bluetooth Constants
   class BluetoothConstants:
