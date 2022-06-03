@@ -124,8 +124,6 @@ class LoopThread(threading.Thread):
                 driveThread.stopRobot()
                 isAvoiding = False
                 #Fall back to reverse here
-            elif isAvoiding:
-                drive.driveOpenLoopNL(constants.AutonConstants().openLoopSpeed)
             if vision.getLastDirection() == 0 and not stop: #Forward
                 drive.steerServoPerc(0)
             elif vision.getLastDirection() == 1 and not stop: #backwards
