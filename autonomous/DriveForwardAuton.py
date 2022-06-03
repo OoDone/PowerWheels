@@ -21,7 +21,6 @@ class DriveForwardAuton:
         asyncio.run(self.initialize())
 
     async def initialize(self):
-        #OPTIONAL, RUNS ONCE AT START AND IS ASYNC
         global isAutonFinished
         global start
         logger.info("AUTON INITIALIZE")
@@ -39,12 +38,4 @@ class DriveForwardAuton:
         
     def isFinished(self):
         return isAutonFinished
-
-    #def loop(self):
-        #runs every 20 milliseconds
-       # logger.info("TEMP AUTON DRIVEFORWARDAUTON LOOP")
-
-    #while(start):
-        #sleep(0.02)
-       # loop()
 

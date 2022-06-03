@@ -23,23 +23,18 @@ class DriveThread(threading.Thread):
         constants = Constants()
         logger.info("Robot | Code: DriveThread.py Init")
         
-
-        
+  
     def run(self):
         logger.info("Starting Drive Thread: " + self.name)
         global start
         global driveDirection
         while start:
             if not stop:
-                if driveDirection  == "N":
-                    #No direction yet
+                if driveDirection  == "N": #No direction yet
                     x=1
-                elif driveDirection  == "F":
-                    #Forwards
+                elif driveDirection  == "F": #Forwards
                     drive.driveOpenLoopNL(constants.AutonConstants().openLoopSpeed)
-                elif driveDirection  == "B":
-                    #Backwards
-                    #logger.info("Backwards")
+                elif driveDirection  == "B": #Backwards
                     drive.driveOpenLoopNL(-constants.AutonConstants().openLoopSpeed)
             else:
                 drive.stopRobot()
@@ -50,7 +45,6 @@ class DriveThread(threading.Thread):
     def stopThread(self):
         global start
         start = False
-
 
     def stopRobot(self):
         global stop
@@ -71,6 +65,3 @@ class DriveThread(threading.Thread):
 
     def getDriveDirection(self):
         return driveDirection
-
-            
-        

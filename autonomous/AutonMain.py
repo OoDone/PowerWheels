@@ -17,10 +17,6 @@ class AutonMain:
         constants = Constants()
 
     
-    #def setSocket(self, Sock):
-        #global sock
-        #sock = Sock
-        #logger.info("Set Socket!")
 
     def setAutonMode(self, mode):
         global autonMode
@@ -45,35 +41,28 @@ class AutonMain:
         elif enabled == True: #AUTON ENABLED
             autonEnabled = enabled
             logger.info("Robot | Enabling Autonomous In Mode " + str(autonMode))
-            #sock.send("auton,enable")
             self.auton()
         else: #AUTON DISABLED
             autonEnabled = enabled
             logger.info("Robot | Disabling Autonomous Mode.")
             global auton
             auton.stop()
-            #sock.send("auton,disable")
 
 
     def auton(self):
         global auton
         if autonMode == 1:
-            #autonMode 0
             auton = DriveForwardAuton(logger)
             auton.start()
             self.loop()
         elif autonMode == 0:
-            #autonMode 1
             auton = SmartAuton(logger)
             auton.start()
-            #CircleAuton().start() #Drives in circles #MAKE EACH AUTON IN A DIFFERENT FILE AND CLASS
-            #self.loop()
         else: logger.info("Auton(): Autonomous Mode Not Enabled")
         
         
     def loop(self):
         global autonEnabled
-        #while autonEnabled:
         if auton.isFinished():
             self.enableAuton(False)
 

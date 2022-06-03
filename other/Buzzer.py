@@ -55,4 +55,3 @@ class Buzzer:
             break
       except:
         logger.warn("Robot: Exception in customBuzz() function")
-

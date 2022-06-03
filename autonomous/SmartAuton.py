@@ -30,12 +30,11 @@ class SmartAuton:
         global start
         start = True
         self.visionThread = Vision.Vision(logger, 1, start) #Creates New Vision Thread #FIXME
-        self.visionThread.start() #FIXME
-        self.driveThread=DriveThread(logger, 1, drive, start) #Figure out positioning for this and loop function call
+        self.visionThread.start()
+        self.driveThread=DriveThread(logger, 1, drive, start)
         self.driveThread.start()
-        #CHECK IF ALL THREAD IDS CAN BE 1 FIXME
         self.loopThread=LoopThread(logger, 1, drive, self.visionThread, self.driveThread, start) 
-        self.loopThread.start() #FIXME
+        self.loopThread.start()
 
 
     def stop(self):
@@ -100,7 +99,6 @@ class LoopThread(threading.Thread):
         timer = Timer()
         isAvoiding = False
         while start:
-            logger.info("DISTANCESENSOR: " + str(distanceSensor.getSonar()))
             if timer.hasStarted() and timer.hasElapsed(2):
                 logger.info("Done Backing Up!")
                 timer.reset()
@@ -110,19 +108,17 @@ class LoopThread(threading.Thread):
                 isAvoiding = False
             if distanceSensor.getSonar() <= constants.AutonConstants().minDistance and not isAvoiding:  #FIXME OPPOSITE <> SIGN
                 logger.info("Auton: To close, Perform turn")
+                drive.steerServoPerc(50) #steer left
+                sleep(0.5) #Wait until steering is set
                 driveThread.driveRobot(True)
                 isAvoiding = True
                 if not timer.hasStarted():
                     timer.start()
                 stop = True
-                #IF not using vision to avoid do below
-                drive.steerServoPerc(50) #steer left 
-                #FIXME Add turn direction so it doesnt go back into the object it just backed up for
             elif distanceSensor.getSonar() <= constants.AutonConstants().avoidMinDistance and 1==2:#isAvoiding:
                 logger.info("Auton: Distance to close while avoiding obsticle, fallback to reverse avoid")
                 driveThread.stopRobot()
                 isAvoiding = False
-                #Fall back to reverse here
             if vision.getLastDirection() == 0 and not stop: #Forward
                 drive.steerServoPerc(0)
             elif vision.getLastDirection() == 1 and not stop: #backwards

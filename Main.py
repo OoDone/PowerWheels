@@ -17,7 +17,6 @@ try:
 except:
     print("Cannot Import BluetoothServer")
 
-#from Constants import Constants
 try:
     logger = Logger("/home/pi/Desktop/logs/robotLog")
 except:
@@ -57,8 +56,6 @@ def disableRobot():
         driveControl.stopRobot()
         auton.enableAuton(False)
         logger.info("Robot | Disabled Robot.")
-        #GPIO.setmode(GPIO.BCM)         #Set GPIO pin numbering
-        #GPIO.setup(constants.RobotConstants().killSwitchPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         try:
             if constants.isTestingMode == False and blServer.getStatus() == True:
                 client_socket.send("disable")
@@ -77,7 +74,6 @@ while(1):
         input_state = GPIO.input(constants.RobotConstants().killSwitchPin) #Read and store value of input to a variable
         #logger.info("Input_State: " + str(input_state))
         if input_state and not constants.isTestingMode: #True is not on(Robot disabled)
-            #global enabled
             if enabled:
                 disableRobot() #Disable robot every time its enabled while the kill switch is active(In off position)
         if constants.isTestingMode == True:

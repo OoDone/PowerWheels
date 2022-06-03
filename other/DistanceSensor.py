@@ -12,11 +12,11 @@ from Variables import Constants
 class DistanceSensor:
     def __init__(self, Logger):
         global logger
+        global constants
         logger = Logger
         constants = Constants()
         sleep(0.005)
         self.timeOut=constants.RobotConstants().distSensorMaxDist*60
-        self.timeOut = 60*10000
         logger.info("Robot | Code: DistanceSensor.py Init")
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(constants.RobotConstants().trigPin, GPIO.OUT) # set trigPin to output mode

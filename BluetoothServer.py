@@ -27,8 +27,7 @@ class BluetoothServer:
     #enabledAlert(0.1, 3)
     bluetooth.advertise_service(server_socket, "SampleServer", service_classes=[bluetooth.SERIAL_PORT_CLASS],profiles=[bluetooth.SERIAL_PORT_PROFILE])
     logger.info("Bluetooth: Advertising Service!")
-
-
+    
     client_socket, address = server_socket.accept()
     logger.info("Bluetooth: Accepting client!")
     logger.info("Bluetooth: Device connected!")
@@ -42,7 +41,6 @@ class BluetoothServer:
             data = client_socket.recv(1024)
             if not data:
                 break
-            #print(data) #PRINT LINEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
             return data
     except OSError:
         pass

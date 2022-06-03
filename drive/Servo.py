@@ -57,7 +57,3 @@ class Servo:
     
   def getServoPosition(self):
     return position
-
-#Getters for encoder ticks, motor speed
-#Encoder logic
-

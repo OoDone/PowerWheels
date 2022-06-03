@@ -57,38 +57,29 @@ class Vision(threading.Thread):
         lastDirection = 0
         m1_speed = 0.8 #mr
         m2_speed = a #ml
-        #r.value = (m1_speed, m2_speed)
         logger.info("Vision: Clear To Go Forward")
 
     def backward(self):
         global lastDirection
         lastDirection = 1
-        #r.reverse()
         logger.info("Vision: Clear To Go Backwards")
 
     def right(self):
         global lastDirection
         lastDirection = 2
-        #r.right(speed=1)
         logger.info("Vision: Obstacle, Attempting To Go Right")
-        #sleep(0.6) #0.5
-        #forward()
 
  
     def left(self):
         global lastDirection
         lastDirection = 3
-        #r.left(speed=1)
         logger.info("Vision: Obstacle, Attempting To Go Left")
-        #sleep(0.6) #0.5
-        #forward()
 
     def stop(self):
         m1_speed = 0.0
         m2_speed = 0.0
         global lastDirection
         lastDirection = 4
-        #r.value = (m1_speed, m2_speed)
         logger.info("Vision: Obstacle?? Stopping")
         
     def getLastDirection(self):
@@ -221,8 +212,6 @@ class Vision(threading.Thread):
 
                 if y[1] < 360: #310
                     self.left()
-                    #pwm.start(0)
-                    #pwm1.start(40)
                     direction = "left "
                     print(direction)
 
@@ -233,7 +222,6 @@ class Vision(threading.Thread):
 
             else:
                 self.forward()
-    #           sleep(0.005)
                 direction = "forward "
                 print(direction)
             
@@ -258,16 +246,12 @@ class Vision(threading.Thread):
                 #return
         else:
             logger.info("Stopping Vision Thread")
+            #cv2.destroyAllWindows
+            #cap.release()
             return #Stop Vision Thread
-            
-
-
-        #cv2.destroyAllWindows
-        #cap.release()
-            
+                   
     def stopVision(self):
         global start
         start = False
-        #logger.info("Stopping Vision...")
             
         
