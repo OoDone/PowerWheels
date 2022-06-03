@@ -73,8 +73,8 @@ while(1):
     except:
         y=1
     #try:
-    GPIO.setmode(GPIO.BCM)         #Set GPIO pin numbering
-    GPIO.setup(constants.RobotConstants().killSwitchPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    #GPIO.setmode(GPIO.BCM)         #Set GPIO pin numbering
+    #GPIO.setup(constants.RobotConstants().killSwitchPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     input_state = GPIO.input(constants.RobotConstants().killSwitchPin) #Read and store value of input to a variable
     logger.info("Input_State: " + str(input_state))
     if input_state and not constants.isTestingMode: #True is not on(Robot disabled)
