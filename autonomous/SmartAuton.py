@@ -101,7 +101,7 @@ class LoopThread(threading.Thread):
         timer = Timer()
         isAvoiding = False
         while start:
-            #logger.info("DISTANCESENSOR: " + str(distanceSensor.getSonar()))
+            logger.info("DISTANCESENSOR: " + str(distanceSensor.getSonar()))
             if timer.hasStarted() and timer.hasElapsed(2):
                 logger.info("Done Backing Up!")
                 timer.reset()
