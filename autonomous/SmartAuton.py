@@ -96,7 +96,6 @@ class LoopThread(threading.Thread):
     
     def run(self):
         logger.info("Started Loop Thread!")
-        global start
         stop = False
         timer = Timer()
         isAvoiding = False
