@@ -56,10 +56,9 @@ def disableRobot():
         enabled = False
         driveControl.stopRobot()
         auton.enableAuton(False)
-        GPIO.cleanup() #FIXME might not work
         logger.info("Robot | Disabled Robot.")
-        GPIO.setmode(GPIO.BCM)         #Set GPIO pin numbering
-        GPIO.setup(constants.RobotConstants().killSwitchPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        #GPIO.setmode(GPIO.BCM)         #Set GPIO pin numbering
+        #GPIO.setup(constants.RobotConstants().killSwitchPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         try:
             if constants.isTestingMode == False and blServer.getStatus() == True:
                 client_socket.send("disable")
@@ -141,4 +140,5 @@ while(1):
     except:
         logger.info("Robot | Error in Main Loop, Shutting down program(Change to continue and not crash?).")
         disableRobot()
+        GPIO.cleanup()
         crash.toString()
