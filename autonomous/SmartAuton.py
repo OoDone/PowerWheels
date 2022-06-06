@@ -99,7 +99,7 @@ class LoopThread(threading.Thread):
         timer = Timer()
         isAvoiding = False
         while start:
-            if timer.hasStarted() and timer.hasElapsed(2):
+            if timer.hasStarted() and timer.hasElapsed(1):
                 logger.info("Done Backing Up!")
                 timer.reset()
                 timer.stop()
@@ -109,6 +109,7 @@ class LoopThread(threading.Thread):
             if distanceSensor.getSonar() <= constants.AutonConstants().minDistance and not isAvoiding:  #FIXME OPPOSITE <> SIGN
                 logger.info("Auton: To close, Perform turn")
                 drive.steerServoPerc(50) #steer left
+                drive.stopRobot()
                 sleep(0.5) #Wait until steering is set
                 driveThread.driveRobot(True)
                 isAvoiding = True
