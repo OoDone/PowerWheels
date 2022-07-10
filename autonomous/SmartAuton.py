@@ -4,12 +4,9 @@ from drive.DriveControl import DriveControl
 from Variables import Constants
 from other.DistanceSensor import DistanceSensor
 from other import Vision
-from multiprocessing import Process
-from threading import Thread
 import threading
 from time import sleep
 from autonomous.DriveThread import DriveThread
-import asyncio
 from client.timer import Timer
 class SmartAuton:
     global isAvoiding
