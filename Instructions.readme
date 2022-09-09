@@ -1,1 +1,10 @@
-sadasd
+terms:
+- car = powerwheels vehicle
+- server = raspberry pi on the car
+- client / Controller = raspberry pi not on the car
+
+(First Time)Setting up the car:
+1. Plug the server into a monitor and keyboard(Need to fix)
+2. Power on raspberry pi on the car
+3.wait until the light stops blinking on the raspberry pi(server), then type in "sudo Lightdm" and hit enter(NEED TO FIX)
+4. 
