@@ -1,0 +1,22 @@
+terms:
+- car = powerwheels vehicle
+- server = raspberry pi on the car
+- client / Controller = raspberry pi not on the car
+- pi = raspberry pi
+
+*(First Time)Setting up the car:*
+1. Plug the server into a monitor and plug in the keyboard and mouse(Need to fix)
+2. Power on raspberry pi on the car
+3.wait until the light stops blinking on the raspberry pi(server), then type in "sudo Lightdm" and hit enter(NEED TO FIX)
+NOTE: If connected to internet(Default), the server will try to pull new code from my github repository, and will wipeout your settings if it succeeds, there will be a tutorial on how to change or disable github pull down below
+NOTE: Before continueing, lets test out the settings to see if it connects without needing to change anything
+  1. unplug the keyboard, mouse, monitor, AND PS4 CONTROLLER from the server and plug them into the client
+  2. power on the client pi 
+  3. wait until the light stops blinking on the pi(client), then type in "sudo Lightdm" and hit enter(NEED TO FIX)
+  4. click the "PowerWheels" folder on the desktop and then click into the next "powerwheels" folder then go into the "client" folder
+  5. open a terminal instance
+  6. enter "cd Desktop/PowerWheels/powerwheels/client" into the terminal and hit enter
+  7. enter "python3.6 Controller.py" into the terminal and hit enter
+  8. it should say connecting
+5.click the "PowerWheels" folder on the desktop and then click on "powerwheels" again to go into "PowerWheels/powerwheels" directory
+
